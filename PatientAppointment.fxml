@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="375.0" prefWidth="964.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Label layoutX="14.0" layoutY="14.0" text="Hello User!" />
+    <Label layoutX="73.0" layoutY="50.0" text="My Appointments :" />
+    <TableView fx:id="patientAppointmentsTableView" layoutX="14.0" layoutY="74.0" prefHeight="200.0" prefWidth="927.0">
+      <columns>
+        <TableColumn fx:id="patientName" prefWidth="213.0" text="Name" />
+        <TableColumn fx:id="appDate" prefWidth="89.0" text="Date" />
+            <TableColumn fx:id="appTime" prefWidth="68.0" text="Time" />
+            <TableColumn fx:id="provider" prefWidth="121.0" text="Provider" />
+            <TableColumn fx:id="visitReason" prefWidth="141.0" text="Visit Reason" />
+            <TableColumn fx:id="status" prefWidth="100.0" text="Status" />
+            <TableColumn fx:id="cancel" prefWidth="88.0" text="Cancel?" />
+            <TableColumn fx:id="reschedule" prefWidth="106.0" text="Reschedule?" />
+      </columns>
+    </TableView>
+    <Button fx:id="saveBtn" layoutX="812.0" layoutY="295.0" minHeight="16.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="129.0" text="Save Changes" />
+    <Button fx:id="returnHomeBtn" layoutX="380.0" layoutY="327.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="195.0" text="Return to Home" />
+  </children>
+</AnchorPane>
