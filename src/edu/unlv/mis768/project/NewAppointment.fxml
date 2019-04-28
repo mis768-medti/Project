@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="519.0" prefWidth="531.2501220703125" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="519.0" prefWidth="531.2501220703125" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unlv.mis768.project.NewAppointmentController">
   <!-- TODO Add Nodes -->
   <children>
     <Label layoutX="32.0" layoutY="26.0" text="Patient :" />
@@ -21,6 +21,6 @@
     <TextArea fx:id="cmtTxt" layoutX="158.0" layoutY="345.0" prefHeight="145.0" prefWidth="200.0" wrapText="true" />
     <Label layoutX="32.0" layoutY="355.0" prefWidth="74.0" text="Comments :" />
     <Button fx:id="reqAppTxt" layoutX="407.0" layoutY="237.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="95.0" text="Request Appointment" textAlignment="CENTER" wrapText="true" />
-    <Button fx:id="returnHomeTxt" layoutX="401.0" layoutY="324.0" mnemonicParsing="false" text="Return to Home" />
+    <Button fx:id="returnHomeTxt" layoutX="401.0" layoutY="324.0" mnemonicParsing="false" onAction="#returnHomeButtonListener" text="Return to Home" />
   </children>
 </AnchorPane>

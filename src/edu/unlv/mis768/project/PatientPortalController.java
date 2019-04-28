@@ -100,7 +100,8 @@ public class PatientPortalController {
     }
     
     /**
-     * For navigation through patient portal screens
+     * Accepts patient object and updates welcome label
+     * Used for navigation through patient portal screens
      * @param patient A patient object
      */
     public void initData(Patient patient) {
@@ -135,6 +136,80 @@ public class PatientPortalController {
     	stage.show();
 
     }
-
+    
+    // Event listener for Manage Dependent(s) Button
+    public void manageDependentButtonListener(ActionEvent e) throws Exception{
+    	// FXML loader object to load the UI design
+    	FXMLLoader loader = new FXMLLoader();
+    	// specify the file location
+    	loader.setLocation(getClass().getResource("PatientDependent.fxml"));
+    	
+    	// load the UI and call the controller method
+    	Parent parent = loader.load();
+    	PatientDependentController controller = loader.getController();
+    	controller.initData(this.patient);
+    	
+    	// set the scene
+    	Scene scene = new Scene(parent);
+    	
+    	// get the current window
+    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    	// change the title
+    	stage.setTitle("Dependent Management");
+    	// set the scene for the stage
+    	stage.setScene(scene);
+    	// show the stage
+    	stage.show();
+    }
+    
+    // Event listener for Modify Appointments Button
+    public void modifyAppointmentButtonListener(ActionEvent e) throws Exception{
+    	// FXML loader object to load the UI design
+    	FXMLLoader loader = new FXMLLoader();
+    	// specify the file location
+    	loader.setLocation(getClass().getResource("PatientAppointment.fxml"));
+    	
+    	// load the UI and call the controller method
+    	Parent parent = loader.load();
+    	PatientAppointmentController controller = loader.getController();
+    	controller.initData(this.patient);
+    	
+    	// set the scene
+    	Scene scene = new Scene(parent);
+    	
+    	// get the current window
+    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    	// change the title
+    	stage.setTitle("Appointment Management");
+    	// set the scene for the stage
+    	stage.setScene(scene);
+    	// show the stage
+    	stage.show();
+    }
+    
+    // Event listener for New Appointment Button
+    public void newAppointmentButtonListener(ActionEvent e) throws Exception{
+    	// FXML loader object to load the UI design
+    	FXMLLoader loader = new FXMLLoader();
+    	// specify the file location
+    	loader.setLocation(getClass().getResource("NewAppointment.fxml"));
+    	
+    	// load the UI and call the controller method
+    	Parent parent = loader.load();
+    	NewAppointmentController controller = loader.getController();
+    	controller.initData(this.patient);
+    	
+    	// set the scene
+    	Scene scene = new Scene(parent);
+    	
+    	// get the current window
+    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    	// change the title
+    	stage.setTitle("Schedule Appointment");
+    	// set the scene for the stage
+    	stage.setScene(scene);
+    	// show the stage
+    	stage.show();
+    }
 } 
 
