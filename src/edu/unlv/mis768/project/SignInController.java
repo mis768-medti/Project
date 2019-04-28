@@ -101,12 +101,43 @@ public class SignInController {
 		        		String title = "";
 		        		if (userType.equals("admin")) {
 		        			loader.setLocation(getClass().getResource("StaffPrtal.fxml"));
-		        			title = "Staff Portal";
+		        			
+		        			// load the UI and call the controller method
+		        			Parent parent = loader.load();
+		        			AdminPortalController controller = loader.getController();
+		        			controller.initData(username);
+		        			
+		        			// set the scene
+		        			Scene scene = new Scene(parent);
+		        			
+		        			// get the current window
+		        			Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		        			// change the title
+		        			stage.setTitle("Staff Portal");
+		        			// set the scene for the stage
+		        			stage.setScene(scene);
+		        			// show the stage
+		        			stage.show();
 		        		}
 		        		
 		        		else if (userType.equals("provider")) {
 		        			loader.setLocation(getClass().getResource("DoctorInterface.fxml"));
-		        			title = "Doctor Portal";
+		        			
+		        			// load the UI
+		        			Parent parent = loader.load();
+		        			ProviderPortalController controller = loader.getController();
+		        			
+		        			// set the scene
+		        			Scene scene = new Scene(parent);
+		        			
+		        			// get the current window
+		        			Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		        			// change the title
+		        			stage.setTitle("Doctor Portal");
+		        			// set the scene for the stage
+		        			stage.setScene(scene);
+		        			// show the stage
+		        			stage.show();
 		        		}
 		        		
 		        		else if (userType.equals("patient")) {
@@ -129,11 +160,6 @@ public class SignInController {
 			        		// show the stage
 			        		stage.show();
 		        		}
-		        	
-		        		
-		        		
-		        	
-		        		
 		        	}
 		        	
 		        	else {
@@ -166,9 +192,6 @@ public class SignInController {
 	        	
 	        	alert.showAndWait();
 			}
-	        
-	        
     	}
     }
-
 }
