@@ -1,16 +1,23 @@
 package edu.unlv.mis768.project;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class SignInController {
 
@@ -32,7 +39,7 @@ public class SignInController {
     public void initialize() {}
     
     // Event listener for Log In Button
-    public void logInButtonListener() {
+    public void logInButtonListener(ActionEvent e) throws Exception {
     	
     	// Get login credentials from text fields
     	String username = userName.getText();
@@ -71,7 +78,7 @@ public class SignInController {
 				Statement stmt = conn.createStatement();
 				
 				// Query user table
-		        String sqlSelect = "SELECT Password FROM " + AppointmentDBConstants.USER_TABLE_NAME
+		        String sqlSelect = "SELECT Password, AccountType FROM " + AppointmentDBConstants.USER_TABLE_NAME
 		        		+ " WHERE " + AppointmentDBConstants.USER_PK_NAME + " = '" + username + "'";
 		        ResultSet result = stmt.executeQuery(sqlSelect);
 		        
@@ -81,8 +88,47 @@ public class SignInController {
 		        	String correctPassword = result.getString("password");
 		        	
 		        	// Check if user supplied password matches password in database
-		        	if (password.equals(correctPassword))
-		        		System.out.println("Login in successful!");
+		        	if (password.equals(correctPassword)) {
+		        		// Successful log in: Determine user type and send to the appropriate next scene
+		        		String userType = result.getString("AccountType");
+		        		FXMLLoader loader = new FXMLLoader();
+		        		
+		        		// Determine file location and title
+		        		String fileLocation = "";
+		        		String title = "";
+		        		if (userType.equals("admin")) {
+		        			fileLocation = "StaffPrtal.fxml";
+		        			title = "Staff Portal";
+		        		}
+		        		else if (userType.equals("provider")) {
+		        			fileLocation = "DoctorInterface.fxml";
+		        			title = "Doctor Portal";
+		        		}
+		        		else if (userType.equals("patient")) {
+		        			fileLocation = "PatientPortal.fxml";
+		        			title = "Patient Portal";
+		        		}
+		        		
+		        		// specify the file location
+		        		loader.setLocation(getClass().getResource(fileLocation));
+		        		
+		        		// load the UI
+		        		Parent parent = loader.load();
+		        		// set the scene
+		        		Scene scene = new Scene(parent);
+		        		
+		        		// get the current window
+		        		Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		        		// change the title
+		        		stage.setTitle(title);
+		        		// set the scene for the stage
+		        		stage.setScene(scene);
+		        		// show the stage
+		        		stage.show();
+		        	
+		        		
+		        	}
+		        	
 		        	else {
 		        		Alert alert = new Alert(AlertType.ERROR);
 			        	alert.setTitle("Error");
@@ -105,11 +151,11 @@ public class SignInController {
 		        }
 				
 				
-			} catch (SQLException e) {
+			} catch (SQLException ex) {
 				Alert alert = new Alert(AlertType.ERROR);
 	        	alert.setTitle("Error");
 	        	alert.setHeaderText("Application Error");
-	        	alert.setContentText(e.getMessage());
+	        	alert.setContentText(ex.getMessage());
 	        	
 	        	alert.showAndWait();
 			}

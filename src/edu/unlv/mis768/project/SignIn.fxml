@@ -35,7 +35,7 @@
         </Label>
         <TextField fx:id="userName" layoutX="65.0" layoutY="147.0" prefHeight="34.1796875" prefWidth="200.0" />
         <TextField fx:id="passWord" layoutX="60.0" layoutY="235.0" prefHeight="34.1796875" prefWidth="200.0" />
-        <Button fx:id="logInBtn" font="$x2" layoutX="111.0" layoutY="291.0" mnemonicParsing="false" onAction="#logInButtonListener" prefHeight="26.6015625" prefWidth="112.0" text="Log in" textFill="#333100" />
+        <Button fx:id="logInBtn" defaultButton="true" font="$x2" layoutX="111.0" layoutY="291.0" onAction="#logInButtonListener" prefHeight="26.6015625" prefWidth="112.0" text="_Log in" textFill="#333100" />
             <Label fx:id="signUpLbl" layoutX="95.0" layoutY="377.0" prefHeight="17.0" prefWidth="209.0" text="Sign up For an accoout" textFill="#9e9e9e" underline="true" wrapText="true">
                <font>
                   <Font size="14.0" />
