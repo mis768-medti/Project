@@ -24,7 +24,7 @@
             <TableColumn fx:id="visitReason" prefWidth="214.0" text="Visit Reason" />
       </columns>
     </TableView>
-    <Button fx:id="myProfileBtn" layoutX="43.0" layoutY="235.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" text="My Profile" textAlignment="CENTER" />
+    <Button fx:id="myProfileBtn" layoutX="43.0" layoutY="235.0" mnemonicParsing="false" onAction="#myProfileButtonListener" prefHeight="73.0" prefWidth="181.0" text="My Profile" textAlignment="CENTER" />
     <Button fx:id="manageDependentBtn" layoutX="265.0" layoutY="235.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="169.0" text="Manage dependent(s)" textAlignment="CENTER" wrapText="true" />
     <Button fx:id="modifyAppointmentBtn" layoutX="464.0" layoutY="235.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="155.0" text="View/Modify Appointments" textAlignment="CENTER" wrapText="true" />
     <Button fx:id="newAppointmentBtn" layoutX="655.0" layoutY="235.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="181.0" text="Schedule New Appointment" textAlignment="CENTER" wrapText="true" />
