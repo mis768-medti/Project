@@ -93,38 +93,45 @@ public class SignInController {
 		        		String userType = result.getString("AccountType");
 		        		FXMLLoader loader = new FXMLLoader();
 		        		
-		        		// Determine file location and title
+		        		// Specify the file location
+		        		// Determine window title
+		        		// Access the controller class via the loader
+		        		// Call the method in the controller class
 		        		String fileLocation = "";
 		        		String title = "";
 		        		if (userType.equals("admin")) {
-		        			fileLocation = "StaffPrtal.fxml";
+		        			loader.setLocation(getClass().getResource("StaffPrtal.fxml"));
 		        			title = "Staff Portal";
 		        		}
+		        		
 		        		else if (userType.equals("provider")) {
-		        			fileLocation = "DoctorInterface.fxml";
+		        			loader.setLocation(getClass().getResource("DoctorInterface.fxml"));
 		        			title = "Doctor Portal";
 		        		}
+		        		
 		        		else if (userType.equals("patient")) {
-		        			fileLocation = "PatientPortal.fxml";
-		        			title = "Patient Portal";
+		        			loader.setLocation(getClass().getResource("PatientPortal.fxml"));
+
+		        			// load the UI and call the controller method
+		        			Parent parent = loader.load();
+		        			PatientPortalController controller = loader.getController();
+		        			controller.initData(username);
+		        			
+		        			// set the scene
+		        			Scene scene = new Scene(parent);
+		        			
+		        			// get the current window
+			        		Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+			        		// change the title
+			        		stage.setTitle("Patient Portal");
+			        		// set the scene for the stage
+			        		stage.setScene(scene);
+			        		// show the stage
+			        		stage.show();
 		        		}
+		        	
 		        		
-		        		// specify the file location
-		        		loader.setLocation(getClass().getResource(fileLocation));
 		        		
-		        		// load the UI
-		        		Parent parent = loader.load();
-		        		// set the scene
-		        		Scene scene = new Scene(parent);
-		        		
-		        		// get the current window
-		        		Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-		        		// change the title
-		        		stage.setTitle(title);
-		        		// set the scene for the stage
-		        		stage.setScene(scene);
-		        		// show the stage
-		        		stage.show();
 		        	
 		        		
 		        	}

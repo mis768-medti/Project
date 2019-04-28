@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="366.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="366.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unlv.mis768.project.PatientPortalController">
   <!-- TODO Add Nodes -->
   <children>
-    <Label layoutX="41.0" layoutY="16.0" text="Hello User!">
+    <Label fx:id="welcomeLabel" layoutX="41.0" layoutY="16.0" text="Hello User!">
       <font>
         <Font size="12.0" />
       </font>
