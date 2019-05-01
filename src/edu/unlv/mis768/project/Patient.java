@@ -1,43 +1,37 @@
 package edu.unlv.mis768.project;
 
 public class Patient {
+	//FIELDS 	
+	String patientName;
+	String insurance;
+	Doctor doctor;
 	
-	private int patientID;
-	private String firstName;
-	private String lastName;
-	
-	public Patient() {}
-	
-	public Patient(int id, String patientFirstName, String patientLastName) {
-		this.patientID = id;
-		this.firstName = patientFirstName;
-		this.lastName = patientLastName;
+	public Patient() {
+		
 	}
-
-	public int getPatientID() {
-		return patientID;
+	public String getPatientName() {
+		return patientName;
 	}
-
-	public void setPatientID(int patientID) {
-		this.patientID = patientID;
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
 	}
-
-	public String getFirstName() {
-		return firstName;
+	public String getInsurance() {
+		return insurance;
 	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setInsurance(String insurance) {
+		this.insurance = insurance;
 	}
-
-	public String getLastName() {
-		return lastName;
+	public String getDoctor() {
+		return doctor.getName();
 	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
 	
+	public String toString() {
+		return "Name: " + getPatientName()+"\n"
+				+ "Doctor: " + doctor.getName();
+	}
 	
 	
 
