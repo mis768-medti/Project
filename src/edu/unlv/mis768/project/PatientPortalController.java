@@ -86,7 +86,7 @@ public class PatientPortalController {
 	        this.patient = new Patient(result.getInt("PatientID"),
 	        				result.getString("FirstName"), 
 	        				result.getString("LastName"));
-	        welcomeLabel.setText("Hello " + this.patient.getFirstName() + "!");
+	        welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!");
 	        
 		} 
 		catch (SQLException ex) {
@@ -108,7 +108,7 @@ public class PatientPortalController {
     	this.patient = patient;
     	
     	// Update welcomeLabel with user's first name
-    	welcomeLabel.setText("Hello " + this.patient.getFirstName() + "!"); 
+    	welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!"); 
     }
     
     // Event listener for My Profile Button

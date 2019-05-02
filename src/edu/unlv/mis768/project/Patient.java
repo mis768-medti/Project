@@ -2,18 +2,31 @@ package edu.unlv.mis768.project;
 
 public class Patient {
 	//FIELDS 	
-	String patientName;
+	String patientFirstName;
+	String patientLastName;
 	String insurance;
 	Doctor doctor;
+	int patientID;
 	
 	public Patient() {
 		
 	}
-	public String getPatientName() {
-		return patientName;
+	public Patient(int patientID, String firstName, String lastName) {
+		this.patientID=patientID;
+		this.patientFirstName = firstName;
+		this.patientLastName = lastName;
 	}
-	public void setPatientName(String patientName) {
-		this.patientName = patientName;
+	public String getPatientFirstName() {
+		return patientFirstName;
+	}
+	public void setPatientFirstName(String patientFirstName) {
+		this.patientFirstName = patientFirstName;
+	}
+	public String getPatientLastName() {
+		return patientLastName;
+	}
+	public void setPatientLastName(String patientLastName) {
+		this.patientLastName = patientLastName;
 	}
 	public String getInsurance() {
 		return insurance;
@@ -29,7 +42,7 @@ public class Patient {
 	}
 	
 	public String toString() {
-		return "Name: " + getPatientName()+"\n"
+		return "Name: " + getPatientFirstName()+"\n"
 				+ "Doctor: " + doctor.getName();
 	}
 	

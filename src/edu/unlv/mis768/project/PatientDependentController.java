@@ -66,7 +66,7 @@ public class PatientDependentController {
     	this.patient = patient;
     	
     	// Update welcomeLabel with user's first name
-    	welcomeLabel.setText("Hello " + this.patient.getFirstName() + "!"); 	
+    	welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!"); 	
     }
     
     // Event listener for Return Home Button
