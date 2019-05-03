@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Doctor extends Employee {
 	//fields 
 	private String specialty;
-	private ArrayList<Calendar> calendarList;
+	private ArrayList<Slot> slotList;
 	private ArrayList<Appointment> appointmentList;
 
 	public Doctor(String name, int id, String title, String specialty) {
@@ -23,12 +23,12 @@ public class Doctor extends Employee {
 		this.specialty = specialty;
 	}
 
-	public ArrayList<Calendar> getCalendarList() {
-		return calendarList;
+	public ArrayList<Slot> getSlotList() {
+		return slotList;
 	}
 
-	public void setCalendarList(ArrayList<Calendar> calendarList) {
-		this.calendarList = calendarList;
+	public void setCalendarList(ArrayList<Slot> slotList) {
+		this.slotList = slotList;
 	}
 
 	public ArrayList<Appointment> getAppointmentList() {
