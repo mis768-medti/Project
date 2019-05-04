@@ -211,5 +211,29 @@ public class PatientPortalController {
     	// show the stage
     	stage.show();
     }
+    
+    // Event listener for Logout Button
+    public void logoutButtonListener(ActionEvent e) throws Exception {
+    	// FXML loader object to load the UI design
+    	FXMLLoader loader = new FXMLLoader();
+    	// specify the file location
+    	loader.setLocation(getClass().getResource("SignIn.fxml"));
+    	
+    	// load the UI and call the controller method
+    	Parent parent = loader.load();
+    	SignInController controller = loader.getController();
+    	
+    	// set the scene
+    	Scene scene = new Scene(parent);
+    	
+    	// get the current window
+    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    	// change the title
+    	stage.setTitle("MedTime");
+    	// set the scene for the stage
+    	stage.setScene(scene);
+    	// show the stage
+    	stage.show();	
+    }
 } 
 

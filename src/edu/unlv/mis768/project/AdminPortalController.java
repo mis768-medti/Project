@@ -146,7 +146,6 @@ public class AdminPortalController {
     	// load the UI and call the controller method
     	Parent parent = loader.load();
     	SignInController controller = loader.getController();
-    	//controller.initData(this.admin);
     	
     	// set the scene
     	Scene scene = new Scene(parent);
