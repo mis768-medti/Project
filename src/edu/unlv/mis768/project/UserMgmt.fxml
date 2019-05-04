@@ -16,9 +16,9 @@
             <TableColumn fx:id="remove" prefWidth="93.0" text="Remove" />
         </columns>
       </TableView>
-      <Button fx:id="addPhysicianBtn" layoutX="629.0" layoutY="75.0" mnemonicParsing="false" text="Add Physician" />
-      <Button fx:id="addPatientBtn" layoutX="629.0" layoutY="119.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Add Patient" />
-      <Button fx:id="addStaffbtn" layoutX="629.0" layoutY="163.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Add Staff" />
+      <Button fx:id="addPhysicianBtn" layoutX="625.0" layoutY="75.0" mnemonicParsing="false" onAction="#addPhysicianButtonListener" text="Add Physician" />
+      <Button fx:id="addPatientBtn" layoutX="629.0" layoutY="119.0" mnemonicParsing="false" onAction="#addPatientButtonListener" prefHeight="31.0" prefWidth="106.0" text="Add Patient" />
+      <Button fx:id="addStaffbtn" layoutX="629.0" layoutY="163.0" mnemonicParsing="false" onAction="#addStaffButtonListener" prefHeight="31.0" prefWidth="106.0" text="Add Staff" />
       <Button fx:id="saveBtn" layoutX="489.0" layoutY="297.0" mnemonicParsing="false" text="Save Changes" />
       <Button fx:id="returnBtn" layoutX="284.0" layoutY="349.0" mnemonicParsing="false" onAction="#returnHomeButtonListener" prefHeight="25.0" prefWidth="174.0" text="Return To Home" />
    </children>

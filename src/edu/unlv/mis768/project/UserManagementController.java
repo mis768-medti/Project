@@ -60,6 +60,78 @@ public class UserManagementController {
     	welcomeLabel.setText("Hello " + this.admin.getFirstName() + "!");
     }
     
+    // Event listener for Add Physician Button
+    public void addPhysicianButtonListener(ActionEvent e) throws Exception {
+    	// FXML loader object to load the UI design
+    	FXMLLoader loader = new FXMLLoader();
+    	// specify the file location
+    	loader.setLocation(getClass().getResource("AddPhysician.fxml"));
+    	
+    	// load the UI and call the controller method
+    	Parent parent = loader.load();
+    	//SignInController controller = loader.getController();
+    	
+    	// set the scene
+    	Scene scene = new Scene(parent);
+    	
+    	// get the current window
+    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    	// change the title
+    	stage.setTitle("Add Physician");
+    	// set the scene for the stage
+    	stage.setScene(scene);
+    	// show the stage
+    	stage.show();
+    }
+    
+    // Event listener for Add Patient Button
+    public void addPatientButtonListener(ActionEvent e) throws Exception {
+    	// FXML loader object to load the UI design
+    	FXMLLoader loader = new FXMLLoader();
+    	// specify the file location
+    	loader.setLocation(getClass().getResource("AddPatient.fxml"));
+    	
+    	// load the UI and call the controller method
+    	Parent parent = loader.load();
+    	//SignInController controller = loader.getController();
+    	
+    	// set the scene
+    	Scene scene = new Scene(parent);
+    	
+    	// get the current window
+    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    	// change the title
+    	stage.setTitle("Add Patient");
+    	// set the scene for the stage
+    	stage.setScene(scene);
+    	// show the stage
+    	stage.show();
+    }
+    
+    // Event listener for Add Patient Button
+    public void addStaffButtonListener(ActionEvent e) throws Exception {
+    	// FXML loader object to load the UI design
+    	FXMLLoader loader = new FXMLLoader();
+    	// specify the file location
+    	loader.setLocation(getClass().getResource("AddStaff.fxml"));
+    	
+    	// load the UI and call the controller method
+    	Parent parent = loader.load();
+    	//SignInController controller = loader.getController();
+    	
+    	// set the scene
+    	Scene scene = new Scene(parent);
+    	
+    	// get the current window
+    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    	// change the title
+    	stage.setTitle("Add Staff");
+    	// set the scene for the stage
+    	stage.setScene(scene);
+    	// show the stage
+    	stage.show();
+    }
+    
     // Event listener for Return Home Button
     public void returnHomeButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
