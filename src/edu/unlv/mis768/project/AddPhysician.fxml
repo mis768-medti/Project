@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="338.0" prefWidth="405.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane prefHeight="338.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unlv.mis768.project.AddPhysicianController">
   <!-- TODO Add Nodes -->
   <children>
     <Label layoutX="27.0" layoutY="67.0" text="Username :">
@@ -22,6 +22,6 @@
     <TextField fx:id="firstnameTxt" layoutX="142.0" layoutY="102.0" prefHeight="34.0" prefWidth="200.0" />
     <TextField fx:id="lastNameTxt" layoutX="142.0" layoutY="152.0" prefHeight="34.0" prefWidth="200.0" />
     <TextField fx:id="specialtyTxt" layoutX="142.0" layoutY="208.0" prefHeight="34.0" prefWidth="200.0" />
-    <Button fx:id="saveBtn" font="$x1" layoutX="142.0" layoutY="281.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="114.0" text="Save" />
+    <Button fx:id="saveBtn" font="$x1" layoutX="142.0" layoutY="281.0" mnemonicParsing="false" onAction="#saveButtonListener" prefHeight="34.0" prefWidth="114.0" text="Save" />
   </children>
 </AnchorPane>
