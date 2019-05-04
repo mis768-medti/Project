@@ -6,17 +6,30 @@ package edu.unlv.mis768.project;
  */
 public class Employee {
 	//fields 
-	String name;
-	int id;
-	String title;
+	private String firstName;
+	private String lastName;
+	private int id;
 	
-
-	public String getName() {
-		return name;
+	public Employee(String firstName, String lastName, int id) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.id = id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String name) {
+		this.firstName = name;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setlastName(String name) {
+		this.lastName = name;
 	}
 
 	public int getId() {
@@ -26,14 +39,4 @@ public class Employee {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-
 }

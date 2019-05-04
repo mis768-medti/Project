@@ -5,11 +5,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 
 public class AdminPortalController {
 
@@ -28,15 +34,12 @@ public class AdminPortalController {
     @FXML
     private Button appMgmtBtn;
     
-    private String username;
-    
-    private int adminID;
+    private Staff admin;
     
     public void initialize() {}
     
     public void initData(String user) {
-    	this.username = user;
-    	
+
     	// Update welcomeLabel with user's first name
     	// Create a connection to the database.
         Connection conn =
@@ -47,15 +50,16 @@ public class AdminPortalController {
 			// Create a statement object
 			stmt = conn.createStatement();
 			
-			// Query patient table
-	        String sqlSelect = "SELECT AdminID, FirstName FROM " + AppointmentDBConstants.ADMIN_TABLE_NAME
+			// Query admin table
+	        String sqlSelect = "SELECT * FROM " + AppointmentDBConstants.ADMIN_TABLE_NAME
 	        		+ " WHERE Username = '" + user + "'";
 	        ResultSet result = stmt.executeQuery(sqlSelect);
 	        
 	        result.last();
-	        
-	        this.adminID = result.getInt("AdminID");
-	        welcomeLabel.setText("Hello " + result.getString("FirstName") + "!");
+	        this.admin = new Staff(result.getString("FirstName"), 
+    				result.getString("LastName"), result.getInt("AdminID"), 
+    				result.getInt("AccessLevel"), result.getString("Role"));
+	        welcomeLabel.setText("Hello " + this.admin.getFirstName() + "!");
 	        
 		} 
 		catch (SQLException ex) {
@@ -67,6 +71,94 @@ public class AdminPortalController {
         	alert.showAndWait();
 		}
     	
+    }
+    
+    /**
+     * Accepts Staff object and updates welcome label
+     * Used for navigation through staff portal screens
+     * @param patient A staff object
+     */
+    public void initData(Staff staff) {
+    	this.admin = staff;
+    	
+    	// Update welcomeLabel with user's first name
+    	welcomeLabel.setText("Hello " + this.admin.getFirstName() + "!"); 
+    }
+    
+    // Event listener for View Calendar Button
+    public void viewCalendarButtonListener(ActionEvent e) throws Exception {
+    	
+    	// FXML loader object to load the UI design
+    	FXMLLoader loader = new FXMLLoader();
+    	// specify the file location
+    	loader.setLocation(getClass().getResource("ViewCalendar.fxml"));
+    	
+    	// load the UI and call the controller method
+    	Parent parent = loader.load();
+    	ViewCalendarController controller = loader.getController();
+    	controller.initData(this.admin);
+    	
+    	// set the scene
+    	Scene scene = new Scene(parent);
+    	
+    	// get the current window
+    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    	// change the title
+    	stage.setTitle("View Calendar");
+    	// set the scene for the stage
+    	stage.setScene(scene);
+    	// show the stage
+    	stage.show();
+    }
+    
+    // Event listener for User Management Button
+    public void userManagementButtonListener(ActionEvent e) throws Exception {
+    	// FXML loader object to load the UI design
+    	FXMLLoader loader = new FXMLLoader();
+    	// specify the file location
+    	loader.setLocation(getClass().getResource("UserMgmt.fxml"));
+    	
+    	// load the UI and call the controller method
+    	Parent parent = loader.load();
+    	UserManagementController controller = loader.getController();
+    	controller.initData(this.admin);
+    	
+    	// set the scene
+    	Scene scene = new Scene(parent);
+    	
+    	// get the current window
+    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    	// change the title
+    	stage.setTitle("User Management");
+    	// set the scene for the stage
+    	stage.setScene(scene);
+    	// show the stage
+    	stage.show();
+    }
+    
+    // Event listener for Logout Button
+    public void logoutButtonListener(ActionEvent e) throws Exception {
+    	// FXML loader object to load the UI design
+    	FXMLLoader loader = new FXMLLoader();
+    	// specify the file location
+    	loader.setLocation(getClass().getResource("SignIn.fxml"));
+    	
+    	// load the UI and call the controller method
+    	Parent parent = loader.load();
+    	SignInController controller = loader.getController();
+    	//controller.initData(this.admin);
+    	
+    	// set the scene
+    	Scene scene = new Scene(parent);
+    	
+    	// get the current window
+    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    	// change the title
+    	stage.setTitle("MedTime");
+    	// set the scene for the stage
+    	stage.setScene(scene);
+    	// show the stage
+    	stage.show();	
     }
 
 }

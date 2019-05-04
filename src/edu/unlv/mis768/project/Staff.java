@@ -5,11 +5,11 @@ public class Staff extends Employee {
 	private int accessLevel;
 	private String role;
 	
-	public Staff(String name, int id, String title,
+	//Constructor
+	public Staff(String firstName, String lastName, int id,
 			int accessLevel, String role) {
-		this.name = name;
-		this.id = id;
-		this.title = title;
+		
+		super(firstName, lastName, id);
 		this.accessLevel = accessLevel;
 		this.role = role;
 	}
@@ -31,9 +31,8 @@ public class Staff extends Employee {
 	}
 	
 	public String toString() {
-		return "Name: " + getName() +"\n"
+		return "Name: " + getFirstName() + " " + getLastName() +"\n"
 				+"ID: " + getId() + "\n"
-				+ "Title: " + getTitle() +"\n"
 				+ "Role: " + getRole();
 	}
 	

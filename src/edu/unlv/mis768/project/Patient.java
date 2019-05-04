@@ -35,7 +35,7 @@ public class Patient {
 		this.insurance = insurance;
 	}
 	public String getDoctor() {
-		return doctor.getName();
+		return (doctor.getFirstName() + " " + doctor.getLastName());
 	}
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
@@ -43,7 +43,7 @@ public class Patient {
 	
 	public String toString() {
 		return "Name: " + getPatientFirstName()+"\n"
-				+ "Doctor: " + doctor.getName();
+				+ "Doctor: " + doctor.getFirstName() + " " + doctor.getLastName();
 	}
 	
 	
