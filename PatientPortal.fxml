@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="366.0" prefWidth="867.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.unlv.mis768.project.PatientPortalController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Label fx:id="welcomeLabel" layoutX="41.0" layoutY="16.0" text="Hello User!">
+      <font>
+        <Font size="12.0" />
+      </font>
+    </Label>
+    <Label layoutX="41.0" layoutY="51.0" text="Upcoming Appointments:" />
+    <TableView fx:id="patientTableView" layoutX="41.0" layoutY="77.0" prefHeight="139.0" prefWidth="795.0">
+      <columns>
+        <TableColumn prefWidth="268.0" text="Name" fx:id="patientName" />
+        <TableColumn prefWidth="89.0" text="Date" fx:id="appDate" />
+        <TableColumn prefWidth="55.0" text="Time" fx:id="appTime" />
+        <TableColumn prefWidth="168.0" text="Provider" fx:id="appProvider" />
+        <TableColumn prefWidth="214.0" text="Visit Reason" fx:id="visitReason" />
+      </columns>
+    </TableView>
+    <Button fx:id="myProfileBtn" layoutX="43.0" layoutY="235.0" mnemonicParsing="false" onAction="#myProfileButtonListener" prefHeight="73.0" prefWidth="162.0" text="My Profile" textAlignment="CENTER" />
+    <Button fx:id="manageDependentBtn" layoutX="235.0" layoutY="235.0" mnemonicParsing="false" onAction="#manageDependentButtonListener" prefHeight="73.0" prefWidth="145.0" text="Manage dependent(s)" textAlignment="CENTER" wrapText="true" />
+    <Button fx:id="modifyAppointmentBtn" layoutX="405.0" layoutY="235.0" mnemonicParsing="false" onAction="#modifyAppointmentButtonListener" prefHeight="73.0" prefWidth="137.0" text="View/Modify Appointments" textAlignment="CENTER" wrapText="true" />
+    <Button fx:id="newAppointmentBtn" layoutX="565.0" layoutY="235.0" mnemonicParsing="false" onAction="#newAppointmentButtonListener" prefHeight="73.0" prefWidth="137.0" text="Schedule New Appointment" textAlignment="CENTER" wrapText="true" />
+    <Button fx:id="logOutBtn" layoutX="731.0" layoutY="239.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="105.0" text="Log Out" />
+  </children>
+</AnchorPane>

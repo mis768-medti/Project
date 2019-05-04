@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minWidth="565.0" prefHeight="159.0" prefWidth="565.0000999999975" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unlv.mis768.project.AdminPortalController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Label fx:id="welcomeLabel" layoutX="283.0" layoutY="23.0" text="Hello User !" />
+    <Button fx:id="viecalBtn" layoutX="14.0" layoutY="74.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="114.0" text="View Calendars" />
+    <Button fx:id="appMgmtBtn" layoutX="147.0" layoutY="74.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="126.0" text="Appointment Management" textAlignment="CENTER" wrapText="true" />
+    <Button fx:id="userMgmtBtn" layoutX="283.0" layoutY="74.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="114.0" text="User management" textAlignment="CENTER" wrapText="true" />
+    <Button fx:id="LogoutBtn" layoutX="412.0" layoutY="75.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="126.0" text="Logout" />
+  </children>
+</AnchorPane>

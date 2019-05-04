@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="393.0" prefWidth="742.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Label layoutX="21.0" layoutY="14.0" text="Hello User!" />
+      <Label layoutX="21.0" layoutY="40.0" text="Existing Users :" />
+      <TableView fx:id="manageUserTblData" layoutX="21.0" layoutY="75.0" prefHeight="200.0" prefWidth="558.0">
+        <columns>
+          <TableColumn fx:id="name" prefWidth="330.0" text="Name" />
+          <TableColumn fx:id="userType" prefWidth="134.0" text="User Type" />
+            <TableColumn fx:id="remove" prefWidth="93.0" text="Remove" />
+        </columns>
+      </TableView>
+      <Button fx:id="addPhysicianBtn" layoutX="629.0" layoutY="75.0" mnemonicParsing="false" text="Add Physician" />
+      <Button fx:id="addPatientBtn" layoutX="629.0" layoutY="119.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Add Patient" />
+      <Button fx:id="addStaffbtn" layoutX="629.0" layoutY="163.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Add Staff" />
+      <Button fx:id="saveBtn" layoutX="489.0" layoutY="297.0" mnemonicParsing="false" text="Save Changes" />
+      <Button fx:id="returnBtn" layoutX="284.0" layoutY="349.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="Return To Home" />
+   </children>
+</AnchorPane>
