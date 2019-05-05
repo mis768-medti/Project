@@ -1,5 +1,7 @@
 package edu.unlv.mis768.project;
 
+import java.util.Date;
+
 public class Appointment {
 	//field
 	private Patient patient;
@@ -44,6 +46,15 @@ public class Appointment {
 
 	public void setVisitType(String visitType) {
 		this.visitType = visitType;
+	}
+	
+	public boolean isFutureAppointment() {
+		// Today's date for comparison
+		Date today = new Date();
+		if (this.slot.getDate().compareTo(today) >= 0)
+			return true;
+		else
+			return false;
 	}
 	
 //	public String toString() {

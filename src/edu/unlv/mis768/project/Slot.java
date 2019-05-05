@@ -74,6 +74,10 @@ public class Slot {
 		this.hour = hour;
 	}
 	
+	public Date getDate() {
+		return this.date;
+	}
+	
 	public String toString() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String dateString = formatter.format(this.date);

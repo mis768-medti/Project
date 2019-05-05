@@ -164,6 +164,23 @@ public class Patient {
 		}	
 	}
 	
+	public ArrayList<Appointment> getFutureAppointments(){
+		// Array List to house future appointments
+		ArrayList<Appointment> futureAppointments = new ArrayList<Appointment>();
+		
+		// Loop over appointments
+		for (int i = 0; i < appointmentList.size(); i++) {
+			Appointment appointment = appointmentList.get(i);
+			
+			// If appointment is in the future
+			// add to future appointments ArrayList
+			if (appointment.isFutureAppointment())
+				futureAppointments.add(appointment);
+		}
+		
+		return futureAppointments;
+	}
+	
 	public void removeInsurance(PatientInsurance insurance) {
 		
 		// Create a connection to the database.

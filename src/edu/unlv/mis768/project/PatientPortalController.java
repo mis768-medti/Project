@@ -72,7 +72,7 @@ public class PatientPortalController {
     	
     	appointmentTableView.getItems().clear();
     	
-    	ArrayList<Appointment> appointmentList = patient.getAppointments();
+    	ArrayList<Appointment> appointmentList = patient.getFutureAppointments();
     	
     	// Loop over ArrayList
     	for (int i = 0; i < appointmentList.size(); i++) {

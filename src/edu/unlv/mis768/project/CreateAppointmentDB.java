@@ -1244,7 +1244,7 @@ public class CreateAppointmentDB {
 				   stmt.execute("INSERT INTO Appointment VALUES (" +
 						   		"2, " +
 						   		"2, " +
-						   		"'2019-04-27 13:00:00.00', " + 
+						   		"'2019-05-27 13:00:00.00', " + 
 						   		"'New Patient', " + 
 						   		"NULL," +
 						   		"NULL" + 
@@ -1254,7 +1254,7 @@ public class CreateAppointmentDB {
 				   stmt.execute("INSERT INTO Appointment VALUES (" +
 						   		"3, " +
 						   		"3, " +
-						   		"'2019-04-27 13:00:00.00', " + 
+						   		"'2019-06-27 13:00:00.00', " + 
 						   		"'Physical', " + 
 						   		"NULL," +
 						   		"NULL" + 
@@ -1304,7 +1304,7 @@ public class CreateAppointmentDB {
 				   stmt.execute("INSERT INTO Appointment VALUES (" +
 						   		"8, " +
 						   		"6, " +
-						   		"'2019-04-27 13:00:00.00', " + 
+						   		"'2019-05-27 13:00:00.00', " + 
 						   		"'Physical', " + 
 						   		"NULL," +
 						   		"NULL" + 
@@ -1314,7 +1314,7 @@ public class CreateAppointmentDB {
 				   stmt.execute("INSERT INTO Appointment VALUES (" +
 						   		"9, " +
 						   		"7, " +
-						   		"'2019-04-27 14:00:00.00', " + 
+						   		"'2019-06-27 14:00:00.00', " + 
 						   		"'New Patient', " + 
 						   		"NULL," +
 						   		"NULL" + 

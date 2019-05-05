@@ -229,6 +229,28 @@ public class PatientAdult extends Patient {
 		return appList;
 	}
 	
+	/**
+	 * Returns an ArrayList containing the patient's and
+	 * 	patient's dependents' future appointments
+	 */
+	public ArrayList<Appointment> getFutureAppointments(){
+		// Create an ArrayList to return
+		ArrayList<Appointment> appList = new ArrayList<Appointment>();
+		// Copy over patient's future appointments
+		appList.addAll(super.getFutureAppointments());
+		
+		// Check if patient has dependents
+		if (dependentList.size() > 0) {
+			// Patient has dependents
+			// Loop over dependents
+			for (int i = 0; i < dependentList.size(); i++) {
+				// Add future appointments to appList
+				appList.addAll(dependentList.get(i).getFutureAppointments());
+			}
+		}
+		return appList;
+	}
+	
 	public void removeAppointment(Appointment appointment) {
 		// Determine if appointment is for patient or a dependent
 		Patient appointmentPatient = appointment.getPatient();
