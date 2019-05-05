@@ -62,7 +62,7 @@ public class PatientDependentController {
     private TableView<PatientDependent> dependentTableView;
 
     @FXML
-    private Button saveBtn;
+    private Button deleteButton;
     
     private PatientAdult patient;
     
@@ -84,7 +84,7 @@ public class PatientDependentController {
     	// Update welcomeLabel with user's first name
     	welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!"); 	
     	
-    	// Populate the tableView with patien'ts dependent information
+    	// Populate the tableView with patient's dependent information
     	this.refreshDependentTableView();
     }
     
@@ -135,7 +135,7 @@ public class PatientDependentController {
     		alert.showAndWait();
     	}
     	
-    	else if (dateOfBirth.isEmpty()) {
+    	else if (dateOfBirth.isEmpty() || dateOfBirth.length() < 10) {
     		Alert alert = new Alert(AlertType.WARNING);
     		alert.setTitle("Warning");
     		alert.setHeaderText("Invalid Dependent");
@@ -165,7 +165,10 @@ public class PatientDependentController {
 	    		
 	    		// Dependent does not already exist
 	    		else {
-	    			System.out.println("Add dependent");
+	    			// Add dependent
+	    			patient.addDependent(newDependent);
+	    			// Refresh tableView so new dependent is displayed
+	    			refreshDependentTableView();
 	    		}
 			
     		
@@ -178,12 +181,22 @@ public class PatientDependentController {
         		
         		alert.showAndWait();
 			}
-    		
-    		
-    		
 
     	}
     
+    }
+    
+    public void deleteButtonListener() {
+    	// get the dependent selected in the TableView
+    	int selectedRow = dependentTableView.getSelectionModel().getSelectedIndex();
+    	PatientDependent dependentToRemove = dependentTableView.getItems().get(selectedRow);
+    	
+    	// remove dependent
+    	patient.removeDependent(dependentToRemove);
+    	
+    	// refresh tableView
+    	refreshDependentTableView();
+    	
     }
     
     // Event listener for Return Home Button

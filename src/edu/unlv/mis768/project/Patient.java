@@ -77,22 +77,25 @@ public class Patient {
 	        		+ " WHERE PatientID = '" + this.patientID + "'";
 	        ResultSet result = stmt.executeQuery(sqlSelect);
 	        
-	        // Clear insurance ArrayList
+	     // Clear insurance ArrayList
 	        if (insuranceList.size() > 0)
 	        	insuranceList.clear();
 	        
-	        // Populate ArrayList with PatientInsurance objects
-	        //	created from SQL query results
-	        result.first();
-	        do {
-	        	insuranceList.add(new PatientInsurance(result.getInt("PatientID"), 
-	        			result.getString("InsuranceName"), 
-	        			result.getString("GroupNo"),
-						result.getString("MemberNo"),
-						result.getString("InsuranceType")));
-	        	} while(result.next());
+	        if (result.next()) {
+	        	// Populate ArrayList with PatientInsurance objects
+		        //	created from SQL query results
+		        result.first();
+		        do {
+		        	insuranceList.add(new PatientInsurance(result.getInt("PatientID"), 
+		        			result.getString("InsuranceName"), 
+		        			result.getString("GroupNo"),
+							result.getString("MemberNo"),
+							result.getString("InsuranceType")));
+		        	} while(result.next());
+	        }
 		} 
 		catch (SQLException ex) {
+			System.out.println("Patient Insurance Error");
         	System.out.println(ex.getMessage());
 		}	
 	}

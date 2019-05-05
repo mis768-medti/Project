@@ -1,5 +1,6 @@
 package edu.unlv.mis768.project;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class PatientDependent extends Patient {
@@ -23,9 +24,18 @@ public class PatientDependent extends Patient {
 	}
 	
 	public boolean equals(PatientDependent dependent) {
-		if (this.patientFirstName.equals(dependent.patientFirstName) &&
-				this.patientLastName.equals(dependent.patientLastName) &&
-				this.dateOfBirth.equals(dependent.dateOfBirth))
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(this.dateOfBirth);
+		
+		Calendar dependentCalendar = Calendar.getInstance();
+		dependentCalendar.setTime(dependent.dateOfBirth);
+		
+		if (this.patientFirstName.equalsIgnoreCase(dependent.patientFirstName) &&
+				this.patientLastName.equalsIgnoreCase(dependent.patientLastName) &&
+				calendar.YEAR == dependentCalendar.YEAR &&
+				calendar.MONTH == dependentCalendar.MONTH &&
+				calendar.DAY_OF_MONTH == dependentCalendar.DAY_OF_MONTH)
 			return true;
 		else
 			return false;

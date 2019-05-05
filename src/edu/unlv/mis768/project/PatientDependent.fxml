@@ -24,7 +24,7 @@
     <TextField fx:id="dependentDateOfBirthTxt" layoutX="621.0" layoutY="174.0" prefHeight="31.0" prefWidth="204.0" promptText="Date of Birth (mm-dd-yyyy)" />
     <TextField fx:id="dependentPrimaryPhysicianTxt" layoutX="622.0" layoutY="213.0" prefHeight="31.0" prefWidth="204.0" promptText="Primary Physician" />
     <Button fx:id="addBtn" layoutX="779.0" layoutY="259.0" mnemonicParsing="false" onAction="#addButtonListener" text="Add" />
-    <Button id="saveBu" fx:id="saveBtn" layoutX="388.0" layoutY="228.0" mnemonicParsing="false" prefWidth="151.0" text="Save Changes" />
+    <Button id="saveBu" fx:id="deleteButton" layoutX="388.0" layoutY="228.0" mnemonicParsing="false" onAction="#deleteButtonListener" prefWidth="151.0" text="Delete" />
     <Button fx:id="returnHomeBtn" layoutX="349.0" layoutY="311.0" mnemonicParsing="false" onAction="#returnHomeButtonListener" prefHeight="27.0" prefWidth="217.0" text="Return to Home" />
   </children>
 </AnchorPane>
