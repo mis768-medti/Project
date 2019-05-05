@@ -77,7 +77,7 @@ public class PatientPortalController {
 			stmt = conn.createStatement();
 			
 			// Query patient table
-	        String sqlSelect = "SELECT PatientID, FirstName, LastName FROM " + AppointmentDBConstants.PATIENT_TABLE_NAME
+	        String sqlSelect = "SELECT *  FROM " + AppointmentDBConstants.PATIENT_TABLE_NAME
 	        		+ " WHERE Username = '" + user + "'";
 	        ResultSet result = stmt.executeQuery(sqlSelect);
 	        
@@ -85,7 +85,8 @@ public class PatientPortalController {
 	        
 	        this.patient = new Patient(result.getInt("PatientID"),
 	        				result.getString("FirstName"), 
-	        				result.getString("LastName"));
+	        				result.getString("LastName"),
+	        				result.getDate("DateOfBirth"));
 	        welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!");
 	        
 		} 
