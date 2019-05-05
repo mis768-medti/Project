@@ -76,6 +76,24 @@ public class PatientAdult extends Patient {
 		return dependentList;
 	}
 	
+	/**
+	 * Determines if patient has any dependents
+	 * @return true if patient has dependents, false otherwise
+	 */
+	public boolean hasDependents() {
+		boolean hasDependents = false;
+		
+		if (dependentList.size() > 0)
+			hasDependents = true;
+		
+		return hasDependents;
+	}
+	
+	/**
+	 * Determines if patient has the specified dependent
+	 * @param dependent A dependent object
+	 * @return true if patient has dependent, false otherwise
+	 */
 	public boolean hasDependent(PatientDependent dependent) {
 		boolean hasDependent = false;
 		

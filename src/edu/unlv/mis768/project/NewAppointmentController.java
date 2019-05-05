@@ -1,50 +1,156 @@
 package edu.unlv.mis768.project;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class NewAppointmentController {
 
     @FXML
-    private ComboBox<?> patientCmb;
+    private Button requestButton;
 
     @FXML
     private TextArea cmtTxt;
 
     @FXML
-    private Button reqAppTxt;
+    private ComboBox<Slot> timeComboBox;
 
     @FXML
-    private Button returnHomeTxt;
+    private ComboBox<Patient> patientComboBox;
 
     @FXML
-    private TextField ReasonTxt;
+    private ComboBox<Doctor> providerComboBox;
 
     @FXML
-    private ComboBox<?> providerCmb;
-
-    @FXML
-    private TextField availableTimeTxt;
+    private Button returnHomeButton;
 
     @FXML
     private DatePicker appDate;
+
+    @FXML
+    private ComboBox<String> reasonComboBox;
     
     private PatientAdult patient;
     
-    public void initialize() {}
+    private ArrayList<Doctor> doctorList;
+    
+    public void initialize() {
+    	
+    	doctorList = new ArrayList<Doctor>();
+    	
+    	// Create a connection to the database.
+        Connection conn =
+               AppointmentDBUtil.getDBConnection();
+        
+        try {
+        	// Create a statement object
+			Statement stmt = conn.createStatement();
+			
+			// Populate reason for visit combo box
+			// Query specialty table
+	        String sqlSelect = "SELECT DISTINCT VisitReason FROM " 
+	        		+ AppointmentDBConstants.SPECIALTY_TABLE_NAME;
+	        ResultSet result = stmt.executeQuery(sqlSelect);
+	        
+	        result.first();
+	        do {
+	        	reasonComboBox.getItems().add(result.getString("VisitReason"));
+	        } while(result.next());
+	        
+	        // Populate doctorList ArrayList 
+	        sqlSelect = "SELECT FirstName, LastName, ProviderID, Specialty "
+	        		+ "FROM " + AppointmentDBConstants.PROVIDER_TABLE_NAME;
+	        
+	        result = stmt.executeQuery(sqlSelect);
+	        
+	        result.first();
+	        do {
+	        	doctorList.add(new Doctor(result.getString("FirstName"),
+	        						result.getString("LastName"),
+	        						result.getInt("ProviderID"),
+	        						result.getString("Specialty")));
+	        } while(result.next());
+	        
+	        
+        }  catch (SQLException ex) {
+				Alert alert = new Alert(AlertType.ERROR);
+	        	alert.setTitle("Error");
+	        	alert.setHeaderText("Application Error");
+	        	alert.setContentText(ex.getMessage());
+	        	
+	        	alert.showAndWait();
+		}
+    }
     
     public void initData(PatientAdult patient) {
-    	this.patient = patient; 	
+    	this.patient = patient;
+    	
+    	// Populate patient combo box
+    	// Add patient
+    	patientComboBox.getItems().add(this.patient);
+    	
+    	// Add dependents (if necessary)
+    	if (this.patient.hasDependents()) {
+    		// Get dependent list
+    		ArrayList<PatientDependent> dependents = this.patient.getDependents();
+    		// Loop over dependents
+    		for (int i = 0; i < dependents.size(); i++) {
+    			// Add dependent to patient combo box
+    			patientComboBox.getItems().add(dependents.get(i));
+    		}
+    	}
+    	
+    }
+    
+    // Event listener for Visit Reason Combobox
+    public void visitReasonListener() {
+    	// Determine visit reason
+    	String visitReason = reasonComboBox.getValue();
+    	
+    	// Populate provider combobox with provider's that 
+    	// can treat selected reason
+    	providerComboBox.getItems().clear();
+    	
+    	for (int i = 0; i < doctorList.size(); i++) {
+    		Doctor doctor = doctorList.get(i);
+    		
+    		if (doctor.canTreat(visitReason))
+    			providerComboBox.getItems().add(doctor);
+    	}
+    }
+    
+    // Event listener for Date Picker
+    public void appDateListener() {
+    	// Determine selected provider
+    	Doctor doctor = providerComboBox.getValue();
+    	
+    	// Determine selected date
+    	LocalDate appointmentDate = appDate.getValue();
+    	Instant instant = Instant.from(appointmentDate.atStartOfDay(ZoneId.systemDefault()));
+    	Date date = Date.from(instant);
+    	
+    	System.out.println(date);
     }
     
     // Event listener for Return Home Button
