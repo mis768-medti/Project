@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="378.0" prefWidth="864.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.unlv.mis768.project.PatientProfileController">
+<AnchorPane prefHeight="458.0" prefWidth="864.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.unlv.mis768.project.PatientProfileController">
   <!-- TODO Add Nodes -->
   <children>
     <Label fx:id="welcomeLabel" layoutX="24.0" layoutY="17.0" text="Hello User!" />
@@ -24,8 +24,8 @@
         <Font size="14.0" fx:id="x1" />
       </font>
     </Label>
-    <Button fx:id="saveChangesBtn" layoutX="575.0" layoutY="267.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="105.0" text="Save Changes" />
-    <Button fx:id="returnHomeBtn" layoutX="325.0" layoutY="314.0" mnemonicParsing="false" onAction="#returnHomeButtonListener" prefHeight="29.0" prefWidth="144.0" text="Return To Home" />
+    <Button fx:id="saveChangesBtn" layoutX="702.0" layoutY="398.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="144.0" text="Save Changes" />
+    <Button fx:id="returnHomeBtn" layoutX="288.0" layoutY="402.0" mnemonicParsing="false" onAction="#returnHomeButtonListener" prefHeight="29.0" prefWidth="144.0" text="Return To Home" />
     <GridPane layoutX="24.0" layoutY="95.0" prefHeight="48.0" prefWidth="373.0">
       <children>
         <Label font="$x1" text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
@@ -42,5 +42,11 @@
         <RowConstraints maxHeight="28.0" minHeight="6.0" prefHeight="28.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
+    <TextField fx:id="nameTxt" layoutX="402.0" layoutY="268.0" prefHeight="29.0" prefWidth="105.0" text="Name" />
+    <TextField fx:id="groupNumberTxt" layoutX="512.0" layoutY="268.0" prefHeight="29.0" prefWidth="105.0" text="Group Number" />
+    <TextField fx:id="memberNumberTxt" layoutX="621.0" layoutY="268.0" prefHeight="29.0" prefWidth="114.00009999999747" text="Member Number" />
+    <TextField fx:id="typeTxt" layoutX="741.0" layoutY="268.0" prefHeight="29.0" prefWidth="105.0" text="Type" />
+    <Button fx:id="addBtn" layoutX="702.0" layoutY="315.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="144.0" text="Add New Record" />
+    <Button fx:id="delBtn" layoutX="702.0" layoutY="356.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="144.0" text="Delete Selected Record" />
   </children>
 </AnchorPane>
