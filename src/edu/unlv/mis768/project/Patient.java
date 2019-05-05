@@ -16,6 +16,7 @@ public class Patient {
 	String patientLastName;
 	ArrayList<PatientInsurance> insuranceList;
 	ArrayList<Patient> dependentList;
+	ArrayList<Appointment> appointmentList;
 	Date dateOfBirth;
 	Doctor doctor;
 	int patientID;
@@ -23,7 +24,7 @@ public class Patient {
 	
 	public Patient() {}
 	
-	public Patient(int patientID, String firstName, String lastName, Date dateOfBirth) {
+	public Patient(int patientID, String firstName, String lastName, Date dateOfBirth){
 		
 		// Set fields
 		this.patientID = patientID;
@@ -33,8 +34,10 @@ public class Patient {
 		
 		// Instantiate ArrayLists
 		this.insuranceList = new ArrayList<PatientInsurance>();
+		this.appointmentList = new ArrayList<Appointment>();
 		
 		this.pullInsuranceInformation();
+		this.pullAppointmentInformation();
 		
 	}
 	
@@ -53,6 +56,7 @@ public class Patient {
 		this.insuranceList = new ArrayList<PatientInsurance>();
 				
 		this.pullInsuranceInformation();
+		this.pullAppointmentInformation();
 	}
 	
 
@@ -100,6 +104,66 @@ public class Patient {
 		}	
 	}
 	
+	/**
+	 * Queries the appointment table and populates
+	 * the appointment ArrayList with the patient's 
+	 * appointment information
+	 */
+	public void pullAppointmentInformation() {
+		// Create a connection to the database.
+        Connection conn =
+               AppointmentDBUtil.getDBConnection();
+        
+		Statement stmt;
+		try {
+			// Create a statement object
+			stmt = conn.createStatement();
+			
+			// Query patient appointment table
+	        String sqlSelect = "SELECT cast(a.AppointmentDateTime as char) as AppointmentDateTime,"
+	        		+"a.VisitReason, a.PhysicianID,"
+	        		+ " p.FirstName, p.LastName, p.Specialty FROM " 
+	        		+ AppointmentDBConstants.APPOINTMENT_TABLE_NAME
+	        		+ " a INNER JOIN " + AppointmentDBConstants.PROVIDER_TABLE_NAME + " p"
+	        		+ " on a.PhysicianID = p.ProviderID "
+	        		+ " WHERE PatientID = '" + this.patientID + "'";
+	        
+	        ResultSet result = stmt.executeQuery(sqlSelect);
+	        
+	        // Clear appointment ArrayList
+	        if (appointmentList.size() > 0)
+	        	appointmentList.clear();
+	        
+	        if (result.next()) {
+	        	// Populate ArrayList with Appointment objects
+		        //	created from SQL query results
+		        result.first();
+		        do {
+		        	 
+		        	Doctor appointmentDoctor = new Doctor(result.getString("FirstName"),
+		        									result.getString("LastName"),
+		        									result.getInt("PhysicianID"),
+		        									result.getString("Specialty"));
+
+		        	String appointmentDate = result.getString("AppointmentDateTime");
+		        	Slot appointmentSlot = new Slot(appointmentDate);
+		        	
+		        	appointmentList.add(new Appointment(this, 
+		        			appointmentDoctor, 
+		        			appointmentSlot,
+							result.getString("VisitReason")));
+		        	} while(result.next());
+	        }
+		} 
+		catch (SQLException ex) {
+			System.out.println("Patient Appointment SQL Error");
+        	System.out.println(ex.getMessage());
+		} catch (Exception e) {
+			System.out.println("Patient Appointment Slot Error");
+			System.out.println(e.getMessage());
+		}	
+	}
+	
 	public void removeInsurance(PatientInsurance insurance) {
 		
 		// Create a connection to the database.
@@ -122,6 +186,40 @@ public class Patient {
 	
 	       	// Refresh Insurance ArrayList
         	this.pullInsuranceInformation();
+	        }
+	              	
+ 
+		catch (SQLException ex) {
+			System.out.println("Delete Insurance Error");
+        	System.out.println(ex.getMessage());
+		}	
+	}
+	
+	public void removeAppointment(Appointment appointment) {
+		
+		// Create a connection to the database.
+        Connection conn =
+               AppointmentDBUtil.getDBConnection();
+        
+		Statement stmt;
+		try {
+			// Create a statement object
+			stmt = conn.createStatement();
+			
+			// Remove appointment from Appointment table
+			int patientID = appointment.getPatient().getPatientID();
+			int physicianID = appointment.getDoctor().getId();
+			String appointmentDateTime = appointment.getSlot();
+			
+			String sqlDelete = "DELETE FROM " + AppointmentDBConstants.APPOINTMENT_TABLE_NAME
+					+ " WHERE PatientID = " + patientID + " AND  "
+					+ " PhysicianID = " + physicianID + " AND "
+					+ " AppointmentDateTime = '" + appointmentDateTime + "'" ;
+			
+			stmt.executeUpdate(sqlDelete);
+	
+	       	// Refresh Appointment ArrayList
+        	this.pullAppointmentInformation();
 	        }
 	              	
  
@@ -172,6 +270,10 @@ public class Patient {
 		return insuranceList;
 	}
 	
+	public ArrayList<Appointment> getAppointments() {
+		return appointmentList;
+	}
+	
 	public String getDoctor() {
 		return (doctor.getFirstName() + " " + doctor.getLastName());
 	}
@@ -181,8 +283,7 @@ public class Patient {
 	}
 	
 	public String toString() {
-		return "Name: " + getPatientFirstName()+"\n"
-				+ "Doctor: " + doctor.getFirstName() + " " + doctor.getLastName();
+		return getPatientFirstName()+" " + getPatientLastName();
 	}
 	
 	

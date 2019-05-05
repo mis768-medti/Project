@@ -206,4 +206,48 @@ public class PatientAdult extends Patient {
 		// Remove insurance for patient
 		super.removeInsurance(insurance);
 	}
+	
+	/**
+	 * Returns an ArrayList containing the patient's and
+	 * 	patient's dependents' appointments
+	 */
+	public ArrayList<Appointment> getAppointments(){
+		// Create an ArrayList to return
+		ArrayList<Appointment> appList = new ArrayList<Appointment>();
+		// Copy over patient's appointments
+		appList.addAll(appointmentList);
+		
+		// Check if patient has dependents
+		if (dependentList.size() > 0) {
+			// Patient has dependents
+			// Loop over dependents
+			for (int i = 0; i < dependentList.size(); i++) {
+				// Add appointments to appList
+				appList.addAll(dependentList.get(i).getAppointments());
+			}
+		}
+		return appList;
+	}
+	
+	public void removeAppointment(Appointment appointment) {
+		// Determine if appointment is for patient or a dependent
+		Patient appointmentPatient = appointment.getPatient();
+		
+		if (appointmentPatient.getPatientID() == this.patientID) {
+			// Appointment is for this patient
+			super.removeAppointment(appointment);
+		}
+		else {
+			// Appointment is for a dependent
+			// Loop over dependents
+			for (int i = 0; i < dependentList.size(); i++) {
+				// Check if appointment is for dependent
+				Patient dependent = dependentList.get(i);
+				if(appointmentPatient.getPatientID() == dependent.getPatientID()) {
+					// Appointment is for this patient
+					dependent.removeAppointment(appointment);
+				}
+			}
+		}
+	}
 }

@@ -8,7 +8,7 @@ public class Doctor extends Employee {
 	private ArrayList<Slot> slotList;
 	private ArrayList<Appointment> appointmentList;
 
-	public Doctor(String firstName, String lastName, int id, String title, String specialty) {
+	public Doctor(String firstName, String lastName, int id, String specialty) {
 		super(firstName, lastName, id);
 		this.specialty = specialty;
 	}
@@ -37,9 +37,7 @@ public class Doctor extends Employee {
 		this.appointmentList = appointmentList;
 	}
 	public String toString() {
-		return "Name: " + getFirstName() + " " + getLastName() +"\n"
-				+"ID: " + getId() + "\n"
-				+ "Specialty: " + getSpecialty();
+		return getFirstName() + " " + getLastName();
 	}
 	
 	

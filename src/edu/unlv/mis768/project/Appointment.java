@@ -14,16 +14,16 @@ public class Appointment {
 		this.visitType = visitType;
 	}
 
-	public String getPatient() {
-		return patient.toString();
+	public Patient getPatient() {
+		return patient;
 	}
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
 
-	public String getDoctor() {
-		return doctor.toString();
+	public Doctor getDoctor() {
+		return this.doctor;
 	}
 
 	public void setDoctor(Doctor doctor) {

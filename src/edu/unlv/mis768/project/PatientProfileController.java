@@ -113,7 +113,7 @@ public class PatientProfileController {
     	else {
     		PatientInsurance insuranceToRemove = insuranceTableView.getItems().get(selectedRow);
         	
-        	// remove dependent
+        	// remove insurance
         	patient.removeInsurance(insuranceToRemove);
         	
         	// refresh tableView
