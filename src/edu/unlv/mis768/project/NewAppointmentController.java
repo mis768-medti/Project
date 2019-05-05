@@ -39,11 +39,11 @@ public class NewAppointmentController {
     @FXML
     private DatePicker appDate;
     
-    private Patient patient;
+    private PatientAdult patient;
     
     public void initialize() {}
     
-    public void initData(Patient patient) {
+    public void initData(PatientAdult patient) {
     	this.patient = patient; 	
     }
     

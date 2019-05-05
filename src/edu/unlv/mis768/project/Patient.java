@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,7 +14,8 @@ public class Patient {
 	// fields 	
 	String patientFirstName;
 	String patientLastName;
-	ArrayList<PatientInsurance> insurance;
+	ArrayList<PatientInsurance> insuranceList;
+	ArrayList<Patient> dependentList;
 	Date dateOfBirth;
 	Doctor doctor;
 	int patientID;
@@ -22,17 +25,37 @@ public class Patient {
 	
 	public Patient(int patientID, String firstName, String lastName, Date dateOfBirth) {
 		
+		// Set fields
 		this.patientID = patientID;
 		this.patientFirstName = firstName;
 		this.patientLastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 		
-		this.insurance = new ArrayList<PatientInsurance>();
+		// Instantiate ArrayLists
+		this.insuranceList = new ArrayList<PatientInsurance>();
 		
 		this.pullInsuranceInformation();
 		
 	}
 	
+	public Patient(int patientID, String firstName, String lastName, String dateOfBirth) 
+			throws Exception {
+		
+		// Set fields
+		this.patientID = patientID;
+		this.patientFirstName = firstName;
+		this.patientLastName = lastName;
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
+		this.dateOfBirth = formatter.parse(dateOfBirth);
+				
+		// Instantiate ArrayLists
+		this.insuranceList = new ArrayList<PatientInsurance>();
+				
+		this.pullInsuranceInformation();
+	}
+	
+
 	/**
 	 * Queries the patient insurance table and populates
 	 * the insurance ArrayList with the patient's 
@@ -55,19 +78,19 @@ public class Patient {
 	        ResultSet result = stmt.executeQuery(sqlSelect);
 	        
 	        // Clear insurance ArrayList
-	        if (insurance.size() > 0)
-	        	insurance.clear();
+	        if (insuranceList.size() > 0)
+	        	insuranceList.clear();
 	        
 	        // Populate ArrayList with PatientInsurance objects
 	        //	created from SQL query results
 	        result.first();
 	        do {
-	        	insurance.add(new PatientInsurance(result.getInt("PatientID"), 
+	        	insuranceList.add(new PatientInsurance(result.getInt("PatientID"), 
 	        			result.getString("InsuranceName"), 
 	        			result.getString("GroupNo"),
 						result.getString("MemberNo"),
 						result.getString("InsuranceType")));
-	        	} while(!result.next());
+	        	} while(result.next());
 		} 
 		catch (SQLException ex) {
         	System.out.println(ex.getMessage());
@@ -80,6 +103,11 @@ public class Patient {
 	
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+	
+	public void setDateOfBirth(String dateOfBirth) throws Exception {
+		SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
+		this.dateOfBirth = formatter.parse(dateOfBirth);
 	}
 	
 	public int getPatientID() {
@@ -107,7 +135,7 @@ public class Patient {
 	}
 	
 	public ArrayList<PatientInsurance> getInsurance() {
-		return insurance;
+		return insuranceList;
 	}
 	
 	public String getDoctor() {

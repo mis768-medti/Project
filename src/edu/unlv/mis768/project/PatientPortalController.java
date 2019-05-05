@@ -55,7 +55,7 @@ public class PatientPortalController {
     @FXML
     private TableColumn<?, ?> visitReason;
     
-    private Patient patient;
+    private PatientAdult patient;
     
     public void initialize() {}
     
@@ -83,7 +83,7 @@ public class PatientPortalController {
 	        
 	        result.last();
 	        
-	        this.patient = new Patient(result.getInt("PatientID"),
+	        this.patient = new PatientAdult(result.getInt("PatientID"),
 	        				result.getString("FirstName"), 
 	        				result.getString("LastName"),
 	        				result.getDate("DateOfBirth"));
@@ -105,7 +105,7 @@ public class PatientPortalController {
      * Used for navigation through patient portal screens
      * @param patient A patient object
      */
-    public void initData(Patient patient) {
+    public void initData(PatientAdult patient) {
     	this.patient = patient;
     	
     	// Update welcomeLabel with user's first name

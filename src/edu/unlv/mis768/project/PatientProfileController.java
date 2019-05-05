@@ -54,7 +54,7 @@ public class PatientProfileController {
     @FXML
     private Label nameLabel;
     
-    private Patient patient;
+    private PatientAdult patient;
     
     public void initialize() {
     	// set up the columns in the table
@@ -68,7 +68,7 @@ public class PatientProfileController {
     			PropertyValueFactory<PatientInsurance, String>("type"));
     }
     
-    public void initData(Patient patient) {
+    public void initData(PatientAdult patient) {
     	this.patient = patient;
     	
     	// Update welcomeLabel with user's first name
@@ -84,7 +84,6 @@ public class PatientProfileController {
     	ArrayList<PatientInsurance> insuranceList = patient.getInsurance();
     	// Loop over ArrayList
     	for (int i = 0; i < insuranceList.size(); i++) {
-    		System.out.println(insuranceList.get(i).getInsuranceName());
     		insuranceTableView.getItems().add(insuranceList.get(i));
     	}
     }
