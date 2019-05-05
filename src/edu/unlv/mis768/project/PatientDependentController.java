@@ -189,13 +189,26 @@ public class PatientDependentController {
     public void deleteButtonListener() {
     	// get the dependent selected in the TableView
     	int selectedRow = dependentTableView.getSelectionModel().getSelectedIndex();
-    	PatientDependent dependentToRemove = dependentTableView.getItems().get(selectedRow);
     	
-    	// remove dependent
-    	patient.removeDependent(dependentToRemove);
+    	if (selectedRow == -1) {
+    		// No rows selected
+    		Alert alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("Warning");
+    		alert.setHeaderText("Invalid Deletion Attempt");
+    		alert.setContentText("Please select a dependent to delete");
+
+    		alert.showAndWait();
+    	}
+    	else {
+    		PatientDependent dependentToRemove = dependentTableView.getItems().get(selectedRow);
+        	
+        	// remove dependent
+        	patient.removeDependent(dependentToRemove);
+        	
+        	// refresh tableView
+        	refreshDependentTableView();
+    	}
     	
-    	// refresh tableView
-    	refreshDependentTableView();
     	
     }
     

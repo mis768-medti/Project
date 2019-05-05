@@ -9,11 +9,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -98,13 +100,26 @@ public class PatientProfileController {
     public void deleteButtonListener() {
     	// get the insurance selected in the TableView
     	int selectedRow = insuranceTableView.getSelectionModel().getSelectedIndex();
-    	PatientInsurance insuranceToRemove = insuranceTableView.getItems().get(selectedRow);
     	
-    	// remove dependent
-    	patient.removeInsurance(insuranceToRemove);
+    	if (selectedRow == -1) {
+    		// No rows selected
+    		Alert alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("Warning");
+    		alert.setHeaderText("Invalid Deletion Attempt");
+    		alert.setContentText("Please select an insurance to delete");
+
+    		alert.showAndWait();
+    	}
+    	else {
+    		PatientInsurance insuranceToRemove = insuranceTableView.getItems().get(selectedRow);
+        	
+        	// remove dependent
+        	patient.removeInsurance(insuranceToRemove);
+        	
+        	// refresh tableView
+        	refreshInsuranceTableView();	
+    	}
     	
-    	// refresh tableView
-    	refreshInsuranceTableView();
     	
     }
     
