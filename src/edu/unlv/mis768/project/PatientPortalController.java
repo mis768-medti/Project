@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class PatientPortalController {
 
@@ -26,19 +28,16 @@ public class PatientPortalController {
     private Button manageDependentBtn;
 
     @FXML
-    private TableColumn<?, ?> patientName;
+    private TableColumn<Appointment, String> patientNameColumn;
 
     @FXML
     private Label welcomeLabel;
 
     @FXML
-    private TableColumn<?, ?> appTime;
+    private TableColumn<Appointment, String> appDateColumn;
 
     @FXML
-    private TableColumn<?, ?> appDate;
-
-    @FXML
-    private TableColumn<?, ?> appProvider;
+    private TableColumn<Appointment, String> appProviderColumn;
 
     @FXML
     private Button modifyAppointmentBtn;
@@ -50,14 +49,36 @@ public class PatientPortalController {
     private Button newAppointmentBtn;
 
     @FXML
-    private TableView<?> patientTableView;
+    private TableView<Appointment> appointmentTableView;
 
     @FXML
-    private TableColumn<?, ?> visitReason;
+    private TableColumn<Appointment, String> visitReasonColumn;
     
     private PatientAdult patient;
     
-    public void initialize() {}
+    public void initialize() {
+    	// set up the columns in the table
+    	patientNameColumn.setCellValueFactory(new 
+    			PropertyValueFactory<Appointment, String>("patient"));
+    	appDateColumn.setCellValueFactory(new 
+    			PropertyValueFactory<Appointment, String>("slot"));
+    	appProviderColumn.setCellValueFactory(new 
+    			PropertyValueFactory<Appointment, String>("doctor"));
+    	visitReasonColumn.setCellValueFactory(new 
+    			PropertyValueFactory<Appointment, String>("visitType"));
+    }
+    
+    public void refreshAppointmentTableView() {
+    	
+    	appointmentTableView.getItems().clear();
+    	
+    	ArrayList<Appointment> appointmentList = patient.getAppointments();
+    	
+    	// Loop over ArrayList
+    	for (int i = 0; i < appointmentList.size(); i++) {
+    		appointmentTableView.getItems().add(appointmentList.get(i));
+    	}
+    }
     
     /**
      * Determines patient from username and 
@@ -88,6 +109,9 @@ public class PatientPortalController {
 	        				result.getString("LastName"),
 	        				result.getDate("DateOfBirth"));
 	        welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!");
+	        
+	        // Populate the tableView with patient's appointment information
+	    	refreshAppointmentTableView();
 	        
 		} 
 		catch (SQLException ex) {

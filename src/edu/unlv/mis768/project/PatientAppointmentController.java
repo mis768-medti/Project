@@ -20,12 +20,6 @@ import javafx.stage.Stage;
 public class PatientAppointmentController {
 
     @FXML
-    private TableColumn<?, ?> cancel;
-
-    @FXML
-    private TableColumn<?, ?> reschedule;
-
-    @FXML
     private TableColumn<Appointment, String> patientNameColumn;
 
     @FXML
@@ -85,6 +79,9 @@ public class PatientAppointmentController {
     	welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!"); 	
     	
     	// Populate the tableView with patient's appointment information
+    	// To Do: Restrict to only upcoming (future) appointments
+    	//	Need to make future appointments in the database
+    	//  Need to make a getFutureAppointments method in patient
     	refreshAppointmentTableView();
     }
     
