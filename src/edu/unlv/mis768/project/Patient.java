@@ -100,6 +100,37 @@ public class Patient {
 		}	
 	}
 	
+	public void removeInsurance(PatientInsurance insurance) {
+		
+		// Create a connection to the database.
+        Connection conn =
+               AppointmentDBUtil.getDBConnection();
+        
+		Statement stmt;
+		try {
+			// Create a statement object
+			stmt = conn.createStatement();
+			
+			// Remove insurance from PatientInsurance table
+			String sqlDelete = "DELETE FROM " + AppointmentDBConstants.INSURANCE_TABLE_NAME
+					+ " WHERE PatientID = " + this.patientID + " AND  "
+					+ " InsuranceName = '" + insurance.getInsuranceName() + "' AND "
+					+ " GroupNo = '" + insurance.getGroupNumber() + "'" ;
+			
+			System.out.println(sqlDelete);
+			stmt.executeUpdate(sqlDelete);
+	
+	       	// Refresh Insurance ArrayList
+        	this.pullInsuranceInformation();
+	        }
+	              	
+ 
+		catch (SQLException ex) {
+			System.out.println("Delete Insurance Error");
+        	System.out.println(ex.getMessage());
+		}	
+	}
+	
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}

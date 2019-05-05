@@ -188,4 +188,22 @@ public class PatientAdult extends Patient {
         	System.out.println(ex.getMessage());
 		}	
 	}
+	
+	/**
+	 * Cascades any insurance removals to patient's dependents
+	 */
+	public void removeInsurance(PatientInsurance insurance) {
+		// Check if patient has dependents
+		if (dependentList.size() > 0) {
+			// Patient has dependents
+			// Loop over dependents
+			for (int i = 0; i < dependentList.size(); i++) {
+				// Remove insurance
+				dependentList.get(i).removeInsurance(insurance);
+			}
+		}
+		
+		// Remove insurance for patient
+		super.removeInsurance(insurance);
+	}
 }

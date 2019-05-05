@@ -37,7 +37,7 @@ public class PatientProfileController {
     private TableColumn<PatientInsurance, String> groupNumberColumn;
 
     @FXML
-    private Button saveChangesBtn;
+    private Button deleteButton;
 
     @FXML
     private TableColumn<PatientInsurance, String> insuranceTypeColumn;
@@ -68,6 +68,17 @@ public class PatientProfileController {
     			PropertyValueFactory<PatientInsurance, String>("type"));
     }
     
+    public void refreshInsuranceTableView() {
+    	
+    	insuranceTableView.getItems().clear();
+    	
+    	ArrayList<PatientInsurance> insuranceList = patient.getInsurance();
+    	// Loop over ArrayList
+    	for (int i = 0; i < insuranceList.size(); i++) {
+    		insuranceTableView.getItems().add(insuranceList.get(i));
+    	}
+    }
+    
     public void initData(PatientAdult patient) {
     	this.patient = patient;
     	
@@ -81,11 +92,20 @@ public class PatientProfileController {
     	dateOfBirthLabel.setText(this.patient.getDateOfBirth().toString());
     	
     	// Populate the tableView with patient's insurance information
-    	ArrayList<PatientInsurance> insuranceList = patient.getInsurance();
-    	// Loop over ArrayList
-    	for (int i = 0; i < insuranceList.size(); i++) {
-    		insuranceTableView.getItems().add(insuranceList.get(i));
-    	}
+    	refreshInsuranceTableView();
+    }
+    
+    public void deleteButtonListener() {
+    	// get the insurance selected in the TableView
+    	int selectedRow = insuranceTableView.getSelectionModel().getSelectedIndex();
+    	PatientInsurance insuranceToRemove = insuranceTableView.getItems().get(selectedRow);
+    	
+    	// remove dependent
+    	patient.removeInsurance(insuranceToRemove);
+    	
+    	// refresh tableView
+    	refreshInsuranceTableView();
+    	
     }
     
     // Event listener for Return Home Button

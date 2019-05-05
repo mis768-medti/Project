@@ -24,7 +24,7 @@
         <Font size="14.0" fx:id="x1" />
       </font>
     </Label>
-    <Button fx:id="saveChangesBtn" layoutX="564.0" layoutY="267.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="116.0" text="Save Changes" />
+    <Button fx:id="deleteButton" layoutX="564.0" layoutY="267.0" mnemonicParsing="false" onAction="#deleteButtonListener" prefHeight="31.0" prefWidth="116.0" text="Delete" />
     <Button fx:id="returnHomeBtn" layoutX="325.0" layoutY="314.0" mnemonicParsing="false" onAction="#returnHomeButtonListener" prefHeight="29.0" prefWidth="144.0" text="Return To Home" />
     <GridPane layoutX="24.0" layoutY="95.0" prefHeight="48.0" prefWidth="373.0">
       <children>
