@@ -76,7 +76,7 @@ public class PatientAppointmentController {
     	this.patient = patient;
     	
     	// Update welcomeLabel with user's first name
-    	welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!"); 	
+    	welcomeLabel.setText("Hello " + this.patient.getFirstName() + "!"); 	
     	
     	// Populate the tableView with patient's appointment information
     	// To Do: Restrict to only upcoming (future) appointments

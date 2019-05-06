@@ -9,11 +9,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Patient {
+public class Patient extends User {
 	
 	// fields 	
-	String patientFirstName;
-	String patientLastName;
+	String userType = "patient";
+	String firstName;
+	String lastName;
 	ArrayList<PatientInsurance> insuranceList;
 	ArrayList<Patient> dependentList;
 	ArrayList<Appointment> appointmentList;
@@ -27,8 +28,8 @@ public class Patient {
 		
 		// Set fields
 		this.patientID = patientID;
-		this.patientFirstName = firstName;
-		this.patientLastName = lastName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 		
 		// Instantiate ArrayLists
@@ -45,8 +46,8 @@ public class Patient {
 		
 		// Set fields
 		this.patientID = patientID;
-		this.patientFirstName = firstName;
-		this.patientLastName = lastName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
 		this.dateOfBirth = formatter.parse(dateOfBirth);
@@ -261,6 +262,10 @@ public class Patient {
 		}	
 	}
 	
+	public String getUserType() {
+		return userType;
+	}
+	
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -282,20 +287,20 @@ public class Patient {
 		this.patientID = patientID;
 	}
 	
-	public String getPatientFirstName() {
-		return patientFirstName;
+	public String getFirstName() {
+		return firstName;
 	}
 	
-	public void setPatientFirstName(String patientFirstName) {
-		this.patientFirstName = patientFirstName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	
-	public String getPatientLastName() {
-		return patientLastName;
+	public String getLastName() {
+		return lastName;
 	}
 	
-	public void setPatientLastName(String patientLastName) {
-		this.patientLastName = patientLastName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	public ArrayList<PatientInsurance> getInsurance() {
@@ -307,7 +312,7 @@ public class Patient {
 	}
 	
 	public String toString() {
-		return getPatientFirstName()+" " + getPatientLastName();
+		return getFirstName()+" " + getLastName();
 	}
 	
 	

@@ -9,11 +9,11 @@
    <children>
       <Label fx:id="welcomeLabel" layoutX="21.0" layoutY="14.0" text="Hello User!" />
       <Label layoutX="21.0" layoutY="40.0" text="Existing Users :" />
-      <TableView fx:id="manageUserTblData" layoutX="21.0" layoutY="75.0" prefHeight="200.0" prefWidth="558.0">
+      <TableView fx:id="userTableView" layoutX="21.0" layoutY="75.0" prefHeight="200.0" prefWidth="558.0">
         <columns>
-          <TableColumn fx:id="name" prefWidth="330.0" text="Name" />
-          <TableColumn fx:id="userType" prefWidth="134.0" text="User Type" />
-            <TableColumn fx:id="remove" prefWidth="93.0" text="Remove" />
+          <TableColumn fx:id="firstNameColumn" prefWidth="240.0" text="First Name" />
+            <TableColumn fx:id="lastNameColumn" prefWidth="165.0" text="Last Name" />
+          <TableColumn fx:id="userTypeColumn" prefWidth="134.0" text="User Type" />
         </columns>
       </TableView>
       <Button fx:id="addPhysicianBtn" layoutX="625.0" layoutY="75.0" mnemonicParsing="false" onAction="#addPhysicianButtonListener" text="Add Physician" />

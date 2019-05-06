@@ -63,9 +63,9 @@ public class PatientDependentController {
     public void initialize() {
     	// set up the columns in the table
     	dependentFirstNameColumn.setCellValueFactory(new 
-    			PropertyValueFactory<PatientDependent, String>("patientFirstName"));
+    			PropertyValueFactory<PatientDependent, String>("firstName"));
     	dependentLastNameColumn.setCellValueFactory(new 
-    			PropertyValueFactory<PatientDependent, String>("patientLastName"));
+    			PropertyValueFactory<PatientDependent, String>("lastName"));
     	dependentDateOfBirthColumn.setCellValueFactory(new 
     			PropertyValueFactory<PatientDependent, Date>("dateOfBirth"));
     }
@@ -74,7 +74,7 @@ public class PatientDependentController {
     	this.patient = patient;
     	
     	// Update welcomeLabel with user's first name
-    	welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!"); 	
+    	welcomeLabel.setText("Hello " + this.patient.getFirstName() + "!"); 	
     	
     	// Populate the tableView with patient's dependent information
     	this.refreshDependentTableView();
@@ -141,8 +141,8 @@ public class PatientDependentController {
     		try {
     			// Instantiate a dependent object based on the specified information
         		PatientDependent newDependent = new PatientDependent();
-        		newDependent.setPatientFirstName(firstName);
-        		newDependent.setPatientLastName(lastName);
+        		newDependent.setFirstName(firstName);
+        		newDependent.setLastName(lastName);
 				newDependent.setDateOfBirth(dateOfBirth);
 				
 				// Check if user already has specified dependent

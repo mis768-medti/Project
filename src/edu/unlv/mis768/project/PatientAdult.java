@@ -59,13 +59,16 @@ public class PatientAdult extends Patient {
 	        
 	        // Populate ArrayList with PatientInsurance objects
 	        //	created from SQL query results
-	        result.first();
-	        do {
-	        	dependentList.add(new PatientDependent(result.getInt("PatientID"), 
-	        			result.getString("FirstName"), 
-	        			result.getString("LastName"),
-						result.getDate("DateOfBirth")));
-	        	} while(result.next());
+	        if (result.next()) {
+	        	result.first();
+		        do {
+		        	dependentList.add(new PatientDependent(result.getInt("PatientID"), 
+		        			result.getString("FirstName"), 
+		        			result.getString("LastName"),
+							result.getDate("DateOfBirth")));
+		        	} while(result.next());	
+	        }
+	        
 	        
 	        AppointmentDBUtil.closeDBConnection(conn);
 		} 
@@ -126,8 +129,8 @@ public class PatientAdult extends Patient {
 			
 			// Check if dependent is in the Patient table
 			String sqlSelect = "SELECT PatientID FROM " +  AppointmentDBConstants.PATIENT_TABLE_NAME 
-					+ " WHERE FirstName ='" +  dependent.patientFirstName + "' AND "
-					+ " LastName = '" + dependent.patientLastName + "' AND " 
+					+ " WHERE FirstName ='" +  dependent.firstName + "' AND "
+					+ " LastName = '" + dependent.lastName + "' AND " 
 					+ " DateOfBirth = '" + birthDateString + "'";
 			
 	        ResultSet result = stmt.executeQuery(sqlSelect);
@@ -137,8 +140,8 @@ public class PatientAdult extends Patient {
 	        	// insert dependent into Patient table
 	        	String sqlInsert = "INSERT INTO " + AppointmentDBConstants.PATIENT_TABLE_NAME
 	        			+ "(FirstName, LastName, DateOfBirth) VALUES ('"
-	        			+ dependent.patientFirstName + "','" 
-	        			+ dependent.patientLastName + "','" 
+	        			+ dependent.firstName + "','" 
+	        			+ dependent.lastName + "','" 
 	        			+ birthDateString + "')";
 	        	
 	        	stmt.executeUpdate(sqlInsert);
@@ -157,9 +160,19 @@ public class PatientAdult extends Patient {
         	String sqlInsert = "INSERT INTO " + AppointmentDBConstants.DEPENDENT_TABLE_NAME
         			+ " VALUES (" + this.patientID + ", " + dependentID + ")";
         	
-        	// TO DO: Add dependent's insurance information
-        	
         	stmt.executeUpdate(sqlInsert);
+        	
+        	// Add dependent's insurance information
+        	for (int i = 0; i < this.insuranceList.size(); i++) {
+        		PatientInsurance insurance = this.insuranceList.get(i);
+        		
+        		sqlInsert = "INSERT INTO " + AppointmentDBConstants.INSURANCE_TABLE_NAME
+        				+ " VALUES (" + dependentID + ", '" + insurance.getInsuranceName()
+        				+ "', '" + insurance.getGroupNumber() + "', '" + insurance.getMemberNumber()
+        				+ "', '" + insurance.getType() + "')";
+        		
+        		stmt.executeUpdate(sqlInsert);
+        	}
         	
         	AppointmentDBUtil.closeDBConnection(conn);
         	
@@ -187,20 +200,25 @@ public class PatientAdult extends Patient {
 			String sqlDelete = "DELETE FROM " + AppointmentDBConstants.DEPENDENT_TABLE_NAME
 					+ " WHERE DependentID = " + dependent.patientID;
 			
-			System.out.println(sqlDelete);
+			stmt.executeUpdate(sqlDelete);
+			
+			// Remove dependent from PatientDependent table
+			sqlDelete = "DELETE FROM " + AppointmentDBConstants.INSURANCE_TABLE_NAME
+					+ " WHERE PatientID = " + dependent.patientID;
+			
+			stmt.executeUpdate(sqlDelete);
+			
+			// Remove dependent from PatientDependent table
+			sqlDelete = "DELETE FROM " + AppointmentDBConstants.APPOINTMENT_TABLE_NAME
+						+ " WHERE PatientID = " + dependent.patientID;
+			
 			stmt.executeUpdate(sqlDelete);
 			
 			// Remove dependent from Patient table
 			sqlDelete = "DELETE FROM " + AppointmentDBConstants.PATIENT_TABLE_NAME
 					+ " WHERE PatientID = " + dependent.patientID;
 			
-			System.out.println(sqlDelete);
 			stmt.executeUpdate(sqlDelete);
-			
-			// To do: Remove dependent from Appointment table
-			
-			// To do: Remove dependent from Insurance table
-
 			
 			AppointmentDBUtil.closeDBConnection(conn);
 			

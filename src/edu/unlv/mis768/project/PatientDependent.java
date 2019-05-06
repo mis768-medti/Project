@@ -31,8 +31,8 @@ public class PatientDependent extends Patient {
 		Calendar dependentCalendar = Calendar.getInstance();
 		dependentCalendar.setTime(dependent.dateOfBirth);
 		
-		if (this.patientFirstName.equalsIgnoreCase(dependent.patientFirstName) &&
-				this.patientLastName.equalsIgnoreCase(dependent.patientLastName) &&
+		if (this.firstName.equalsIgnoreCase(dependent.firstName) &&
+				this.lastName.equalsIgnoreCase(dependent.lastName) &&
 				calendar.YEAR == dependentCalendar.YEAR &&
 				calendar.MONTH == dependentCalendar.MONTH &&
 				calendar.DAY_OF_MONTH == dependentCalendar.DAY_OF_MONTH)

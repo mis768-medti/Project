@@ -108,7 +108,7 @@ public class PatientPortalController {
 	        				result.getString("FirstName"), 
 	        				result.getString("LastName"),
 	        				result.getDate("DateOfBirth"));
-	        welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!");
+	        welcomeLabel.setText("Hello " + this.patient.getFirstName() + "!");
 	        
 	        AppointmentDBUtil.closeDBConnection(conn);
 	        
@@ -136,7 +136,7 @@ public class PatientPortalController {
     	this.patient = patient;
     	
     	// Update welcomeLabel with user's first name
-    	welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!");
+    	welcomeLabel.setText("Hello " + this.patient.getFirstName() + "!");
     	
     	// Populate the tableView with patient's appointment information
     	refreshAppointmentTableView();

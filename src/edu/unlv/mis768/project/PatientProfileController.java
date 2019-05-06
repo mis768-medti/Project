@@ -85,10 +85,10 @@ public class PatientProfileController {
     	this.patient = patient;
     	
     	// Update welcomeLabel with user's first name
-    	welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!"); 	
+    	welcomeLabel.setText("Hello " + this.patient.getFirstName() + "!"); 	
     	
     	// Update nameLabel with user's full name
-    	nameLabel.setText(this.patient.getPatientLastName() + ", " + this.patient.getPatientFirstName());
+    	nameLabel.setText(this.patient.getLastName() + ", " + this.patient.getFirstName());
     	
     	// Update dateOfBirthLabel with user's date of birth
     	dateOfBirthLabel.setText(this.patient.getDateOfBirth().toString());

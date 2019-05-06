@@ -4,7 +4,7 @@ package edu.unlv.mis768.project;
  * @author Luis Moller
  *
  */
-public class Employee {
+public class Employee extends User{
 	//fields 
 	private String firstName;
 	private String lastName;

@@ -2,6 +2,7 @@ package edu.unlv.mis768.project;
 
 public class Staff extends Employee {
 	//fields 
+	private String userType = "admin";
 	private int accessLevel;
 	private String role;
 	
@@ -12,6 +13,10 @@ public class Staff extends Employee {
 		super(firstName, lastName, id);
 		this.accessLevel = accessLevel;
 		this.role = role;
+	}
+	
+	public String getUserType() {
+		return userType;
 	}
 
 	public int getAccessLevel() {

@@ -14,9 +14,8 @@ import javafx.scene.control.Alert.AlertType;
 
 public class Doctor extends Employee {
 	//fields 
+	private String userType = "provider";
 	private String specialty;
-	//private ArrayList<Slot> slotList;
-	//private ArrayList<Appointment> appointmentList;
 	private ArrayList<String> treatableReasonsList;
 
 	public Doctor(String firstName, String lastName, int id, String specialty) {
@@ -41,10 +40,12 @@ public class Doctor extends Employee {
 	        		+ " WHERE Specialty = '" + specialty + "'";
 	        ResultSet result = stmt.executeQuery(sqlSelect);
 	        
-	        result.first();
-	        do {
-	        	treatableReasonsList.add(result.getString("VisitReason"));
-	        } while(result.next());
+	        if (result.next()) {
+	        	result.first();
+	        	do {
+		        	treatableReasonsList.add(result.getString("VisitReason"));
+		        } while(result.next());
+	        }
 	        
 	        AppointmentDBUtil.closeDBConnection(conn);
 	        
@@ -155,21 +156,9 @@ public class Doctor extends Employee {
 		 }
 	}
 
-	/*public ArrayList<Slot> getSlotList() {
-		return slotList;
+	public String getUserType() {
+		return userType;
 	}
-
-	public void setCalendarList(ArrayList<Slot> slotList) {
-		this.slotList = slotList;
-	}
-
-	public ArrayList<Appointment> getAppointmentList() {
-		return appointmentList;
-	}
-
-	public void setAppointmentList(ArrayList<Appointment> appointmentList) {
-		this.appointmentList = appointmentList;
-	}*/
 	
 	public String toString() {
 		return getFirstName() + " " + getLastName();
