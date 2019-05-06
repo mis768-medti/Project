@@ -9,15 +9,29 @@ import java.util.Date;
 public class Slot {
 	//fields
 	private Date date;
-	private int hour;
-	private boolean bookedIndicator;
+	private boolean bookedIndicator = false;
 	private Calendar calendar;
 	
-	public Slot(Date date, int hour) {
-		this.date = date;
+	/**
+	 * Creates an instance of a Slot object
+	 * @param date A date object
+	 * @param hour An integer representing the hour (24-hour clock)
+	 * @throws Exception if Date to string conversion fails
+	 */
+	public Slot(Date date, int hour) throws Exception {
 		calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		this.hour = hour;
+		
+		// Set date
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString = formatter.format(date);
+		dateString += " " + hour + ":00:00";
+		
+		formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		this.date = formatter.parse(dateString);
+		
+		// Set calendar
+		this.calendar = Calendar.getInstance();
+		calendar.setTime(this.date);
 		
 	}
 	
@@ -40,7 +54,7 @@ public class Slot {
 		calendar.set(year, month, date, hourOfDay, minute);*/
 		
 		// Set date
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		this.date = formatter.parse(dateTime);
 		
 		// Set calendar
@@ -68,10 +82,7 @@ public class Slot {
 		this.bookedIndicator = booked;
 	}
 	public int getHour() {
-		return hour;
-	}
-	public void setHour(int hour)	{
-		this.hour = hour;
+		return calendar.get(Calendar.HOUR_OF_DAY);
 	}
 	
 	public Date getDate() {

@@ -26,8 +26,6 @@ public class Doctor extends Employee {
 		// Instantiate ArrayLists
 		treatableReasonsList = new ArrayList<String>();
 		
-		
-		
 		// Create a connection to the database.
         Connection conn =
                AppointmentDBUtil.getDBConnection();
@@ -68,16 +66,54 @@ public class Doctor extends Employee {
 		return canTreat;
 	}
 	
-	public ArrayList<Slot> getAvailableSlots(String date) throws Exception{
-		ArrayList<Slot> availableSlots = new ArrayList<Slot>();
+	public ArrayList<Slot> getSlots(String date) throws Exception{
+		ArrayList<Slot> slotList = new ArrayList<Slot>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date appointmentDate = formatter.parse(date);
 		
+		// Default available slots for that day
 		for (int i = 8; i < 18; i++) {
-			availableSlots.add(new Slot(appointmentDate, i));
+			slotList.add(new Slot(appointmentDate, i));
 		}
-				
-		return availableSlots;
+		
+		// Get appointments for that day
+		// Create a connection to the database.
+        Connection conn =
+               AppointmentDBUtil.getDBConnection();
+        
+        try {
+        	// Create a statement object
+			Statement stmt = conn.createStatement();
+			
+			// Query appointment table
+	        String sqlSelect = "SELECT cast(AppointmentDateTime as char) as AppointmentDateTime FROM " 
+	        		+ AppointmentDBConstants.APPOINTMENT_TABLE_NAME
+	        		+ " WHERE PhysicianID = " + this.getId() + " AND"
+	        		+ " cast(AppointmentDateTime as date) = '" + date + "'";
+	        ResultSet result = stmt.executeQuery(sqlSelect);
+	        
+	        // Mark unavailable slots as booked
+	        result.first();
+	        do {
+	        	// Get hour
+	        	int hour = Integer.parseInt(result.getString("AppointmentDateTime").substring(11,13));
+	        	// Loop over slots
+	        	for (int i = 0; i < slotList.size(); i++) {
+	        		Slot slot = slotList.get(i);
+	        		if (slot.getHour() == hour)
+	        			slot.setBookedIndicator(true);
+	        	}
+	        } while(result.next());
+	        
+	        AppointmentDBUtil.closeDBConnection(conn);
+	        
+        }  catch (SQLException ex) {
+        	AppointmentDBUtil.closeDBConnection(conn);
+			System.out.println("SQL Error");
+			System.out.println(ex.getMessage());
+		}
+        
+        return slotList;
 	}
 	
 	

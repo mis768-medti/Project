@@ -128,41 +128,88 @@ public class NewAppointmentController {
     public void visitReasonListener() {
     	// Determine visit reason
     	String visitReason = reasonComboBox.getValue();
-    	
-    	// Populate provider combobox with provider's that 
-    	// can treat selected reason
-    	providerComboBox.getItems().clear();
-    	
-    	for (int i = 0; i < doctorList.size(); i++) {
-    		Doctor doctor = doctorList.get(i);
-    		
-    		if (doctor.canTreat(visitReason))
-    			providerComboBox.getItems().add(doctor);
+    	if (visitReason != null) {
+    
+	    	// Populate provider combobox with provider's that 
+	    	// can treat selected reason
+	    	providerComboBox.getItems().clear();
+	    	
+	    	for (int i = 0; i < doctorList.size(); i++) {
+	    		Doctor doctor = doctorList.get(i);
+	    		
+	    		if (doctor.canTreat(visitReason))
+	    			providerComboBox.getItems().add(doctor);
+	    	}
     	}
     }
     
     // Event listener for Date Picker
     public void appDateListener() {
+    	// Clear timeComboBox
+    	timeComboBox.getItems().clear();
+    	
     	// Determine selected provider
     	Doctor doctor = providerComboBox.getValue();
     	
     	// Determine selected date
-    	String appointmentDate = appDate.getValue().toString();
-    	
-    	try {
-    		// Get available times and add to time combo box
-    		ArrayList<Slot> availableSlots = doctor.getAvailableSlots(appointmentDate);
-    		timeComboBox.getItems().addAll(availableSlots);
+    	LocalDate appointmentDate = appDate.getValue();
+    	if (appointmentDate != null) {
     		
-    	} catch (Exception e) {
-    		
-    		Alert alert = new Alert(AlertType.ERROR);
-        	alert.setTitle("Error");
-        	alert.setHeaderText("Application Error");
-        	alert.setContentText(e.getMessage());
-        	
-        	alert.showAndWait();
+	    	Date date = Date.from(appointmentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	    	String dateString = formatter.format(date);
+	    	
+	    	try {
+	    		// Get available times and add to time combo box
+	    		ArrayList<Slot> slotList = doctor.getSlots(dateString);
+	    		
+	    		// Loop over slots
+	    		for (int i = 0; i < slotList.size(); i++) {
+	    			// Add unbooked times to combo box
+	    			if (!slotList.get(i).getBookedIndicator())
+	    				timeComboBox.getItems().add(slotList.get(i));
+	    		}
+	    		
+	    	} catch (Exception e) {
+	    		
+	    		Alert alert = new Alert(AlertType.ERROR);
+	        	alert.setTitle("Error");
+	        	alert.setHeaderText("Application Error");
+	        	alert.setContentText(e.getMessage());
+	        	
+	        	alert.showAndWait();
+	    	}
     	}
+    	
+    }
+    
+    // Event listener for Request Button
+    public void requestButtonListener() {
+    	// Get values from input controls
+    	Patient patient = patientComboBox.getValue();
+    	Doctor provider = providerComboBox.getValue();
+    	Slot slot = timeComboBox.getValue();
+    	String visitReason = reasonComboBox.getValue();
+    	String comments = cmtTxt.getText();
+    	
+    	// Create an appointment object
+    	Appointment appointment = new Appointment(patient, provider, slot, visitReason);
+    	
+    	// Schedule appointment
+    	appointment.scheduleAppointment();
+    	
+    	// Notify user
+    	Alert alert = new Alert(AlertType.INFORMATION);
+    	alert.setTitle("Information");
+    	alert.setHeaderText("Appointment Scheduled");
+    	alert.showAndWait();
+    	
+    	// Clear selections
+    	timeComboBox.setValue(null);
+    	appDate.setValue(null);
+    	providerComboBox.setValue(null);
+    	reasonComboBox.setValue(null);
+    	patientComboBox.setValue(null);
     	
     }
     
