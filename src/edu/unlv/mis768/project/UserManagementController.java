@@ -197,7 +197,8 @@ public class UserManagementController {
     	
     	// load the UI and call the controller method
     	Parent parent = loader.load();
-    	//SignInController controller = loader.getController();
+    	AddPhysicianController controller = loader.getController();
+    	controller.initData(this.admin);
     	
     	// set the scene
     	Scene scene = new Scene(parent);
@@ -221,7 +222,8 @@ public class UserManagementController {
     	
     	// load the UI and call the controller method
     	Parent parent = loader.load();
-    	//SignInController controller = loader.getController();
+    	AddPatientController controller = loader.getController();
+    	controller.initData(this.admin);
     	
     	// set the scene
     	Scene scene = new Scene(parent);
@@ -236,7 +238,7 @@ public class UserManagementController {
     	stage.show();
     }
     
-    // Event listener for Add Patient Button
+    // Event listener for Add Staff Button
     public void addStaffButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();
@@ -245,7 +247,8 @@ public class UserManagementController {
     	
     	// load the UI and call the controller method
     	Parent parent = loader.load();
-    	//SignInController controller = loader.getController();
+    	AddStaffController controller = loader.getController();
+    	controller.initData(this.admin);
     	
     	// set the scene
     	Scene scene = new Scene(parent);

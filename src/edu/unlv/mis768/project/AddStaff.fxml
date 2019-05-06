@@ -23,5 +23,6 @@
     <TextField fx:id="lastNameTxt" layoutX="142.0" layoutY="152.0" prefHeight="34.0" prefWidth="200.0" />
     <TextField id="specialtyTxt" fx:id="accessLevelTxt" layoutX="142.0" layoutY="208.0" prefHeight="34.0" prefWidth="200.0" />
     <Button fx:id="saveBtn" font="$x1" layoutX="142.0" layoutY="281.0" mnemonicParsing="false" onAction="#saveButtonListener" prefHeight="34.0" prefWidth="114.0" text="Save" />
+      <Button fx:id="cancelButton" layoutX="47.0" layoutY="283.0" mnemonicParsing="false" onAction="#cancelButtonListener" text="Cancel" />
   </children>
 </AnchorPane>
