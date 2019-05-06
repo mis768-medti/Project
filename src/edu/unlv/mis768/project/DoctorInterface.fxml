@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="637.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unlv.mis768.project.ProviderPortalController">
+<AnchorPane prefHeight="684.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unlv.mis768.project.ProviderPortalController">
   <!-- TODO Add Nodes -->
   <children>
-      <DatePicker fx:id="appDate" layoutX="115.0" layoutY="25.0" prefHeight="25.0" prefWidth="231.0" />
+    <DatePicker fx:id="appDate" layoutX="115.0" layoutY="25.0" onAction="#appDateListener" prefHeight="25.0" prefWidth="231.0" />
     <Label layoutX="26.0" layoutY="29.0" text="Select a date :" />
     <TableView fx:id="doctorAptTableView" layoutX="26.0" layoutY="176.0" prefHeight="200.0" prefWidth="817.0">
       <columns>
-        <TableColumn fx:id="name" prefWidth="280.0" text="Name" />
-        <TableColumn fx:id="time" prefWidth="103.0" text="Column XTime" />
-            <TableColumn fx:id="age" prefWidth="55.0" text="Age" />
-            <TableColumn fx:id="minor" prefWidth="118.0" text="Minor Ind" />
-            <TableColumn fx:id="dependentInd" prefWidth="108.0" text="Dependent Ind" />
-            <TableColumn fx:id="appType" prefWidth="152.0" text="Appointment Type" />
+        <TableColumn fx:id="patientColumn" prefWidth="209.0" text="Patient" />
+        <TableColumn fx:id="timeColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="283.0" text="Time" />
+        <TableColumn fx:id="appointmentTypeColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="310.0" text="Appointment Type" />
       </columns>
     </TableView>
     <Label layoutX="35.0" layoutY="141.0" text="Today's Appointment :" />
     <Label layoutX="817.0" layoutY="150.0" text="Appointment Options :" />
     <Button fx:id="rescheduleBtn" layoutX="904.0" layoutY="195.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="122.0" text="Reschedule" />
     <Button fx:id="deleteBtn" layoutX="905.0" layoutY="250.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="120.0" text="Delete" />
-    <Button id="AddBtn" fx:id="addBtn" layoutX="906.0" layoutY="301.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="120.0" text="Add" />
-    <Label layoutX="35.0" layoutY="396.0" text="Appointment Comments :" />
-    <TextArea fx:id="aptCmtTxt" layoutX="26.0" layoutY="432.0" prefHeight="130.0" prefWidth="817.0" wrapText="true" />
-    <Button fx:id="addCmtBtn" layoutX="910.0" layoutY="498.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="116.0" text="Add Comments" />
-      <ImageView fx:id="logo" fitHeight="115.0" fitWidth="158.0" layoutX="860.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="returnBtn" layoutX="409.0" layoutY="590.0" mnemonicParsing="false" text="Return to Home" />
+    <Button id="AddBtn" fx:id="addBtn" layoutX="898.0" layoutY="382.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="120.0" text="Add" />
+    <Label layoutX="35.0" layoutY="482.0" text="Appointment Comments :" />
+    <TextArea fx:id="aptCmtTxt" layoutX="35.0" layoutY="512.0" prefHeight="130.0" prefWidth="817.0" wrapText="true" />
+    <Button fx:id="addCmtBtn" layoutX="899.0" layoutY="498.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="127.0" text="Add Comments" />
+    <ImageView fx:id="logo" fitHeight="115.0" fitWidth="158.0" layoutX="860.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+    <Button fx:id="logoutButton" layoutX="484.0" layoutY="649.0" mnemonicParsing="false" onAction="#logoutButtonListener" text="Logout" />
+    <TextField fx:id="nameTxt" layoutX="26.0" layoutY="382.0" prefHeight="28.0" prefWidth="260.0" text="Name" />
+    <TextField fx:id="timeTxt" layoutX="293.0" layoutY="383.0" prefHeight="28.0" prefWidth="51.0" text="Time" />
+    <TextField fx:id="appTypeTxt" layoutX="660.0" layoutY="386.0" prefHeight="28.0" prefWidth="183.0" text="Appointment Type" />
   </children>
 </AnchorPane>

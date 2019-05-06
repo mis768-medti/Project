@@ -67,7 +67,7 @@ public class Doctor extends Employee {
 		return canTreat;
 	}
 	
-	public ArrayList<Slot> getSlots(String date) throws Exception{
+	public ArrayList<Slot> getSlots(String date) throws Exception {
 		ArrayList<Slot> slotList = new ArrayList<Slot>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date appointmentDate = formatter.parse(date);
@@ -76,6 +76,8 @@ public class Doctor extends Employee {
 		for (int i = 8; i < 18; i++) {
 			slotList.add(new Slot(appointmentDate, i));
 		}
+		
+		
 		
 		// Get appointments for that day
 		// Create a connection to the database.

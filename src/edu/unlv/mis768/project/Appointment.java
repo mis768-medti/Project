@@ -1,9 +1,13 @@
 package edu.unlv.mis768.project;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class Appointment {
 	//field
@@ -19,6 +23,49 @@ public class Appointment {
 		this.slot = s;
 		this.visitType = visitType;
 	}
+	
+	public Appointment(Doctor d, Slot s) {
+		this.doctor = d;
+		this.slot = s;
+		
+		// Determine Patient and Visit Type
+		// Create a connection to the database.
+        Connection conn =
+               AppointmentDBUtil.getDBConnection();
+        
+        try {
+        	// Create a statement object
+			Statement stmt = conn.createStatement();
+			
+			// Query appointment table
+	        String sqlSelect = "SELECT VisitReason, a.PatientID, p.firstName,"
+	        		+ "p.lastName, cast(p.DateOfBirth as char) as DateOfBirth FROM " 
+	        		+ AppointmentDBConstants.APPOINTMENT_TABLE_NAME + " a INNER JOIN "
+	        		+ AppointmentDBConstants.PATIENT_TABLE_NAME + " p on a.PatientID = p.PatientID"
+	        		+ " WHERE PhysicianID = " + doctor.getId() + " AND"
+	        		+ " AppointmentDateTime = '" + slot + "'";
+	        System.out.println(sqlSelect);
+	        ResultSet result = stmt.executeQuery(sqlSelect);
+	        
+	        result.first();
+	        this.visitType = result.getString("VisitReason");
+	        this.patient = new Patient(result.getInt("PatientID"),
+	        						result.getString("firstName"),
+	        						result.getString("lastName"),
+	        						result.getString("DateOfBirth"));
+	        
+	        AppointmentDBUtil.closeDBConnection(conn);
+	        
+        }  catch (SQLException ex) {
+        	AppointmentDBUtil.closeDBConnection(conn);
+			System.out.println("SQL Error");
+			System.out.println(ex.getMessage());
+		} catch (Exception e) {
+			System.out.println("Appointment Patient Error");
+			System.out.println(e.getMessage());
+		}
+	}
+	
 
 	public Patient getPatient() {
 		return patient;

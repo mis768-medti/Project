@@ -127,6 +127,7 @@ public class SignInController {
 		        			// load the UI
 		        			Parent parent = loader.load();
 		        			ProviderPortalController controller = loader.getController();
+		        			controller.initData(username);
 		        			
 		        			// set the scene
 		        			Scene scene = new Scene(parent);
