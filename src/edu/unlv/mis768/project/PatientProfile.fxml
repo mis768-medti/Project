@@ -1,41 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="441.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unlv.mis768.project.PatientProfileController">
+<AnchorPane prefHeight="378.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unlv.mis768.project.PatientProfileController">
   <!-- TODO Add Nodes -->
   <children>
     <Label fx:id="welcomeLabel" layoutX="24.0" layoutY="17.0" text="Hello User!" />
-    <TableView fx:id="insuranceInfoTableview" layoutX="421.0" layoutY="79.0" prefHeight="175.0" prefWidth="317.0">
+    <TableView fx:id="insuranceTableView" layoutX="314.0" layoutY="79.0" prefHeight="175.0" prefWidth="533.0">
       <columns>
-        <TableColumn fx:id="insFields" prefWidth="100.0" text="Fields" />
-        <TableColumn fx:id="insPrimary" prefWidth="100.0" text="Primary" />
-            <TableColumn fx:id="insSecondary" prefWidth="116.0" text="Secondary" />
+        <TableColumn fx:id="insuranceNameColumn" prefWidth="155.0" text="Name" />
+        <TableColumn fx:id="groupNumberColumn" prefWidth="119.0" text="Group Number" />
+        <TableColumn fx:id="memberNumberColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="144.0" text="Member Number" />
+        <TableColumn fx:id="insuranceTypeColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="111.0" text="Type" />
       </columns>
     </TableView>
     <Label layoutX="24.0" layoutY="71.0" text="Patient Information:" />
-    <Label layoutX="474.0" layoutY="50.0" text="Insurance Information:" />
-    <Button fx:id="saveChangesBtn" layoutX="633.0" layoutY="267.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="105.0" text="Save Changes" />
-    <Button fx:id="returnHomeBtn" layoutX="330.0" layoutY="388.0" mnemonicParsing="false" onAction="#returnHomeButtonListener" prefHeight="29.0" prefWidth="144.0" text="Return To Home" />
-      <GridPane layoutX="24.0" layoutY="95.0" prefHeight="48.0" prefWidth="373.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="28.0" minHeight="6.0" prefHeight="28.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <TextField text="Name" />
-            <TextField text="Date Of Birth " GridPane.rowIndex="1" />
-            <TextField fx:id="nameTxt" GridPane.columnIndex="1" />
-            <TextField fx:id="BirthDateTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         </children>
-      </GridPane>
+    <Label layoutX="330.0" layoutY="51.0" text="Insurance Information:">
+      <font>
+        <Font size="14.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Button fx:id="deleteButton" layoutX="564.0" layoutY="267.0" mnemonicParsing="false" onAction="#deleteButtonListener" prefHeight="31.0" prefWidth="116.0" text="Delete" />
+    <Button fx:id="returnHomeBtn" layoutX="325.0" layoutY="314.0" mnemonicParsing="false" onAction="#returnHomeButtonListener" prefHeight="29.0" prefWidth="144.0" text="Return To Home" />
+    <GridPane layoutX="24.0" layoutY="95.0" prefHeight="48.0" prefWidth="373.0">
+      <children>
+        <Label font="$x1" text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label font="$x1" text="Date Of Birth" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label fx:id="nameLabel" font="$x1" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label fx:id="dateOfBirthLabel" font="$x1" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="28.0" minHeight="6.0" prefHeight="28.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
   </children>
 </AnchorPane>
