@@ -18,7 +18,6 @@ public class Patient {
 	ArrayList<Patient> dependentList;
 	ArrayList<Appointment> appointmentList;
 	Date dateOfBirth;
-	Doctor doctor;
 	int patientID;
 	
 	
@@ -305,14 +304,6 @@ public class Patient {
 	
 	public ArrayList<Appointment> getAppointments() {
 		return appointmentList;
-	}
-	
-	public String getDoctor() {
-		return (doctor.getFirstName() + " " + doctor.getLastName());
-	}
-	
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
 	}
 	
 	public String toString() {

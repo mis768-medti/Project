@@ -26,9 +26,6 @@ public class PatientDependentController {
     private TextField dependentLastNameTxt;
 
     @FXML
-    private TextField dependentPrimaryPhysicianTxt;
-
-    @FXML
     private TextField dependentFirstNametxt;
 
     @FXML
@@ -56,9 +53,6 @@ public class PatientDependentController {
     private Button returnHomeBtn;
 
     @FXML
-    private TableColumn<PatientDependent, Doctor> dependentPrimaryPhysicianColumn;
-
-    @FXML
     private TableView<PatientDependent> dependentTableView;
 
     @FXML
@@ -74,8 +68,6 @@ public class PatientDependentController {
     			PropertyValueFactory<PatientDependent, String>("patientLastName"));
     	dependentDateOfBirthColumn.setCellValueFactory(new 
     			PropertyValueFactory<PatientDependent, Date>("dateOfBirth"));
-//    	dependentPrimaryPhysicianColumn.setCellValueFactory(new 
-//    			PropertyValueFactory<Patient, Doctor>("doctor"));
     }
     
     public void initData(PatientAdult patient) {

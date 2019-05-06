@@ -300,186 +300,184 @@ public class CreateAppointmentDB {
 						   "FirstName VARCHAR(25) NOT NULL, " + 
 						   "LastName VARCHAR(25) NOT NULL, " + 
 						   "DateOfBirth date NOT NULL, " +
-						   "PrimaryPhysician int, " +
-						   "FOREIGN KEY (Username) REFERENCES User(Username), " +
-						   "FOREIGN KEY (PrimaryPhysician) REFERENCES Provider(ProviderID) " + 
+						   "FOREIGN KEY (Username) REFERENCES User(Username) " + 
 						   ")");
 				   
 				   // Insert row #1
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"'JohnDoe01', " +
 						   		"'John', " +
 						   		"'Doe' , " + 
-						   		"'1990-01-01', "+ 
-						   		"1)");
+						   		"'1990-01-01'"+ 
+						   		")");
 				   
 				   // Insert row #2
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"'HenryBrumer01', " +
 						   		"'Henry', " +
 						   		"'Brumer' , " + 
-						   		"'1990-02-01', "+ 
-						   		"2)");
+						   		"'1990-02-01'"+ 
+						   		")");
 
 				   // Insert row #3
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"'NolaDelisa01', " +
 						   		"'Nola', " +
 						   		"'Delisa' , " + 
-						   		"'1990-03-01', "+ 
-						   		"3)");
+						   		"'1990-03-01'"+ 
+						   		")");
 				   
 				   // Insert row #4
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"'KrissyHarold01', " +
 						   		"'Krissy', " +
 						   		"'Harold' , " + 
-						   		"'1990-04-01', "+ 
-						   		"4)");
+						   		"'1990-04-01'"+ 
+						   		")");
 				   
 				   // Insert row #5
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"'ScotHeyward01', " +
 						   		"'Scot', " +
 						   		"'Heyward' , " + 
-						   		"'1990-05-01', "+ 
-						   		"5)");
+						   		"'1990-05-01'"+ 
+						   		")");
 				   
 				   // Insert row #6
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Fredrick', " +
 						   		"'Templeman' , " + 
-						   		"'1990-06-01', "+ 
-						   		"NULL)");
+						   		"'1990-06-01'"+ 
+						   		")");
 				   
 				   // Insert row #7
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Chi', " +
 						   		"'Hopple' , " + 
-						   		"'1990-07-01', "+ 
-						   		"NULL)");
+						   		"'1990-07-01'"+ 
+						   		")");
 				     
 				   // Insert row #8
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Vinnie', " +
 						   		"'Whitesel' , " + 
-						   		"'2010-01-01', "+ 
-						   		"6)");
+						   		"'2010-01-01'"+ 
+						   		")");
 				   
 				   // Insert row #9
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Ethan', " +
 						   		"'Cappel' , " + 
-						   		"'2011-01-01', "+ 
-						   		"7)");
+						   		"'2011-01-01'"+ 
+						   		")");
 				   
 				   // Insert row #10
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Jona', " +
 						   		"'Backhaus' , " + 
-						   		"'2012-01-01', "+ 
-						   		"8)");
+						   		"'2012-01-01'"+ 
+						   		")");
 				   
 				   // Insert row #11
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Ettie', " +
 						   		"'Fuquay' , " + 
-						   		"'2013-01-01', "+ 
-						   		"9)");
+						   		"'2013-01-01'"+ 
+						   		")");
 				   
 				   // Insert row #12
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Shelia', " +
 						   		"'Goodfellow' , " + 
-						   		"'2014-01-01', "+ 
-						   		"10)");
+						   		"'2014-01-01'"+ 
+						   		")");
 				    
 				   // Insert row #13
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Dinah', " +
 						   		"'Foskey' , " + 
-						   		"'2015-01-01', "+ 
-						   		"9)");
+						   		"'2015-01-01'"+ 
+						   		")");
 				     
 				   // Insert row #14
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Ai', " +
 						   		"'Lamirande' , " + 
-						   		"'2016-01-01', "+ 
-						   		"8)");
+						   		"'2016-01-01'"+ 
+						   		")");
 				   
 				   // Insert row #15
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Kena', " +
 						   		"'Scaglione' , " + 
-						   		"'2017-01-01', "+ 
-						   		"7)");
+						   		"'2017-01-01'"+ 
+						   		")");
 				   
 				   // Insert row #16
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Renaldo', " +
 						   		"'Hooley' , " + 
-						   		"'2018-01-01', "+ 
-						   		"NULL)");
+						   		"'2018-01-01'"+ 
+						   		")");
 
 				   // Insert row #17
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Alfreda', " +
 						   		"'Yeh' , " + 
-						   		"'2019-01-01', "+ 
-						   		"NULL)");
+						   		"'2019-01-01'"+ 
+						   		")");
 
 				   // Insert row #18
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Lorinda', " +
 						   		"'Rodas' , " + 
-						   		"'2010-01-01', "+ 
-						   		"NULL)");
+						   		"'2010-01-01'"+ 
+						   		")");
 				   
 				   // Insert row #19
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 						   		"NULL, " +
 						   		"'Sheri', " +
 						   		"'Duffield' , " + 
-						   		"'2011-01-01', "+ 
-						   		"NULL)");
+						   		"'2011-01-01'"+ 
+						   		")");
 				     
 				   // Insert row #20
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 					   		"NULL, " +
 					   		"'Lemuel', " +
 					   		"'Busch' , " + 
-					   		"'2012-01-01', "+ 
-					   		"NULL)");
+					   		"'2012-01-01'"+ 
+					   		")");
 				   
 				   // Insert row #21
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 					   		"NULL, " +
 					   		"'Ambrose', " +
 					   		"'Dobyns' , " + 
-					   		"'2013-01-01', "+ 
-					   		"NULL)");
+					   		"'2013-01-01'"+ 
+					   		")");
 				   
 				   // Insert row #22
-				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth, PrimaryPhysician) VALUES (" +
+				   stmt.execute("INSERT INTO Patient (Username, FirstName, LastName, DateOfBirth) VALUES (" +
 					   		"NULL, " +
 					   		"'Rebbecca', " +
 					   		"'Shufelt' , " + 
-					   		"'2014-01-01', "+ 
-					   		"NULL)");
+					   		"'2014-01-01'"+ 
+					   		")");
   
 				   System.out.println("Patient table created.");
 			   }
@@ -1223,8 +1221,7 @@ public class CreateAppointmentDB {
 						   "PhysicianID INT, " + 
 						   "AppointmentDateTime DATETIME, " + 
 						   "VisitReason VARCHAR(25), " + 
-						   "Comments VARCHAR(100), " +
-						   "Status VARCHAR(25), " + 
+						   "Comments VARCHAR(100), " + 
 						   "PRIMARY KEY (PatientID, PhysicianID, AppointmentDateTime), " +
 						   "FOREIGN KEY (PatientID) REFERENCES Patient(PatientID), " +
 						   "FOREIGN KEY (PhysicianID) REFERENCES Provider(ProviderID) " + 
@@ -1236,7 +1233,6 @@ public class CreateAppointmentDB {
 						   		"1, " +
 						   		"'2019-04-27 13:00:00.00', " + 
 						   		"'Vaccine', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1246,7 +1242,6 @@ public class CreateAppointmentDB {
 						   		"2, " +
 						   		"'2019-05-27 13:00:00.00', " + 
 						   		"'New Patient', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1256,7 +1251,6 @@ public class CreateAppointmentDB {
 						   		"3, " +
 						   		"'2019-06-27 13:00:00.00', " + 
 						   		"'Physical', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1266,7 +1260,6 @@ public class CreateAppointmentDB {
 						   		"4, " +
 						   		"'2019-04-27 13:00:00.00', " + 
 						   		"'Injury', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1276,7 +1269,6 @@ public class CreateAppointmentDB {
 						   		"5, " +
 						   		"'2019-04-27 13:00:00.00', " + 
 						   		"'Illness', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1286,7 +1278,6 @@ public class CreateAppointmentDB {
 						   		"11, " +
 						   		"'2019-04-27 13:00:00.00', " + 
 						   		"'Consultation', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1296,7 +1287,6 @@ public class CreateAppointmentDB {
 						   		"12, " +
 						   		"'2019-04-27 13:00:00.00', " + 
 						   		"'Pre-Op', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1306,7 +1296,6 @@ public class CreateAppointmentDB {
 						   		"6, " +
 						   		"'2019-05-27 13:00:00.00', " + 
 						   		"'Physical', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1316,7 +1305,6 @@ public class CreateAppointmentDB {
 						   		"7, " +
 						   		"'2019-06-27 14:00:00.00', " + 
 						   		"'New Patient', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1326,7 +1314,6 @@ public class CreateAppointmentDB {
 						   		"8, " +
 						   		"'2019-04-27 14:00:00.00', " + 
 						   		"'Physical', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1336,7 +1323,6 @@ public class CreateAppointmentDB {
 						   		"9, " +
 						   		"'2019-04-27 14:00:00.00', " + 
 						   		"'Injury', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1346,7 +1332,6 @@ public class CreateAppointmentDB {
 						   		"10, " +
 						   		"'2019-04-27 14:00:00.00', " + 
 						   		"'Illness', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1356,7 +1341,6 @@ public class CreateAppointmentDB {
 						   		"9, " +
 						   		"'2019-04-27 13:00:00.00', " + 
 						   		"'Physical', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1366,7 +1350,6 @@ public class CreateAppointmentDB {
 						   		"8, " +
 						   		"'2019-04-27 13:00:00.00', " + 
 						   		"'Vaccine', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
@@ -1376,7 +1359,6 @@ public class CreateAppointmentDB {
 						   		"7, " +
 						   		"'2019-04-27 13:00:00.00', " + 
 						   		"'New Patient', " + 
-						   		"NULL," +
 						   		"NULL" + 
 						   		")");
 				   
