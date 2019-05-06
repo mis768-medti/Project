@@ -54,6 +54,7 @@ public class Patient {
 				
 		// Instantiate ArrayLists
 		this.insuranceList = new ArrayList<PatientInsurance>();
+		this.appointmentList = new ArrayList<Appointment>();
 				
 		this.pullInsuranceInformation();
 		this.pullAppointmentInformation();
@@ -97,8 +98,11 @@ public class Patient {
 							result.getString("InsuranceType")));
 		        	} while(result.next());
 	        }
+	        
+	        AppointmentDBUtil.closeDBConnection(conn);
 		} 
 		catch (SQLException ex) {
+			AppointmentDBUtil.closeDBConnection(conn);
 			System.out.println("Patient Insurance Error");
         	System.out.println(ex.getMessage());
 		}	
@@ -148,19 +152,25 @@ public class Patient {
 		        	String appointmentDate = result.getString("AppointmentDateTime");
 		        	Slot appointmentSlot = new Slot(appointmentDate);
 		        	
+		        	
 		        	appointmentList.add(new Appointment(this, 
 		        			appointmentDoctor, 
 		        			appointmentSlot,
 							result.getString("VisitReason")));
 		        	} while(result.next());
 	        }
+	        
+	        AppointmentDBUtil.closeDBConnection(conn);
 		} 
 		catch (SQLException ex) {
+			AppointmentDBUtil.closeDBConnection(conn);
 			System.out.println("Patient Appointment SQL Error");
         	System.out.println(ex.getMessage());
 		} catch (Exception e) {
+			AppointmentDBUtil.closeDBConnection(conn);
 			System.out.println("Patient Appointment Slot Error");
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}	
 	}
 	
@@ -200,6 +210,8 @@ public class Patient {
 			
 			System.out.println(sqlDelete);
 			stmt.executeUpdate(sqlDelete);
+			
+			AppointmentDBUtil.closeDBConnection(conn);
 	
 	       	// Refresh Insurance ArrayList
         	this.pullInsuranceInformation();
@@ -207,6 +219,7 @@ public class Patient {
 	              	
  
 		catch (SQLException ex) {
+			AppointmentDBUtil.closeDBConnection(conn);
 			System.out.println("Delete Insurance Error");
         	System.out.println(ex.getMessage());
 		}	
@@ -234,6 +247,8 @@ public class Patient {
 					+ " AppointmentDateTime = '" + appointmentDateTime + "'" ;
 			
 			stmt.executeUpdate(sqlDelete);
+			
+			AppointmentDBUtil.closeDBConnection(conn);
 	
 	       	// Refresh Appointment ArrayList
         	this.pullAppointmentInformation();
@@ -241,6 +256,7 @@ public class Patient {
 	              	
  
 		catch (SQLException ex) {
+			AppointmentDBUtil.closeDBConnection(conn);
 			System.out.println("Delete Insurance Error");
         	System.out.println(ex.getMessage());
 		}	

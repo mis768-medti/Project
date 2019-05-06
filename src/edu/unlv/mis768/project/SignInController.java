@@ -91,6 +91,7 @@ public class SignInController {
 		        	if (password.equals(correctPassword)) {
 		        		// Successful log in: Determine user type and send to the appropriate next scene
 		        		String userType = result.getString("AccountType");
+		        		AppointmentDBUtil.closeDBConnection(conn);
 		        		FXMLLoader loader = new FXMLLoader();
 		        		
 		        		// Specify the file location
@@ -163,6 +164,7 @@ public class SignInController {
 		        	}
 		        	
 		        	else {
+		        		conn.close();
 		        		Alert alert = new Alert(AlertType.ERROR);
 			        	alert.setTitle("Error");
 			        	alert.setHeaderText("Invalid password");
@@ -174,6 +176,7 @@ public class SignInController {
 		        }
 		        	
 		        else {
+		        	conn.close();
 		        	// No rows returned: Username does not exist in database
 		        	Alert alert = new Alert(AlertType.ERROR);
 		        	alert.setTitle("Error");
@@ -185,6 +188,7 @@ public class SignInController {
 				
 				
 			} catch (SQLException ex) {
+				AppointmentDBUtil.closeDBConnection(conn);
 				Alert alert = new Alert(AlertType.ERROR);
 	        	alert.setTitle("Error");
 	        	alert.setHeaderText("Application Error");

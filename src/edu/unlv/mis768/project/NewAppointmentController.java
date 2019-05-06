@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -146,11 +147,23 @@ public class NewAppointmentController {
     	Doctor doctor = providerComboBox.getValue();
     	
     	// Determine selected date
-    	LocalDate appointmentDate = appDate.getValue();
-    	Instant instant = Instant.from(appointmentDate.atStartOfDay(ZoneId.systemDefault()));
-    	Date date = Date.from(instant);
+    	String appointmentDate = appDate.getValue().toString();
     	
-    	System.out.println(date);
+    	try {
+    		// Get available times and add to time combo box
+    		ArrayList<Slot> availableSlots = doctor.getAvailableSlots(appointmentDate);
+    		timeComboBox.getItems().addAll(availableSlots);
+    		
+    	} catch (Exception e) {
+    		
+    		Alert alert = new Alert(AlertType.ERROR);
+        	alert.setTitle("Error");
+        	alert.setHeaderText("Application Error");
+        	alert.setContentText(e.getMessage());
+        	
+        	alert.showAndWait();
+    	}
+    	
     }
     
     // Event listener for Return Home Button

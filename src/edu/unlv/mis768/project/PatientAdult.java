@@ -66,8 +66,11 @@ public class PatientAdult extends Patient {
 	        			result.getString("LastName"),
 						result.getDate("DateOfBirth")));
 	        	} while(result.next());
+	        
+	        AppointmentDBUtil.closeDBConnection(conn);
 		} 
 		catch (SQLException ex) {
+			AppointmentDBUtil.closeDBConnection(conn);
         	System.out.println(ex.getMessage());
 		}	
 	}
@@ -158,10 +161,13 @@ public class PatientAdult extends Patient {
         	
         	stmt.executeUpdate(sqlInsert);
         	
+        	AppointmentDBUtil.closeDBConnection(conn);
+        	
         	// Refresh Dependent ArrayList
         	this.pullDependentInformation();
 		} 
 		catch (SQLException ex) {
+			AppointmentDBUtil.closeDBConnection(conn);
         	System.out.println(ex.getMessage());
 		}	
 	}
@@ -195,6 +201,9 @@ public class PatientAdult extends Patient {
 			
 			// To do: Remove dependent from Insurance table
 
+			
+			AppointmentDBUtil.closeDBConnection(conn);
+			
 	       	// Refresh Dependent ArrayList
         	this.pullDependentInformation();
         	
@@ -202,6 +211,7 @@ public class PatientAdult extends Patient {
 	              	
  
 		catch (SQLException ex) {
+			AppointmentDBUtil.closeDBConnection(conn);
 			System.out.println("Delete Dependent Error");
         	System.out.println(ex.getMessage());
 		}	

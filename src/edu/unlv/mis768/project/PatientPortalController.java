@@ -110,11 +110,14 @@ public class PatientPortalController {
 	        				result.getDate("DateOfBirth"));
 	        welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!");
 	        
+	        AppointmentDBUtil.closeDBConnection(conn);
+	        
 	        // Populate the tableView with patient's appointment information
 	    	refreshAppointmentTableView();
 	        
 		} 
 		catch (SQLException ex) {
+			AppointmentDBUtil.closeDBConnection(conn);
 			Alert alert = new Alert(AlertType.ERROR);
         	alert.setTitle("Error");
         	alert.setHeaderText("Application Error");
@@ -133,7 +136,10 @@ public class PatientPortalController {
     	this.patient = patient;
     	
     	// Update welcomeLabel with user's first name
-    	welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!"); 
+    	welcomeLabel.setText("Hello " + this.patient.getPatientFirstName() + "!");
+    	
+    	// Populate the tableView with patient's appointment information
+    	refreshAppointmentTableView();
     }
     
     // Event listener for My Profile Button

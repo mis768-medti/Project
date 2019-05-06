@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -12,8 +15,8 @@ import javafx.scene.control.Alert.AlertType;
 public class Doctor extends Employee {
 	//fields 
 	private String specialty;
-	private ArrayList<Slot> slotList;
-	private ArrayList<Appointment> appointmentList;
+	//private ArrayList<Slot> slotList;
+	//private ArrayList<Appointment> appointmentList;
 	private ArrayList<String> treatableReasonsList;
 
 	public Doctor(String firstName, String lastName, int id, String specialty) {
@@ -21,11 +24,10 @@ public class Doctor extends Employee {
 		this.specialty = specialty;
 		
 		// Instantiate ArrayLists
-		slotList = new ArrayList<Slot>();
-		appointmentList = new ArrayList<Appointment>();
 		treatableReasonsList = new ArrayList<String>();
 		
-		// Populate treatable conditions list
+		
+		
 		// Create a connection to the database.
         Connection conn =
                AppointmentDBUtil.getDBConnection();
@@ -34,6 +36,7 @@ public class Doctor extends Employee {
         	// Create a statement object
 			Statement stmt = conn.createStatement();
 			
+			// Populate treatable conditions list
 			// Query specialty table
 	        String sqlSelect = "SELECT DISTINCT VisitReason FROM " 
 	        		+ AppointmentDBConstants.SPECIALTY_TABLE_NAME
@@ -43,11 +46,14 @@ public class Doctor extends Employee {
 	        result.first();
 	        do {
 	        	treatableReasonsList.add(result.getString("VisitReason"));
-	        } while(result.next());  
+	        } while(result.next());
+	        
+	        AppointmentDBUtil.closeDBConnection(conn);
 	        
         }  catch (SQLException ex) {
-				System.out.println("SQL Error");
-				System.out.println(ex.getMessage());
+        	AppointmentDBUtil.closeDBConnection(conn);
+			System.out.println("SQL Error");
+			System.out.println(ex.getMessage());
 		}
 	}
 	
@@ -61,6 +67,20 @@ public class Doctor extends Employee {
 		
 		return canTreat;
 	}
+	
+	public ArrayList<Slot> getAvailableSlots(String date) throws Exception{
+		ArrayList<Slot> availableSlots = new ArrayList<Slot>();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date appointmentDate = formatter.parse(date);
+		
+		for (int i = 8; i < 18; i++) {
+			availableSlots.add(new Slot(appointmentDate, i));
+		}
+				
+		return availableSlots;
+	}
+	
+	
 
 	public String getSpecialty() {
 		return specialty;
@@ -88,15 +108,18 @@ public class Doctor extends Employee {
 			    result.first();
 			    do {
 			       	treatableReasonsList.add(result.getString("VisitReason"));
-			    } while(result.next());  
+			    } while(result.next());
+			    
+			    AppointmentDBUtil.closeDBConnection(conn);
 			        
 		 }  catch (SQLException ex) {
+			 	AppointmentDBUtil.closeDBConnection(conn);
 				System.out.println("SQL Error");
 				System.out.println(ex.getMessage());
 		 }
 	}
 
-	public ArrayList<Slot> getSlotList() {
+	/*public ArrayList<Slot> getSlotList() {
 		return slotList;
 	}
 
@@ -110,7 +133,7 @@ public class Doctor extends Employee {
 
 	public void setAppointmentList(ArrayList<Appointment> appointmentList) {
 		this.appointmentList = appointmentList;
-	}
+	}*/
 	
 	public String toString() {
 		return getFirstName() + " " + getLastName();
