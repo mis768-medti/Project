@@ -31,5 +31,6 @@
     <TextField fx:id="nameTxt" layoutX="26.0" layoutY="382.0" prefHeight="28.0" prefWidth="260.0" text="Name" />
     <TextField fx:id="timeTxt" layoutX="293.0" layoutY="383.0" prefHeight="28.0" prefWidth="51.0" text="Time" />
     <TextField fx:id="appTypeTxt" layoutX="660.0" layoutY="386.0" prefHeight="28.0" prefWidth="183.0" text="Appointment Type" />
+      <Button fx:id="exportButton" layoutX="896.0" layoutY="637.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" text="Export to CSV" />
   </children>
 </AnchorPane>
