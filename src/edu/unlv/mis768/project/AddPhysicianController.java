@@ -112,7 +112,7 @@ public class AddPhysicianController {
 			        	// Username does not already exist
 			        	// Insert record into user table
 			        	String sqlInsert = "INSERT INTO " + AppointmentDBConstants.USER_TABLE_NAME
-			        			+ " VALUES('" + username + "','password','patient')";
+			        			+ " VALUES('" + username + "','password','provider')";
 			        	stmt.executeUpdate(sqlInsert);
 			        	
 			        	// Insert record into provider table
