@@ -187,52 +187,10 @@ public class PatientAdult extends Patient {
 	
 	public void removeDependent(PatientDependent dependent) {
 		
-		// Create a connection to the database.
-        Connection conn =
-               AppointmentDBUtil.getDBConnection();
-        
-		Statement stmt;
-		try {
-			// Create a statement object
-			stmt = conn.createStatement();
-			
-			// Remove dependent from PatientDependent table
-			String sqlDelete = "DELETE FROM " + AppointmentDBConstants.DEPENDENT_TABLE_NAME
-					+ " WHERE DependentID = " + dependent.patientID;
-			
-			stmt.executeUpdate(sqlDelete);
-			
-			// Remove dependent from PatientDependent table
-			sqlDelete = "DELETE FROM " + AppointmentDBConstants.INSURANCE_TABLE_NAME
-					+ " WHERE PatientID = " + dependent.patientID;
-			
-			stmt.executeUpdate(sqlDelete);
-			
-			// Remove dependent from PatientDependent table
-			sqlDelete = "DELETE FROM " + AppointmentDBConstants.APPOINTMENT_TABLE_NAME
-						+ " WHERE PatientID = " + dependent.patientID;
-			
-			stmt.executeUpdate(sqlDelete);
-			
-			// Remove dependent from Patient table
-			sqlDelete = "DELETE FROM " + AppointmentDBConstants.PATIENT_TABLE_NAME
-					+ " WHERE PatientID = " + dependent.patientID;
-			
-			stmt.executeUpdate(sqlDelete);
-			
-			AppointmentDBUtil.closeDBConnection(conn);
-			
-	       	// Refresh Dependent ArrayList
-        	this.pullDependentInformation();
-        	
-	        }
-	              	
- 
-		catch (SQLException ex) {
-			AppointmentDBUtil.closeDBConnection(conn);
-			System.out.println("Delete Dependent Error");
-        	System.out.println(ex.getMessage());
-		}	
+		dependent.remove();
+		
+		// Refresh Dependent ArrayList
+    	this.pullDependentInformation();
 	}
 	
 	/**

@@ -262,6 +262,70 @@ public class Patient extends User {
 		}	
 	}
 	
+	@Override
+	/**
+	 * Deletes Patient and associated information from database
+	 */
+	public void remove() {
+		// Create a connection to the database.
+        Connection conn =
+               AppointmentDBUtil.getDBConnection();
+        
+		Statement stmt;
+		try {
+			// Create a statement object
+			stmt = conn.createStatement();
+			
+			// Remove patient from Appointment table
+			String sqlDelete = "DELETE FROM " + AppointmentDBConstants.APPOINTMENT_TABLE_NAME
+					+ " WHERE PatientID = " + this.patientID;
+			
+			stmt.executeUpdate(sqlDelete);
+			
+			// Remove patient from Insurance table
+			sqlDelete = "DELETE FROM " + AppointmentDBConstants.INSURANCE_TABLE_NAME
+					+ " WHERE PatientID = " + this.patientID;
+			
+			stmt.executeUpdate(sqlDelete);
+
+			// Remove patient from Dependent table
+			sqlDelete = "DELETE FROM " + AppointmentDBConstants.DEPENDENT_TABLE_NAME
+					+ " WHERE PatientID = " + this.patientID + " OR"
+					+ " DependentID = " + this.patientID;
+			
+			stmt.executeUpdate(sqlDelete);
+			
+			// Get patient's username
+			String sqlSelect = "SELECT Username FROM " + AppointmentDBConstants.PATIENT_TABLE_NAME
+					+ " WHERE PatientID = " + this.patientID;
+			ResultSet result = stmt.executeQuery(sqlSelect);
+			result.first();
+			String username = result.getString("Username");
+			
+			// Remove patient from Patient table
+			sqlDelete = "DELETE FROM " + AppointmentDBConstants.PATIENT_TABLE_NAME
+					+ " WHERE PatientID = " + this.patientID;
+			
+			stmt.executeUpdate(sqlDelete);
+			
+			// Remove username from User table
+			sqlDelete = "DELETE FROM " + AppointmentDBConstants.USER_TABLE_NAME
+						+ " WHERE Username = '" + username + "'";
+			
+			stmt.executeUpdate(sqlDelete);
+			
+			AppointmentDBUtil.closeDBConnection(conn);
+        	
+	        }
+	              	
+ 
+		catch (SQLException ex) {
+			AppointmentDBUtil.closeDBConnection(conn);
+			System.out.println("Delete Patient Error");
+        	System.out.println(ex.getMessage());
+		}	
+	}
+	
 	public String getUserType() {
 		return userType;
 	}

@@ -39,4 +39,7 @@ public class Employee extends User{
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	@Override
+	public void remove() {}
 }

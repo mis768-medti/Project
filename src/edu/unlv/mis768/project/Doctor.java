@@ -155,6 +155,57 @@ public class Doctor extends Employee {
 				System.out.println(ex.getMessage());
 		 }
 	}
+	
+	@Override
+	/**
+	 * Deletes Doctor and associated information from database
+	 */
+	public void remove() {
+		// Create a connection to the database.
+        Connection conn =
+               AppointmentDBUtil.getDBConnection();
+        
+		Statement stmt;
+		try {
+			// Create a statement object
+			stmt = conn.createStatement();
+			
+			// Remove doctor from Appointment table
+			String sqlDelete = "DELETE FROM " + AppointmentDBConstants.APPOINTMENT_TABLE_NAME
+					+ " WHERE PhysicianID = " + this.getId();
+			
+			stmt.executeUpdate(sqlDelete);
+			
+			// Get doctor's username
+			String sqlSelect = "SELECT Username FROM " + AppointmentDBConstants.PROVIDER_TABLE_NAME
+					+ " WHERE ProviderID = " + this.getId();
+			ResultSet result = stmt.executeQuery(sqlSelect);
+			result.first();
+			String username = result.getString("Username");
+			
+			// Remove doctor from Provider table
+			sqlDelete = "DELETE FROM " + AppointmentDBConstants.PROVIDER_TABLE_NAME
+					+ " WHERE ProviderID = " + this.getId();
+			
+			stmt.executeUpdate(sqlDelete);
+			
+			// Remove username from User table
+			sqlDelete = "DELETE FROM " + AppointmentDBConstants.USER_TABLE_NAME
+						+ " WHERE Username = '" + username + "'";
+			
+			stmt.executeUpdate(sqlDelete);
+			
+			AppointmentDBUtil.closeDBConnection(conn);
+        	
+	        }
+	              	
+ 
+		catch (SQLException ex) {
+			AppointmentDBUtil.closeDBConnection(conn);
+			System.out.println("Delete Doctor Error");
+        	System.out.println(ex.getMessage());
+		}	
+	}
 
 	public String getUserType() {
 		return userType;

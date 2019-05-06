@@ -6,4 +6,7 @@ public abstract class User {
 	String firstName;
 	String lastName;
 	String userType;
+	
+	public abstract void remove();
+	
 }

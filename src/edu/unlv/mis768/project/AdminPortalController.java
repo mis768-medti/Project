@@ -57,8 +57,7 @@ public class AdminPortalController {
 	        
 	        result.last();
 	        this.admin = new Staff(result.getString("FirstName"), 
-    				result.getString("LastName"), result.getInt("AdminID"), 
-    				result.getInt("AccessLevel"), result.getString("Role"));
+    				result.getString("LastName"), result.getInt("AdminID"));
 	        welcomeLabel.setText("Hello " + this.admin.getFirstName() + "!");
 	        
 		} 

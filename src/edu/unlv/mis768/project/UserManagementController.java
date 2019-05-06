@@ -49,7 +49,7 @@ public class UserManagementController {
     private Button addPatientBtn;
 
     @FXML
-    private Button saveBtn;
+    private Button deleteButton;
 
     @FXML
     private Button returnBtn;
@@ -129,8 +129,7 @@ public class UserManagementController {
 		    	        
 		    	        adminResult.last();
 		    	        Staff admin = new Staff(adminResult.getString("FirstName"), 
-		    	        		adminResult.getString("LastName"), adminResult.getInt("AdminID"), 
-		    	        		adminResult.getInt("AccessLevel"), adminResult.getString("Role"));
+		    	        		adminResult.getString("LastName"), adminResult.getInt("AdminID"));
 		    	        
 		    	        userTableView.getItems().add(admin);
 		        		
@@ -165,6 +164,28 @@ public class UserManagementController {
         	alert.showAndWait();
 		}
         
+    }
+    
+    // Event listener for Delete Button
+    public void deleteButtonListener() {
+    	// get the selected user in the TableView
+    	int selectedRow = userTableView.getSelectionModel().getSelectedIndex();
+    	
+    	if (selectedRow == -1) {
+    		// No rows selected
+    		Alert alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("Warning");
+    		alert.setHeaderText("Invalid Deletion Attempt");
+    		alert.setContentText("Please select a user to delete");
+
+    		alert.showAndWait();
+    	}
+    	else {
+    		userTableView.getItems().get(selectedRow).remove();
+        	
+        	// refresh tableView
+        	refreshUserTableView();
+    	}
     }
     
     // Event listener for Add Physician Button

@@ -1058,144 +1058,112 @@ public class CreateAppointmentDB {
 						   "Username VARCHAR(25), " + 
 						   "FirstName VARCHAR(25), " + 
 						   "LastName VARCHAR(25), " + 
-						   "AccessLevel VARCHAR(25), " + 
-						   "Role VARCHAR(25), " +
 						   "FOREIGN KEY (Username) REFERENCES User(Username)" + 
 						   ")");
 				   
 				   // Insert row #1
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'AltaCueto01', " +
 						   		"'Alta', " +
-						   		"'Cueto', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Cueto'" +
 						   		")");
 				   
 				   // Insert row #2
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'FredricHundley01', " +
 						   		"'Fredric', " +
-						   		"'Hundley', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Hundley'" +
 						   		")");
 				   
 				   // Insert row #3
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'NatachaDorgan01', " +
 						   		"'Natacha', " +
-						   		"'Dorgan', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Dorgan'" +
 						   		")");
 				   
 				   // Insert row #4
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'LyndaHardt01', " +
 						   		"'Lynda', " +
-						   		"'Hardt', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Hardt'" +
 						   		")");
 				   
 				   // Insert row #5
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'LatanyaMcgonigal01', " +
 						   		"'Latanya', " +
-						   		"'Mcgonigal', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Mcgonigal'" + 
 						   		")");
 				   
 				   // Insert row #6
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'LiseRossin01', " +
 						   		"'Lise', " +
-						   		"'Rossin', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Rossin'" + 
 						   		")");
 				   
 				   // Insert row #7
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'ArnulfoZell01', " +
 						   		"'Arnulfo', " +
-						   		"'Zell', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Zell'" + 
 						   		")");
 				   
 				   // Insert row #8
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'LaticiaMaloy01', " +
 						   		"'Laticia', " +
-						   		"'Maloy', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Maloy'" + 
 						   		")");
 				   
 				   // Insert row #9
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'KatiLasater01', " +
 						   		"'Kati', " +
-						   		"'Lasater', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Lasater'" +  
 						   		")");
 
 				   // Insert row #10
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'LetaMcnew01', " +
 						   		"'Leta', " +
-						   		"'Mcnew', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Mcnew'" + 
 						   		")");
 				   
 				   // Insert row #11
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'SeptemberMccrum01', " +
 						   		"'September', " +
-						   		"'Mccrum', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Mccrum'" + 
 						   		")");
 				   
 				   // Insert row #12
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'DrewAlvarado01', " +
 						   		"'Drew', " +
-						   		"'Alvarado', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Alvarado'" +  
 						   		")");
 
 				   // Insert row #13
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'MaeganPouliot01', " +
 						   		"'Maegan', " +
-						   		"'Pouliot', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Pouliot'" + 
 						   		")");
 				
 				   // Insert row #14
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'TommyFines01', " +
 						   		"'Tommy', " +
-						   		"'Fines', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Fines'" + 
 						   		")");
 				   
 				   // Insert row #15
-				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName, AccessLevel, Role) VALUES (" +
+				   stmt.execute("INSERT INTO Admin(Username, FirstName, LastName) VALUES (" +
 						   		"'AlisaBonnet01', " +
 						   		"'Alisa', " +
-						   		"'Bonnet', " + 
-						   		"NULL, " + 
-						   		"NULL" + 
+						   		"'Bonnet'" + 
 						   		")");
 				   
 				   System.out.println("Admin table created.");
