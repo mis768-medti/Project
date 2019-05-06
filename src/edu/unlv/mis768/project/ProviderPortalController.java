@@ -133,7 +133,6 @@ public class ProviderPortalController {
 	    	Date date = Date.from(appointmentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 	    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	    	String dateString = formatter.format(date);
-	    	System.out.println(dateString);
 	    	
 	    	try {
 	    		// Get booked times
@@ -160,6 +159,33 @@ public class ProviderPortalController {
 	        	alert.showAndWait();
 	    	}
     	}
+    	
+    }
+    
+    // Event listener for Delete button
+    public void deleteButtonListener() {
+    	// get the Appointment selected in the TableView
+    	int selectedRow = doctorAptTableView.getSelectionModel().getSelectedIndex();
+    	
+    	if (selectedRow == -1) {
+    		// No rows selected
+    		Alert alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("Warning");
+    		alert.setHeaderText("Invalid Deletion Attempt");
+    		alert.setContentText("Please select an appointment to delete");
+
+    		alert.showAndWait();
+    	}
+    	else {
+    		Appointment appointmentToRemove = doctorAptTableView.getItems().get(selectedRow);
+        	
+        	// remove appointment
+    		appointmentToRemove.remove();
+        	
+        	// refresh tableView
+        	appDateListener();
+    	}
+    	
     	
     }
     

@@ -21,7 +21,7 @@
     <Label layoutX="35.0" layoutY="141.0" text="Today's Appointment :" />
     <Label layoutX="817.0" layoutY="150.0" text="Appointment Options :" />
     <Button fx:id="rescheduleBtn" layoutX="904.0" layoutY="195.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="122.0" text="Reschedule" />
-    <Button fx:id="deleteBtn" layoutX="905.0" layoutY="250.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="120.0" text="Delete" />
+    <Button fx:id="deleteBtn" layoutX="905.0" layoutY="250.0" mnemonicParsing="false" onAction="#deleteButtonListener" prefHeight="28.0" prefWidth="120.0" text="Delete" />
     <Button id="AddBtn" fx:id="addBtn" layoutX="898.0" layoutY="382.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="120.0" text="Add" />
     <Label layoutX="35.0" layoutY="482.0" text="Appointment Comments :" />
     <TextArea fx:id="aptCmtTxt" layoutX="35.0" layoutY="512.0" prefHeight="130.0" prefWidth="817.0" wrapText="true" />

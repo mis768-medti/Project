@@ -44,7 +44,6 @@ public class Appointment {
 	        		+ AppointmentDBConstants.PATIENT_TABLE_NAME + " p on a.PatientID = p.PatientID"
 	        		+ " WHERE PhysicianID = " + doctor.getId() + " AND"
 	        		+ " AppointmentDateTime = '" + slot + "'";
-	        System.out.println(sqlSelect);
 	        ResultSet result = stmt.executeQuery(sqlSelect);
 	        
 	        result.first();
@@ -149,7 +148,6 @@ public class Appointment {
         			+ slot.toString() + "','" + visitType + "')";	
 		}
         
-        System.out.println(sqlInsert);
         stmt.executeUpdate(sqlInsert);
 		
 		AppointmentDBUtil.closeDBConnection(conn);
@@ -158,6 +156,39 @@ public class Appointment {
         	System.out.println(ex.getMessage());
 		}
         
+	}
+	
+	/**
+	 * Deletes Appointment from database
+	 */
+	public void remove() {
+		// Create a connection to the database.
+        Connection conn =
+               AppointmentDBUtil.getDBConnection();
+        
+		Statement stmt;
+		try {
+			// Create a statement object
+			stmt = conn.createStatement();
+			
+			// Remove appointment from Appointment table
+			String sqlDelete = "DELETE FROM " + AppointmentDBConstants.APPOINTMENT_TABLE_NAME
+					+ " WHERE PhysicianID = " + doctor.getId() + " AND"
+					+ " PatientID = " + patient.getPatientID() + " AND"
+					+ " AppointmentDateTime = '" + slot + "'";
+			
+			stmt.executeUpdate(sqlDelete);
+		
+			AppointmentDBUtil.closeDBConnection(conn);
+        	
+	        }
+	              	
+ 
+		catch (SQLException ex) {
+			AppointmentDBUtil.closeDBConnection(conn);
+			System.out.println("Delete Appointment Error");
+        	System.out.println(ex.getMessage());
+		}	
 	}
 	
 //	public String toString() {

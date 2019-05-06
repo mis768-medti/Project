@@ -96,17 +96,19 @@ public class Doctor extends Employee {
 	        ResultSet result = stmt.executeQuery(sqlSelect);
 	        
 	        // Mark unavailable slots as booked
-	        result.first();
-	        do {
-	        	// Get hour
-	        	int hour = Integer.parseInt(result.getString("AppointmentDateTime").substring(11,13));
-	        	// Loop over slots
-	        	for (int i = 0; i < slotList.size(); i++) {
-	        		Slot slot = slotList.get(i);
-	        		if (slot.getHour() == hour)
-	        			slot.setBookedIndicator(true);
-	        	}
-	        } while(result.next());
+	        if (result.next()) {
+		        result.first();
+		        do {
+		        	// Get hour
+		        	int hour = Integer.parseInt(result.getString("AppointmentDateTime").substring(11,13));
+		        	// Loop over slots
+		        	for (int i = 0; i < slotList.size(); i++) {
+		        		Slot slot = slotList.get(i);
+		        		if (slot.getHour() == hour)
+		        			slot.setBookedIndicator(true);
+		        	}
+		        } while(result.next());
+	        }
 	        
 	        AppointmentDBUtil.closeDBConnection(conn);
 	        
