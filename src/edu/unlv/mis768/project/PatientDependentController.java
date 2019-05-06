@@ -104,7 +104,6 @@ public class PatientDependentController {
     	String firstName = dependentFirstNametxt.getText();
     	String lastName = dependentLastNameTxt.getText();
     	String dateOfBirth = dependentDateOfBirthTxt.getText();
-    	//String primaryPhysician = dependentPrimaryPhysicianTxt.getText();
     	
     	// Check if required fields are filled out
     	if (firstName.isEmpty()) {

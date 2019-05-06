@@ -21,10 +21,8 @@
     <TextField fx:id="usernameTxt" layoutX="174.0" layoutY="53.0" prefHeight="34.0" prefWidth="200.0" />
     <TextField fx:id="firstnameTxt" layoutX="174.0" layoutY="103.0" prefHeight="34.0" prefWidth="200.0" />
     <TextField fx:id="lastNameTxt" layoutX="174.0" layoutY="153.0" prefHeight="34.0" prefWidth="200.0" />
-    <TextField id="primaryPhysician" fx:id="primaryPhysicianTxt" layoutX="174.0" layoutY="259.0" prefHeight="34.0" prefWidth="200.0" />
-    <TextField id="specialtyTxt" fx:id="dateOfBirthTxt" layoutX="174.0" layoutY="209.0" prefHeight="34.0" prefWidth="200.0" />
+    <TextField id="specialtyTxt" fx:id="dateOfBirthTxt" layoutX="174.0" layoutY="209.0" prefHeight="34.0" prefWidth="200.0" promptText="yyyy-mm-dd" />
     <Button fx:id="saveBtn" font="$x1" layoutX="217.0" layoutY="346.0" mnemonicParsing="false" onAction="#saveButtonListener" prefHeight="34.0" prefWidth="114.0" text="Save" />
-    <Label font="$x1" layoutX="27.0" layoutY="274.0" text="Primary Physician :" />
       <Button fx:id="cancelButton" layoutX="70.0" layoutY="348.0" mnemonicParsing="false" onAction="#cancelButtonListener" prefHeight="34.0" prefWidth="104.0" text="Cancel" />
   </children>
 </AnchorPane>
