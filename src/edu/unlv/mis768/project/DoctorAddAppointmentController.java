@@ -26,6 +26,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the Add Appointment Doctor Version GUI
+ */
 public class DoctorAddAppointmentController {
 
     @FXML
@@ -55,7 +58,11 @@ public class DoctorAddAppointmentController {
     private Doctor doctor;
     
     private ArrayList<Patient> patientList;
-    
+
+    /**
+     * Called upon initialization to populate the
+     * visit reason and patient combo boxes
+     */
     public void initialize() {
     	
     	patientList = new ArrayList<Patient>();
@@ -110,6 +117,11 @@ public class DoctorAddAppointmentController {
 		}
     }
     
+    /**
+     * Method for passing data between calling GUI
+     * and this GUI
+     * @param doctor a Doctor object
+     */
     public void initData(Doctor doctor) {
     	this.doctor = doctor;
     	
@@ -118,15 +130,12 @@ public class DoctorAddAppointmentController {
     	providerComboBox.getItems().add(this.doctor);    	
     }
     
-//    // Event listener for Patient Combobox
-//    public void addPatientListener() {
-//	    	for (int i = 0; i < patientList.size(); i++) {
-//	    		Patient patient = patientList.get(i);
-//	    			patientComboBox.getItems().add(patient);	    	
-//    	}
-//    }
-    
-    // Event listener for Date Picker
+
+    /**
+     * Event Listener for Date Picker
+     * Lists available Slots for the 
+     * selected day for the selected provider
+     */
     public void appDateListener() {
     	// Clear timeComboBox
     	timeComboBox.getItems().clear();
@@ -166,7 +175,11 @@ public class DoctorAddAppointmentController {
     	
     }
     
-    // Event listener for Request Button
+    /**
+     * Creates an Appointment for the selected patient
+     * with the selected provider at the selected 
+     * time and date and saves the information
+     */
     public void requestButtonListener() {
     	// Get values from input controls
     	Patient patient = patientComboBox.getValue();
@@ -196,7 +209,11 @@ public class DoctorAddAppointmentController {
     	
     }
     
-    // Event listener for Return Home Button
+    /**
+     * Redirects user to the Doctor interface GUI
+     * @param e ActionEvent
+     * @throws Exception when the DoctorInterface.fxml file cannot be found
+     */
     public void returnHomeButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();

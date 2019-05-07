@@ -20,6 +20,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the Patient Dependent GUI
+ */
 public class PatientDependentController {
 
     @FXML
@@ -60,6 +63,10 @@ public class PatientDependentController {
     
     private PatientAdult patient;
     
+    /**
+     * Method to call on initialization setting up columns
+     * in the tableview
+     */
     public void initialize() {
     	// set up the columns in the table
     	dependentFirstNameColumn.setCellValueFactory(new 
@@ -70,6 +77,10 @@ public class PatientDependentController {
     			PropertyValueFactory<PatientDependent, Date>("dateOfBirth"));
     }
     
+    /**
+     * Method for passing data between calling GUI and this GUI
+     * @param patient a PatientAdult object
+     */
     public void initData(PatientAdult patient) {
     	this.patient = patient;
     	
@@ -177,6 +188,10 @@ public class PatientDependentController {
     
     }
     
+    /**
+     * Determines which appointment is selected in the tableview
+     * 	and deletes it from patient's record 
+     */
     public void deleteButtonListener() {
     	// get the dependent selected in the TableView
     	int selectedRow = dependentTableView.getSelectionModel().getSelectedIndex();
@@ -203,7 +218,11 @@ public class PatientDependentController {
     	
     }
     
-    // Event listener for Return Home Button
+    /**
+     * Redirects user to the Patient Portal GUI
+     * @param e ActionEvent
+     * @throws Exception when the PatientPortal.fxml file cannot be found
+     */
     public void returnHomeButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();

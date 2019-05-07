@@ -22,6 +22,9 @@ import javafx.stage.Stage;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Controller for the Patient Portal GUI
+ */
 public class PatientPortalController {
 
     @FXML
@@ -56,6 +59,10 @@ public class PatientPortalController {
     
     private PatientAdult patient;
     
+    /**
+     * Method to call on initialization setting up columns
+     * in the tableview
+     */
     public void initialize() {
     	// set up the columns in the table
     	patientNameColumn.setCellValueFactory(new 
@@ -68,6 +75,9 @@ public class PatientPortalController {
     			PropertyValueFactory<Appointment, String>("visitType"));
     }
     
+    /**
+     * Refreshes appointments listed in the TableView
+     */
     public void refreshAppointmentTableView() {
     	
     	appointmentTableView.getItems().clear();
@@ -142,7 +152,11 @@ public class PatientPortalController {
     	refreshAppointmentTableView();
     }
     
-    // Event listener for My Profile Button
+    /**
+     * Redirects user to the Patient Profile GUI
+     * @param e ActionEvent
+     * @throws Exception when the PatientProfile.fxml file cannot be found
+     */
     public void myProfileButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();
@@ -168,7 +182,11 @@ public class PatientPortalController {
 
     }
     
-    // Event listener for Manage Dependent(s) Button
+    /**
+     * Redirects user to the Dependent Management GUI
+     * @param e ActionEvent
+     * @throws Exception when the PatientDependent.fxml file cannot be found
+     */
     public void manageDependentButtonListener(ActionEvent e) throws Exception{
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();
@@ -193,7 +211,11 @@ public class PatientPortalController {
     	stage.show();
     }
     
-    // Event listener for Modify Appointments Button
+    /**
+     * Redirects user to the Patient Appointment GUI
+     * @param e ActionEvent
+     * @throws Exception when the PatientAppointment.fxml file cannot be found
+     */
     public void modifyAppointmentButtonListener(ActionEvent e) throws Exception{
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();
@@ -218,7 +240,11 @@ public class PatientPortalController {
     	stage.show();
     }
     
-    // Event listener for New Appointment Button
+    /**
+     * Redirects user to the New Appointment GUI
+     * @param e ActionEvent
+     * @throws Exception when the NewAppointment.fxml file cannot be found
+     */
     public void newAppointmentButtonListener(ActionEvent e) throws Exception{
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();
@@ -243,7 +269,11 @@ public class PatientPortalController {
     	stage.show();
     }
     
-    // Event listener for Logout Button
+    /**
+     * Redirects user to the Sign In GUI
+     * @param e ActionEvent
+     * @throws Exception when the SignIn.fxml file cannot be found
+     */
     public void logoutButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();

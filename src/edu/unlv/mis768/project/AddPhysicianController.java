@@ -17,6 +17,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+
+/**
+ * Controller for the Add Physician GUI
+ */
 public class AddPhysicianController {
 
     @FXML
@@ -48,7 +52,15 @@ public class AddPhysicianController {
     	this.admin = staff; 
     }
 
-    // Save Button Listener
+    /**
+     * Save Button Listener executes when save button 
+     * is selected and attempts to create a new physician 
+     * record based on the information provided in text
+     * fields. To create a new physician, the user provide
+     * the physician's first name, last name, and specialty. 
+     * Optionally, the user can provide
+     * a username for the physician.
+     */
     public void saveButtonListener() {
     	String username = usernameTxt.getText();
     	String firstName = firstnameTxt.getText();
@@ -168,7 +180,11 @@ public class AddPhysicianController {
     	
     }
     
-    // Cancel Button Listener
+    /**
+     * Cancel Button Listener executes when cancel button 
+     * is selected and redirects user to the 
+	 * user management GUI
+     */
     public void cancelButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();

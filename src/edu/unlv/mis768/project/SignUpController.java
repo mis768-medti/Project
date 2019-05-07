@@ -37,7 +37,11 @@ public class SignUpController {
     @FXML
     private TextField userNametxt;
     
-    // Event listener for Save Button
+    /**
+     * Attempts to make a a new account based on the 
+     * user provided information 
+     * @param e ActionEvent
+     */
     public void saveButtonListener(ActionEvent e) {
     	// Get user input
     	String patientIDText = patientIdTxt.getText();
@@ -140,7 +144,11 @@ public class SignUpController {
     	}
     }
     
-    // Event listener for Cancel Button
+    /**
+     * Redirects to the log in GUI
+     * @param e ActionEvent
+     * @throws Exception when SignIn.fxml file is not found
+     */
     public void cancelButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();

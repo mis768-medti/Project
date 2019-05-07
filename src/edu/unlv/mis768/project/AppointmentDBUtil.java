@@ -3,7 +3,9 @@ package edu.unlv.mis768.project;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-
+/**
+ * Common functions for used in database operations
+ */
 public class AppointmentDBUtil {
 	/**
 	 * This method establishes the DB connection
@@ -26,7 +28,7 @@ public class AppointmentDBUtil {
 
 	/**
 	 * This method closes the DB connection
-	 * @param the connection to be closed
+	 * @param conn Connection the connection to be closed
 	 */
 	public static void closeDBConnection(Connection conn) {
 		if (conn != null) {

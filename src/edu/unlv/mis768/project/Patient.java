@@ -9,6 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Patient Class Definition
+ */
 public class Patient extends User {
 	
 	// fields 	
@@ -21,9 +24,18 @@ public class Patient extends User {
 	Date dateOfBirth;
 	int patientID;
 	
-	
+	/**
+	 * No-arg constructor for Patient object
+	 */
 	public Patient() {}
 	
+	/**
+	 * Patient object constructor
+	 * @param patientID integer patient's id
+	 * @param firstName String patient's first name
+	 * @param lastName String patient's last name
+	 * @param dateOfBirth Date patient's date of birth
+	 */
 	public Patient(int patientID, String firstName, String lastName, Date dateOfBirth){
 		
 		// Set fields
@@ -41,6 +53,14 @@ public class Patient extends User {
 		
 	}
 	
+	/**
+	 * Patient object constructor
+	 * @param patientID integer patient's id
+	 * @param firstName String patient's first name
+	 * @param lastName String patient's last name
+	 * @param dateOfBirth String patient's date of birth (mm-dd-yyyy)
+	 * @throws Exception when dateOfBirth not in expected format
+	 */
 	public Patient(int patientID, String firstName, String lastName, String dateOfBirth) 
 			throws Exception {
 		
@@ -174,6 +194,9 @@ public class Patient extends User {
 		}	
 	}
 	
+	/**
+	 * @return ArrayList of Appointments occurring in the future
+	 */
 	public ArrayList<Appointment> getFutureAppointments(){
 		// Array List to house future appointments
 		ArrayList<Appointment> futureAppointments = new ArrayList<Appointment>();
@@ -191,6 +214,10 @@ public class Patient extends User {
 		return futureAppointments;
 	}
 	
+	/**
+	 * Deletes the provided insurance from the patient's records
+	 * @param insurance PatientInsurance to be removed
+	 */
 	public void removeInsurance(PatientInsurance insurance) {
 		
 		// Create a connection to the database.
@@ -225,6 +252,10 @@ public class Patient extends User {
 		}	
 	}
 	
+	/**
+	 * Removes the provided appointment from the patient's record
+	 * @param appointment Appointment to be removed
+	 */
 	public void removeAppointment(Appointment appointment) {
 		
 		// Create a connection to the database.
@@ -326,55 +357,100 @@ public class Patient extends User {
 		}	
 	}
 	
+	/**
+	 * @return String patient's user type
+	 */
 	public String getUserType() {
 		return userType;
 	}
 	
+	/**
+	 * @return Date patient's birthdate
+	 */
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 	
+	/**
+	 * Sets patient's birthdate
+	 * @param dateOfBirth Date patient's birthdate
+	 */
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	
+	/**
+	 * Sets patient's birthdate
+	 * @param dateOfBirth String patient's birthdate (mm-dd-yyyy)
+	 * @throws Exception when date String not in expected format
+	 */
 	public void setDateOfBirth(String dateOfBirth) throws Exception {
 		SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
 		this.dateOfBirth = formatter.parse(dateOfBirth);
 	}
 	
+	/**
+	 * @return integer patient's id
+	 */
 	public int getPatientID() {
 		return patientID;
 	}
 	
+	/**
+	 * Sets patient's id
+	 * @param patientID integer patient's id
+	 */
 	public void setPatientID(int patientID) {
 		this.patientID = patientID;
 	}
 	
+	/**
+	 * @return String patient's first name
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
 	
+	/**
+	 * Sets patient's first name
+	 * @param firstName String patient's first name
+	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 	
+	/**
+	 * @return String patient's last name
+	 */
 	public String getLastName() {
 		return lastName;
 	}
 	
+	/**
+	 * Sets patient's last name
+	 * @param lastName String patient's last name
+	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 	
+	/**
+	 * @return ArrayList of PatientInsurance objects
+	 */
 	public ArrayList<PatientInsurance> getInsurance() {
 		return insuranceList;
 	}
 	
+	/**
+	 * @return ArrayList of Appointment objects
+	 */
 	public ArrayList<Appointment> getAppointments() {
 		return appointmentList;
 	}
 	
+	/**
+	 * @return String representation of patient object
+	 */
 	public String toString() {
 		return getFirstName()+" " + getLastName();
 	}

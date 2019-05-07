@@ -9,6 +9,9 @@ import java.util.Date;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+/**
+ * Appointment Class Definition
+ */
 public class Appointment {
 	//field
 	private Patient patient;
@@ -17,6 +20,13 @@ public class Appointment {
 	private String visitType;
 	private String comments = "";
 	
+	/**
+	 * Appointment object constructor
+	 * @param p Patient object
+	 * @param d Doctor object
+	 * @param s Slot object
+	 * @param visitType String visit reason
+	 */
 	public Appointment(Patient p, Doctor d, Slot s, String visitType) {
 		this.patient = p;
 		this.doctor = d;
@@ -24,6 +34,12 @@ public class Appointment {
 		this.visitType = visitType;
 	}
 	
+	/**
+	 * Appointment object constructor
+	 * Patient and visit reason determined by the database
+	 * @param d Doctor object
+	 * @param s Slot object
+	 */
 	public Appointment(Doctor d, Slot s) {
 		this.doctor = d;
 		this.slot = s;
@@ -66,46 +82,84 @@ public class Appointment {
 		}
 	}
 	
-
+	/**
+	 * @return Patient object the patient in the appointment
+	 */
 	public Patient getPatient() {
 		return patient;
 	}
 
+	/**
+	 * Sets the Appointment's patient
+	 * @param patient a Patient object
+	 */
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
 
+	/**
+	 * @return Doctor object the doctor in the appointment
+	 */
 	public Doctor getDoctor() {
 		return this.doctor;
 	}
 
+	/**
+	 * Sets the Appointment's doctor
+	 * @param doctor a Doctor object
+	 */
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
 	}
 
+	/**
+	 * @return Slot object representing appointment date and time
+	 */
 	public String getSlot() {
 		return slot.toString();
 	}
 
+	/**
+	 * Sets the Appointment's slot (date and time)
+	 * @param newSlot a Slot object
+	 */
 	public void changeSlot(Slot newSlot) {
 		this.slot = newSlot;
 	}
-
+	
+	/**
+	 * @return String visit reason
+	 */
 	public String getVisitType() {
 		return visitType;
 	}
 
+	/**
+	 * Sets visit reason
+	 * @param visitType String reason for appointment visit
+	 */
 	public void setVisitType(String visitType) {
 		this.visitType = visitType;
 	}
 	
+	/**
+	 * @return String appointment comments
+	 */
 	public String getComments() {
 		return this.comments;
 	}
 	
+	/**
+	 * Sets appointment comments
+	 * @param comments String appointment comments
+	 */
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	
+	/**
+	 * Commits any appointment comment changes to the database
+	 */
 	public void updateCommentInDB() {
 		// Create a connection to the database.
         Connection conn =
@@ -155,6 +209,9 @@ public class Appointment {
 			return false;
 	}
 	
+	/**
+	 * Saves the appointment object to the database
+	 */
 	public void scheduleAppointment() {
 		
 		// Create a connection to the database.
@@ -228,10 +285,4 @@ public class Appointment {
 		}	
 	}
 	
-//	public String toString() {
-//		return "string";
-//	}
-	
-	
-
 }

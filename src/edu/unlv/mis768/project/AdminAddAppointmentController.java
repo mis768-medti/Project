@@ -26,6 +26,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the Add Appointment Admin Version GUI
+ */
 public class AdminAddAppointmentController {
 
     @FXML
@@ -58,6 +61,10 @@ public class AdminAddAppointmentController {
     
     private ArrayList<Patient> patientList;
     
+    /**
+     * Called upon initialization to populate the
+     * visit reason and patient combo boxes
+     */
     public void initialize() {
     	
     	patientList = new ArrayList<Patient>();
@@ -112,6 +119,12 @@ public class AdminAddAppointmentController {
 		}
     }
     
+    /**
+     * Method for passing data between calling GUI
+     * and this GUI
+     * @param doctor a Doctor object
+     * @param admin a Staff object
+     */
     public void initData(Doctor doctor, Staff admin) {
     	this.doctor = doctor;
     	this.admin = admin;
@@ -122,7 +135,11 @@ public class AdminAddAppointmentController {
     }
     
     
-    // Event listener for Date Picker
+    /**
+     * Event Listener for Date Picker
+     * Lists available Slots for the 
+     * selected day for the selected provider
+     */
     public void appDateListener() {
     	// Clear timeComboBox
     	timeComboBox.getItems().clear();
@@ -162,7 +179,11 @@ public class AdminAddAppointmentController {
     	
     }
     
-    // Event listener for Request Button
+    /**
+     * Creates an Appointment for the selected patient
+     * with the selected provider at the selected 
+     * time and date and saves the information
+     */
     public void requestButtonListener() {
     	// Get values from input controls
     	Patient patient = patientComboBox.getValue();
@@ -192,7 +213,11 @@ public class AdminAddAppointmentController {
     	
     }
     
-    // Event listener for Return Home Button
+    /**
+     * Redirects user to the view calendar GUI
+     * @param e ActionEvent
+     * @throws Exception when the ViewCalendar.fxml file cannot be found
+     */
     public void returnHomeButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();

@@ -26,6 +26,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the Add Appointment Patient Version GUI
+ */
 public class NewAppointmentController {
 
     @FXML
@@ -56,6 +59,10 @@ public class NewAppointmentController {
     
     private ArrayList<Doctor> doctorList;
     
+    /**
+     * Called upon initialization to populate the
+     * visit reason and patient combo boxes
+     */
     public void initialize() {
     	
     	doctorList = new ArrayList<Doctor>();
@@ -104,6 +111,11 @@ public class NewAppointmentController {
 		}
     }
     
+    /**
+     * Method for passing data between calling GUI
+     * and this GUI
+     * @param patient a PatientAdult object
+     */
     public void initData(PatientAdult patient) {
     	this.patient = patient;
     	
@@ -124,7 +136,10 @@ public class NewAppointmentController {
     	
     }
     
-    // Event listener for Visit Reason Combobox
+    /**
+     * Populates the provider combobox based on 
+     * provider's ability to treat the selected visit reason
+     */
     public void visitReasonListener() {
     	// Determine visit reason
     	String visitReason = reasonComboBox.getValue();
@@ -143,7 +158,11 @@ public class NewAppointmentController {
     	}
     }
     
-    // Event listener for Date Picker
+    /**
+     * Event Listener for Date Picker
+     * Lists available Slots for the 
+     * selected day for the selected provider
+     */
     public void appDateListener() {
     	// Clear timeComboBox
     	timeComboBox.getItems().clear();
@@ -183,7 +202,11 @@ public class NewAppointmentController {
     	
     }
     
-    // Event listener for Request Button
+    /**
+     * Creates an Appointment for the selected patient
+     * with the selected provider at the selected 
+     * time and date and saves the information
+     */
     public void requestButtonListener() {
     	// Get values from input controls
     	Patient patient = patientComboBox.getValue();
@@ -213,7 +236,11 @@ public class NewAppointmentController {
     	
     }
     
-    // Event listener for Return Home Button
+    /**
+     * Redirects user to the Patient Portal GUI
+     * @param e ActionEvent
+     * @throws Exception when the PatientPortal.fxml file cannot be found
+     */
     public void returnHomeButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();

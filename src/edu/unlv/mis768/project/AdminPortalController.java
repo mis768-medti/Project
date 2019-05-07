@@ -17,6 +17,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the Admin Portal GUI
+ */
 public class AdminPortalController {
 
     @FXML
@@ -38,6 +41,10 @@ public class AdminPortalController {
     
     public void initialize() {}
     
+    /**
+     * Determines user passed on provided username
+     * @param user String username
+     */
     public void initData(String user) {
 
     	// Update welcomeLabel with user's first name
@@ -75,7 +82,7 @@ public class AdminPortalController {
     /**
      * Accepts Staff object and updates welcome label
      * Used for navigation through staff portal screens
-     * @param patient A staff object
+     * @param staff A staff object
      */
     public void initData(Staff staff) {
     	this.admin = staff;
@@ -84,7 +91,11 @@ public class AdminPortalController {
     	welcomeLabel.setText("Hello " + this.admin.getFirstName() + "!"); 
     }
     
-    // Event listener for View Calendar Button
+   /**
+    * Redirects the user to the View Calendar GUI
+    * @param e ActionEvent
+    * @throws Exception when the ViewCalendar.fxml file cannot be found
+    */
     public void viewCalendarButtonListener(ActionEvent e) throws Exception {
     	
     	// FXML loader object to load the UI design
@@ -110,7 +121,11 @@ public class AdminPortalController {
     	stage.show();
     }
     
-    // Event listener for User Management Button
+    /**
+     * Redirects user to the User Management screen
+     * @param e ActionEvent
+     * @throws Exception when the UserMgmt.fxml file cannot be found
+     */
     public void userManagementButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();
@@ -135,7 +150,11 @@ public class AdminPortalController {
     	stage.show();
     }
     
-    // Event listener for Logout Button
+    /**
+     * Redirects user to the sign in page
+     * @param e ActionEvent
+     * @throws Exception when SignIn.fxml file cannot be found
+     */
     public void logoutButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();

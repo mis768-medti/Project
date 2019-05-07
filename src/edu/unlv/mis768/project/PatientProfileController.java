@@ -20,6 +20,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the Patient Profile GUI
+ */
 public class PatientProfileController {
 
 
@@ -58,6 +61,10 @@ public class PatientProfileController {
     
     private PatientAdult patient;
     
+    /**
+     * Method to call on initialization setting up columns
+     * in the tableview
+     */
     public void initialize() {
     	// set up the columns in the table
     	insuranceNameColumn.setCellValueFactory(new 
@@ -70,6 +77,9 @@ public class PatientProfileController {
     			PropertyValueFactory<PatientInsurance, String>("type"));
     }
     
+    /**
+     * Refreshes appointments listed in the TableView
+     */
     public void refreshInsuranceTableView() {
     	
     	insuranceTableView.getItems().clear();
@@ -81,6 +91,10 @@ public class PatientProfileController {
     	}
     }
     
+    /**
+     * Method for passing data between calling GUI and this GUI
+     * @param patient a PatientAdult object
+     */
     public void initData(PatientAdult patient) {
     	this.patient = patient;
     	
@@ -97,6 +111,10 @@ public class PatientProfileController {
     	refreshInsuranceTableView();
     }
     
+    /**
+     * Determines which insurance is selected in the tableview
+     * 	and deletes it from patient's record 
+     */
     public void deleteButtonListener() {
     	// get the insurance selected in the TableView
     	int selectedRow = insuranceTableView.getSelectionModel().getSelectedIndex();
@@ -123,7 +141,11 @@ public class PatientProfileController {
     	
     }
     
-    // Event listener for Return Home Button
+    /**
+     * Redirects user to the Patient Portal GUI
+     * @param e ActionEvent
+     * @throws Exception when the PatientPortal.fxml file cannot be found
+     */
     public void returnHomeButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();

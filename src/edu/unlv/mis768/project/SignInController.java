@@ -38,7 +38,12 @@ public class SignInController {
     
     public void initialize() {}
     
-    // Event listener for Log In Button
+    /**
+     * Checks user's log in credentials and
+     * redirects to the correct "Home" screen
+     * @param e ActionEvent
+     * @throws Exception when the target home screen fxml file is not found
+     */
     public void logInButtonListener(ActionEvent e) throws Exception {
     	
     	// Get login credentials from text fields
@@ -200,7 +205,11 @@ public class SignInController {
     	}
     }
     
-    // Event Listener For Sign Up
+    /**
+     * Redirects user to the account sign up GUI
+     * @param e ActionEvent
+     * @throws Exception when the SignUp.fxml file is not found
+     */
     public void signUpListener(ActionEvent e) throws Exception {
     	FXMLLoader loader = new FXMLLoader();
     	loader.setLocation(getClass().getResource("SignUp.fxml"));
