@@ -105,6 +105,37 @@ public class Appointment {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	public void updateCommentInDB() {
+		// Create a connection to the database.
+        Connection conn =
+               AppointmentDBUtil.getDBConnection();
+        
+		Statement stmt;
+		try {
+		// Create a statement object
+		stmt = conn.createStatement();
+			
+		// insert appointment into Appointment table
+		String sqlUpdate ="";
+		if (!comments.isEmpty()) {
+			// Appointment has comments
+			sqlUpdate = "UPDATE " + AppointmentDBConstants.APPOINTMENT_TABLE_NAME
+        			+ "Set comments = '"+ getComments() + "' "
+					+ "WHERE "
+        			+ "physicianID = " + doctor.getId() 
+					+ " AND patientid= "  + patient.getPatientID() 
+					+" AND appointmentdatetime = '"+ getSlot() + "';" ;	
+		}
+        
+        stmt.executeUpdate(sqlUpdate);
+        		
+		AppointmentDBUtil.closeDBConnection(conn);
+		} catch (SQLException ex) {
+			AppointmentDBUtil.closeDBConnection(conn);
+        	System.out.println(ex.getMessage());
+		}
+        
+	}
 	
 	/**
 	 * Compares appointment date to today
@@ -178,6 +209,7 @@ public class Appointment {
 					+ " AppointmentDateTime = '" + slot + "'";
 			
 			stmt.executeUpdate(sqlDelete);
+			
 		
 			AppointmentDBUtil.closeDBConnection(conn);
         	

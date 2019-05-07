@@ -226,7 +226,8 @@ public class ProviderPortalController {
     		    String outputString ="";
     			outputString += appointment.getPatient().getFirstName() + " " + appointment.getPatient().getLastName() + ",";
     			outputString += appointment.getSlot() +",";
-    			outputString += appointment.getVisitType();
+    			outputString += appointment.getVisitType()+",";
+    			outputString += appointment.getComments();
     			outputFile.println(outputString);
     		}
 	    	outputFile.close();
@@ -272,6 +273,42 @@ public class ProviderPortalController {
     	stage.setScene(scene);
     	// show the stage
     	stage.show();
+    }
+    public void commentTxtListener(){
+    	int selectedRow = doctorAptTableView.getSelectionModel().getSelectedIndex();
+    	Appointment commentToDisplay = doctorAptTableView.getItems().get(selectedRow);
+    	aptCmtTxt.setText(commentToDisplay.getComments());
+    }
+    public void addCommentBtnListener() {
+    	// get the Appointment selected in the TableView
+    	int selectedRow = doctorAptTableView.getSelectionModel().getSelectedIndex();
+    	String commentToAdd = aptCmtTxt.getText();
+    	if (selectedRow == -1) {
+    		// No rows selected
+    		Alert alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("Warning");
+    		alert.setHeaderText("Invalid Addition of Comment Attempt");
+    		alert.setContentText("Please select an appointment to add comment to");
+
+    		alert.showAndWait();
+    	}
+    	else {
+    		Appointment appointmentToAddComment = doctorAptTableView.getItems().get(selectedRow);
+        	
+        	// add comment
+    		appointmentToAddComment.setComments(commentToAdd);
+        	appointmentToAddComment.updateCommentInDB();
+        	//show dialog
+        	Alert alert = new Alert(AlertType.CONFIRMATION);
+    		alert.setTitle("Confirmation");
+    		alert.setHeaderText("Comment Added to DB");
+    		alert.setContentText("Comment successfully  Added");
+
+    		alert.showAndWait();
+        	// refresh tableView
+        	appDateListener();
+        	
+    	}
     }
 
 }

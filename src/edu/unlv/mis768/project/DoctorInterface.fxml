@@ -25,7 +25,7 @@
     <Button id="AddBtn" fx:id="addBtn" layoutX="898.0" layoutY="382.0" mnemonicParsing="false" onAction="#addBtnListener" prefHeight="28.0" prefWidth="120.0" text="Add" />
     <Label layoutX="35.0" layoutY="482.0" text="Appointment Comments :" />
     <TextArea fx:id="aptCmtTxt" layoutX="35.0" layoutY="512.0" prefHeight="130.0" prefWidth="817.0" wrapText="true" />
-    <Button fx:id="addCmtBtn" layoutX="899.0" layoutY="498.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="127.0" text="Add Comments" />
+    <Button fx:id="addCmtBtn" layoutX="899.0" layoutY="498.0" mnemonicParsing="false" onAction="#addCommentBtnListener" prefHeight="31.0" prefWidth="127.0" text="Add Comments" />
     <ImageView fx:id="logo" fitHeight="115.0" fitWidth="158.0" layoutX="860.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
     <Button fx:id="logoutButton" layoutX="484.0" layoutY="649.0" mnemonicParsing="false" onAction="#logoutButtonListener" text="Logout" />
       <Button fx:id="exportButton" layoutX="896.0" layoutY="637.0" mnemonicParsing="false" onAction="#exportButtonListener" prefHeight="25.0" prefWidth="127.0" text="Export to CSV" />
