@@ -12,12 +12,22 @@ import java.util.Date;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+/**
+ * Doctor Class Definition
+ */
 public class Doctor extends Employee {
 	//fields 
 	private String userType = "provider";
 	private String specialty;
 	private ArrayList<String> treatableReasonsList;
 
+	/**
+	 * Doctor object constructor
+	 * @param firstName String doctor's first name
+	 * @param lastName String doctor's last name
+	 * @param id integer doctor's employee id
+	 * @param specialty String doctor's specialty 
+	 */
 	public Doctor(String firstName, String lastName, int id, String specialty) {
 		super(firstName, lastName, id);
 		this.specialty = specialty;
@@ -56,6 +66,12 @@ public class Doctor extends Employee {
 		}
 	}
 	
+	/**
+	 * Determines based on doctor's specialty if they can
+	 * treat a visit reason
+	 * @param visitReason String an appointment visit reason
+	 * @return true if doctor can treat a reason, false otherwise
+	 */
 	public boolean canTreat(String visitReason) {
 		boolean canTreat = false;
 		
@@ -67,6 +83,12 @@ public class Doctor extends Employee {
 		return canTreat;
 	}
 	
+	/**
+	 * Gets all appointment slots for the physician on the specified date
+	 * @param date String a date in yyyy-MM-dd format
+	 * @return an ArrayList of appointment slots
+	 * @throws Exception if date string not in the expected format
+	 */
 	public ArrayList<Slot> getSlots(String date) throws Exception {
 		ArrayList<Slot> slotList = new ArrayList<Slot>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -122,11 +144,17 @@ public class Doctor extends Employee {
 	}
 	
 	
-
+	/**
+	 * @return String doctor's specialty
+	 */
 	public String getSpecialty() {
 		return specialty;
 	}
 
+	/**
+	 * Sets the doctor's specialty
+	 * @param specialty String
+	 */
 	public void setSpecialty(String specialty) {
 		this.specialty = specialty;
 		treatableReasonsList.clear();
@@ -211,10 +239,16 @@ public class Doctor extends Employee {
 		}	
 	}
 
+	/**
+	 * @return String the doctor's user type
+	 */
 	public String getUserType() {
 		return userType;
 	}
 	
+	/**
+	 * @return String representation of doctor object
+	 */
 	public String toString() {
 		return getFirstName() + " " + getLastName();
 	}

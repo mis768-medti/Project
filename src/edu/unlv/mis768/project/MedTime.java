@@ -8,6 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * JavaFX main class for running the
+ * MedTime application
+ */
 public class MedTime extends Application {
 
 	@Override

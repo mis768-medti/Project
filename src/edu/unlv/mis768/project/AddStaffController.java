@@ -17,6 +17,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the Add Staff GUI
+ */
 public class AddStaffController {
 
     @FXML
@@ -42,7 +45,13 @@ public class AddStaffController {
     	this.admin = staff; 
     }
     
-    // Save Button Listener
+    /**
+     * Save Button Listener executes when save button 
+     * is selected and attempts to create a new staff 
+     * record based on the information provided in text
+     * fields. To create a new staff, the user provide
+     * the staff's first name, last name, and username. 
+     */
     public void saveButtonListener() {
     	String username = usernameTxt.getText();
     	String firstName = firstnameTxt.getText();
@@ -143,7 +152,11 @@ public class AddStaffController {
     }
 
     
-    // Cancel Button Listener
+    /**
+     * Cancel Button Listener executes when cancel button 
+     * is selected and redirects user to the 
+	 * user management GUI
+     */
     public void cancelButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();

@@ -9,11 +9,6 @@ import java.sql.Statement;
  * @author Chloe Fletcher
  * This class creates and populates the database 
  * 		with at least 15 records per table
- * 
- * The following fields have NULL values throughout:
- * 	Admin table: AccessLevel, Role
- * 	Appointment table: Comments, Status
- * 
  */
 
 
@@ -1201,7 +1196,7 @@ public class CreateAppointmentDB {
 						   		"1, " +
 						   		"'2019-04-27 13:00:00.00', " + 
 						   		"'Vaccine', " + 
-						   		"NULL" + 
+						   		"'Patient arrived late'" + 
 						   		")");
 				   
 				   // Insert row #2

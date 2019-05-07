@@ -33,7 +33,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-
+/**
+ * Controller for the Provider Portal GUI
+ */
 public class ProviderPortalController {
 
     @FXML
@@ -76,6 +78,10 @@ public class ProviderPortalController {
     
     private Doctor doctor;
     
+    /**
+     * Method to call on initialization setting up columns
+     * in the tableview
+     */
     public void initialize() {
     	// set up the columns in the table
     	patientColumn.setCellValueFactory(new 
@@ -86,6 +92,11 @@ public class ProviderPortalController {
     			PropertyValueFactory<Appointment, String>("visitType"));
     }
     
+    /**
+     * Determines doctor from username and 
+     * creates a Doctor object
+     * @param user String username
+     */
     public void initData(String user) {
 
     	// Create a connection to the database.
@@ -118,13 +129,21 @@ public class ProviderPortalController {
 		}
     	
     }
+    
+    /**
+     * Method for passing data between calling GUI and this GUI
+     * @param doctor a Doctor object
+     */
     public void initData(Doctor doctor) {
     	this.doctor = doctor;
     	// Populate the tableView with Doctors's appointment information
     	appDateListener();
     }
     
-    // Event listener for Date Picker
+    /**
+     * Lists out appointment scheduled in the TableView
+     * for the selected date
+     */
     public void appDateListener() {
     	// Clear TableView
     	doctorAptTableView.getItems().clear();
@@ -164,7 +183,9 @@ public class ProviderPortalController {
     	
     }
     
-    // Event listener for Delete button
+    /**
+     * Deletes the appointment selected in the TableView
+     */
     public void deleteButtonListener() {
     	// get the Appointment selected in the TableView
     	int selectedRow = doctorAptTableView.getSelectionModel().getSelectedIndex();
@@ -191,7 +212,11 @@ public class ProviderPortalController {
     	
     }
     
-    // Event listener for Logout Button
+    /**
+     * Redirects user to the Sign In GUI
+     * @param e ActionEvent
+     * @throws Exception when the SignIn.fxml file cannot be found
+     */
     public void logoutButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();
@@ -215,7 +240,10 @@ public class ProviderPortalController {
     	stage.show();	
     }
     
-    // Event listener for Export Button
+    /**
+     * Exports doctor's appointments on the selected date
+     * to a csv file
+     */
     public void exportButtonListener() {
     	PrintWriter outputFile;
 		try {
@@ -251,7 +279,10 @@ public class ProviderPortalController {
 
     }
     
-    // Event Listener for Add Button
+    /**
+     * Redirects user to the Doctor Add Appointment GUI
+     * @param e ActionEvent
+     */
     public void addBtnListener(ActionEvent e) {
     	try {
     	// FXML loader object to load the UI design
@@ -288,6 +319,9 @@ public class ProviderPortalController {
 
     }
     
+    /**
+     * Lists comments for the selected appointment in the text field
+     */
     public void commentTxtListener(){
     	int selectedRow = doctorAptTableView.getSelectionModel().getSelectedIndex();
     	
@@ -298,6 +332,10 @@ public class ProviderPortalController {
     	
     }
     
+    /**
+     * Saves comments entered in the text field to the selected
+     * appointment object
+     */
     public void addCommentBtnListener() {
     	// get the Appointment selected in the TableView
     	int selectedRow = doctorAptTableView.getSelectionModel().getSelectedIndex();

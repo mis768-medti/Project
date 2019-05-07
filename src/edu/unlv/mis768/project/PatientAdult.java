@@ -9,10 +9,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Patient Adult Class Definition
+ */
 public class PatientAdult extends Patient {
 	
 	private ArrayList<PatientDependent> dependentList;
 	
+	/**
+	 * PatientAdult object constructor
+	 * @param patientID integer patient's id
+	 * @param firstName String patient's first name
+	 * @param lastName String patient's last name
+	 * @param dateOfBirth Date patient's date of birth
+	 */
 	public PatientAdult(int patientID, String firstName, String lastName, Date dateOfBirth) {
 		super(patientID, firstName, lastName, dateOfBirth);
 		
@@ -21,6 +31,14 @@ public class PatientAdult extends Patient {
 		this.pullDependentInformation();
 	}
 	
+	/**
+	 * PatientAdult object constructor
+	 * @param patientID integer patient's id
+	 * @param firstName String patient's first name
+	 * @param lastName String patient's last name
+	 * @param dateOfBirth String patient's date of birth (mm-dd-yyyy)
+	 * @throws Exception when dateOfBirth String not in expected format
+	 */
 	public PatientAdult(int patientID, String firstName, String lastName, String dateOfBirth) 
 			throws Exception {
 		super(patientID, firstName, lastName, dateOfBirth);
@@ -78,6 +96,9 @@ public class PatientAdult extends Patient {
 		}	
 	}
 	
+	/**
+	 * @return ArrayList of PatientDependent objects
+	 */
 	public ArrayList<PatientDependent> getDependents(){
 		return dependentList;
 	}
@@ -111,6 +132,10 @@ public class PatientAdult extends Patient {
 		return hasDependent;
 	}
 	
+	/**
+	 * Adds the provided dependent to the patient's record
+	 * @param dependent a PatientDependent object
+	 */
 	public void addDependent(PatientDependent dependent) {
 		
 		// Create a connection to the database.
@@ -185,6 +210,10 @@ public class PatientAdult extends Patient {
 		}	
 	}
 	
+	/**
+	 * Removes the provided dependent from the patient's record
+	 * @param dependent a PatientDependent object
+	 */
 	public void removeDependent(PatientDependent dependent) {
 		
 		dependent.remove();
@@ -194,7 +223,9 @@ public class PatientAdult extends Patient {
 	}
 	
 	/**
-	 * Cascades any insurance removals to patient's dependents
+	 * Removes the provided insurance and cascades deletion
+	 * to patients dependents
+	 * @param insurance A PatientInsurance object
 	 */
 	public void removeInsurance(PatientInsurance insurance) {
 		// Check if patient has dependents
@@ -212,7 +243,7 @@ public class PatientAdult extends Patient {
 	}
 	
 	/**
-	 * Returns an ArrayList containing the patient's and
+	 * @return an ArrayList containing the patient's and
 	 * 	patient's dependents' appointments
 	 */
 	public ArrayList<Appointment> getAppointments(){
@@ -234,7 +265,7 @@ public class PatientAdult extends Patient {
 	}
 	
 	/**
-	 * Returns an ArrayList containing the patient's and
+	 * @return an ArrayList containing the patient's and
 	 * 	patient's dependents' future appointments
 	 */
 	public ArrayList<Appointment> getFutureAppointments(){
@@ -255,6 +286,11 @@ public class PatientAdult extends Patient {
 		return appList;
 	}
 	
+	/**
+	 * Determines if the provided appointment is for the patient
+	 * or patient's dependents and removes it from the associated person's record
+	 * @param appointment an Appointment object
+	 */
 	public void removeAppointment(Appointment appointment) {
 		// Determine if appointment is for patient or a dependent
 		Patient appointmentPatient = appointment.getPatient();

@@ -5,16 +5,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Staff Class Definition
+ */
 public class Staff extends Employee {
 	//fields 
 	private String userType = "admin";
 	
-	//Constructor
+	/**
+	 * Staff object constructor
+	 * @param firstName String first name
+	 * @param lastName String last name
+	 * @param id String employee id
+	 */
 	public Staff(String firstName, String lastName, int id) {
 		
 		super(firstName, lastName, id);
 	}
 	
+	/**
+	 * @return String user's type
+	 */
 	public String getUserType() {
 		return userType;
 	}
@@ -64,6 +75,9 @@ public class Staff extends Employee {
 		}	
 	}
 	
+	/**
+	 * @return String representation of Staff object
+	 */
 	public String toString() {
 		return "Name: " + getFirstName() + " " + getLastName() +"\n"
 				+"ID: " + getId();

@@ -1,7 +1,6 @@
 package edu.unlv.mis768.project;
 
 /**
- * @author Chloe Flethcer
  * This class defines the strings used to establish a database connection
  */
 

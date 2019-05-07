@@ -70,7 +70,10 @@ public class ViewCalendarController {
     
     private ArrayList<Doctor> doctorList;
    
-    
+    /**
+     * Method to call on initialization setting up columns
+     * in the tableview and populate provider combo box
+     */
     public void initialize() {
     	addBtn.setVisible(false);
     	// set up the columns in the table
@@ -123,12 +126,16 @@ public class ViewCalendarController {
     /**
      * Accepts Staff object and updates welcome label
      * Used for navigation through staff portal screens
-     * @param patient A staff object
+     * @param staff A staff object
      */
     public void initData(Staff staff) {
     	this.admin = staff; 
     }
     
+    /**
+     * Lists out appointment scheduled in the TableView
+     * for the selected date and selected provider
+     */
     public void populateTableView() {
     	
     	// Clear TableView
@@ -172,7 +179,10 @@ public class ViewCalendarController {
     	
     }
     
-    // Event listener for Date Picker
+    /**
+     * Refreshes tableview if both a provider
+     * and date are selected
+     */
     public void appDateListener() {
     	
     	// Check if a provider is selected
@@ -187,7 +197,10 @@ public class ViewCalendarController {
     	
     }
     
-    // Event listener for Provider combo box
+    /**
+     * Refreshes tableview if both a provider
+     * and date are selected
+     */
     public void providerComboBoxListener() {
     	
     	// Check if a date is selected
@@ -200,7 +213,9 @@ public class ViewCalendarController {
     	
     }
     
-    // Event listener for Delete button
+    /**
+     * Deletes the appointment selected in the TableView
+     */
     public void deleteButtonListener() {
     	// get the Appointment selected in the TableView
     	int selectedRow = doctorAptTableView.getSelectionModel().getSelectedIndex();
@@ -228,7 +243,10 @@ public class ViewCalendarController {
     }
     
     
-    // Event listener for Return Home Button
+    /**
+     * Redirects user to the Staff Portal GUI
+     * @param e ActionEvent
+     */
     public void returnHomeButtonListener(ActionEvent e) {
     	try {
 	    	// FXML loader object to load the UI design
@@ -262,7 +280,10 @@ public class ViewCalendarController {
 		}
     }
     
-    // Event Listener for Add Appointment Button
+    /**
+     * Redirects user to the Add Appointment GUI
+     * @param e ActionEvent
+     */
     public void addAppointmentListener(ActionEvent e) {
     	try {
 	    	Doctor doctor = providerCmb.getValue();
@@ -296,6 +317,9 @@ public class ViewCalendarController {
 		}
     }
     
+    /**
+     * Lists comments for the selected appointment in the text field
+     */
     public void commentTxtListener(){
     	int selectedRow = doctorAptTableView.getSelectionModel().getSelectedIndex();
     	
@@ -306,6 +330,10 @@ public class ViewCalendarController {
     	
     }
     
+    /**
+     * Saves comments entered in the text field to the selected
+     * appointment object
+     */
     public void addCommentBtnListener() {
     	// get the Appointment selected in the TableView
     	int selectedRow = doctorAptTableView.getSelectionModel().getSelectedIndex();

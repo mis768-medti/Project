@@ -22,6 +22,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the User Management GUI
+ */
 public class UserManagementController {
 
     @FXML
@@ -56,6 +59,10 @@ public class UserManagementController {
     
     private Staff admin;
     
+    /**
+     * Method to call on initialization setting up columns
+     * in the tableview
+     */
     public void initialize() {
     	// set up the columns in the table
     	firstNameColumn.setCellValueFactory(new 
@@ -69,7 +76,7 @@ public class UserManagementController {
     /**
      * Accepts Staff object and updates welcome label
      * Used for navigation through staff portal screens
-     * @param patient A staff object
+     * @param staff A staff object
      */
     public void initData(Staff staff) {
     	this.admin = staff; 
@@ -81,6 +88,9 @@ public class UserManagementController {
     	refreshUserTableView();
     }
     
+    /**
+     * Refreshes users listed in the TableView
+     */
     public void refreshUserTableView() {
     	
     	userTableView.getItems().clear();
@@ -166,7 +176,9 @@ public class UserManagementController {
         
     }
     
-    // Event listener for Delete Button
+    /**
+     * Deletes the user selected in TableView
+     */
     public void deleteButtonListener() {
     	// get the selected user in the TableView
     	int selectedRow = userTableView.getSelectionModel().getSelectedIndex();
@@ -188,7 +200,11 @@ public class UserManagementController {
     	}
     }
     
-    // Event listener for Add Physician Button
+    /**
+     * Redirects user to the Add Physician GUI
+     * @param e ActionEvent
+     * @throws Exception when the AddPhysician.fxml file cannot be found
+     */
     public void addPhysicianButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();
@@ -213,7 +229,11 @@ public class UserManagementController {
     	stage.show();
     }
     
-    // Event listener for Add Patient Button
+    /**
+     * Redirects user to the Add Patient GUI
+     * @param e ActionEvent
+     * @throws Exception when the AddPatient.fxml file cannot be found
+     */
     public void addPatientButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();
@@ -238,7 +258,11 @@ public class UserManagementController {
     	stage.show();
     }
     
-    // Event listener for Add Staff Button
+    /**
+     * Redirects user to the Add Staff GUI
+     * @param e ActionEvent
+     * @throws Exception when the AddStaff.fxml file cannot be found
+     */
     public void addStaffButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();
@@ -263,7 +287,11 @@ public class UserManagementController {
     	stage.show();
     }
     
-    // Event listener for Return Home Button
+    /**
+     * Redirects user to the Staff Portal GUI
+     * @param e ActionEvent
+     * @throws Exception when the StaffPrtal.fxml file cannot be found
+     */
     public void returnHomeButtonListener(ActionEvent e) throws Exception {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();
