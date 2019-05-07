@@ -72,9 +72,10 @@ public class ViewCalendarController {
     private Staff admin;
     
     private ArrayList<Doctor> doctorList;
+   
     
     public void initialize() {
-    	
+    	addBtn.setVisible(false);
     	// set up the columns in the table
     	patientColumn.setCellValueFactory(new 
     			PropertyValueFactory<Appointment, Patient>("patient"));
@@ -184,6 +185,7 @@ public class ViewCalendarController {
     		// A provider is selected
     		// Populate table view 
     		populateTableView();
+    		addBtn.setVisible(true);
     	}
     	
     }
@@ -248,6 +250,30 @@ public class ViewCalendarController {
     	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
     	// change the title
     	stage.setTitle("Staff Portal");
+    	// set the scene for the stage
+    	stage.setScene(scene);
+    	// show the stage
+    	stage.show();
+    }
+    
+    public void addAppointmentListener(ActionEvent e) throws Exception {
+    	Doctor doctor = providerCmb.getValue();
+    	FXMLLoader loader = new FXMLLoader();
+    	// specify the file location
+    	loader.setLocation(getClass().getResource("AdminAddAppointment.fxml"));
+    	
+    	// load the UI and call the controller method
+    	Parent parent = loader.load();
+    	AdminAddAppointmentController controller = loader.getController();
+    	controller.initData(doctor, this.admin);
+    	
+    	// set the scene
+    	Scene scene = new Scene(parent);
+    	
+    	// get the current window
+    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    	// change the title
+    	stage.setTitle("Schedule Appointment");
     	// set the scene for the stage
     	stage.setScene(scene);
     	// show the stage
