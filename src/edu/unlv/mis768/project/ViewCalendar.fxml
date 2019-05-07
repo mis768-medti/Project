@@ -12,7 +12,7 @@
   <children>
     <DatePicker fx:id="appDate" layoutX="115.0" layoutY="25.0" onAction="#appDateListener" prefHeight="25.0" prefWidth="231.0" />
     <Label layoutX="26.0" layoutY="29.0" text="Select a date :" />
-    <TableView fx:id="doctorAptTableView" layoutX="26.0" layoutY="176.0" prefHeight="200.0" prefWidth="817.0">
+    <TableView fx:id="doctorAptTableView" layoutX="26.0" layoutY="176.0" onMouseClicked="#commentTxtListener" prefHeight="200.0" prefWidth="817.0">
       <columns>
         <TableColumn fx:id="patientColumn" prefWidth="280.0" text="Patient" />
         <TableColumn fx:id="timeColumn" prefWidth="271.0" text="Time" />
@@ -21,12 +21,11 @@
     </TableView>
     <Label layoutX="35.0" layoutY="141.0" text="Today's Appointment :" />
     <Label layoutX="817.0" layoutY="150.0" text="Appointment Options :" />
-    <Button fx:id="rescheduleBtn" layoutX="904.0" layoutY="195.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="122.0" text="Reschedule" />
-    <Button fx:id="deleteBtn" layoutX="905.0" layoutY="250.0" mnemonicParsing="false" onAction="#deleteButtonListener" prefHeight="28.0" prefWidth="120.0" text="Delete" />
-    <Button id="AddBtn" fx:id="addBtn" layoutX="906.0" layoutY="301.0" mnemonicParsing="false" onAction="#addAppointmentListener" prefHeight="28.0" prefWidth="120.0" text="Add" />
+    <Button fx:id="deleteBtn" layoutX="860.0" layoutY="176.0" mnemonicParsing="false" onAction="#deleteButtonListener" prefHeight="28.0" prefWidth="120.0" text="Delete" />
+    <Button id="AddBtn" fx:id="addBtn" layoutX="860.0" layoutY="222.0" mnemonicParsing="false" onAction="#addAppointmentListener" prefHeight="28.0" prefWidth="120.0" text="Add" />
     <Label layoutX="35.0" layoutY="396.0" text="Appointment Comments :" />
     <TextArea fx:id="aptCmtTxt" layoutX="26.0" layoutY="432.0" prefHeight="130.0" prefWidth="817.0" wrapText="true" />
-    <Button fx:id="addCmtBtn" layoutX="910.0" layoutY="498.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="116.0" text="Add Comments" />
+    <Button fx:id="addCmtBtn" layoutX="899.0" layoutY="498.0" mnemonicParsing="false" onAction="#addCommentBtnListener" prefHeight="31.0" prefWidth="127.0" text="Add Comments" />
     <ImageView fx:id="logo" fitHeight="115.0" fitWidth="158.0" layoutX="860.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
     <Button fx:id="returnBtn" layoutX="409.0" layoutY="590.0" mnemonicParsing="false" onAction="#returnHomeButtonListener" text="Return to Home" />
     <Label layoutX="444.0" layoutY="32.0" text="Select a Provider :" />

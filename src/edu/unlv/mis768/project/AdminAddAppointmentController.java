@@ -210,7 +210,7 @@ public class AdminAddAppointmentController {
     	// get the current window
     	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
     	// change the title
-    	stage.setTitle("Patient Portal");
+    	stage.setTitle("View Calendar");
     	// set the scene for the stage
     	stage.setScene(scene);
     	// show the stage

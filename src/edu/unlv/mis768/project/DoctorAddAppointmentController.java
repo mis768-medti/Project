@@ -214,7 +214,7 @@ public class DoctorAddAppointmentController {
     	// get the current window
     	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
     	// change the title
-    	stage.setTitle("Patient Portal");
+    	stage.setTitle("Doctor Portal");
     	// set the scene for the stage
     	stage.setScene(scene);
     	// show the stage

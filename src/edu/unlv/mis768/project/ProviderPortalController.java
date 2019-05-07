@@ -70,9 +70,6 @@ public class ProviderPortalController {
 
     @FXML
     private TableColumn<Appointment, Patient> patientColumn;
-
-    @FXML
-    private Button rescheduleBtn;
     
     @FXML
     private Button exportButton;
@@ -293,8 +290,12 @@ public class ProviderPortalController {
     
     public void commentTxtListener(){
     	int selectedRow = doctorAptTableView.getSelectionModel().getSelectedIndex();
-    	Appointment commentToDisplay = doctorAptTableView.getItems().get(selectedRow);
-    	aptCmtTxt.setText(commentToDisplay.getComments());
+    	
+    	if (selectedRow >= 0) {
+    		Appointment commentToDisplay = doctorAptTableView.getItems().get(selectedRow);
+        	aptCmtTxt.setText(commentToDisplay.getComments());	
+    	}
+    	
     }
     
     public void addCommentBtnListener() {

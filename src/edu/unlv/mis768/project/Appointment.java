@@ -38,7 +38,7 @@ public class Appointment {
 			Statement stmt = conn.createStatement();
 			
 			// Query appointment table
-	        String sqlSelect = "SELECT VisitReason, a.PatientID, p.firstName,"
+	        String sqlSelect = "SELECT VisitReason, Comments, a.PatientID, p.firstName,"
 	        		+ "p.lastName, cast(p.DateOfBirth as char) as DateOfBirth FROM " 
 	        		+ AppointmentDBConstants.APPOINTMENT_TABLE_NAME + " a INNER JOIN "
 	        		+ AppointmentDBConstants.PATIENT_TABLE_NAME + " p on a.PatientID = p.PatientID"
@@ -52,6 +52,7 @@ public class Appointment {
 	        						result.getString("firstName"),
 	        						result.getString("lastName"),
 	        						result.getString("DateOfBirth"));
+	        this.comments = result.getString("Comments");
 	        
 	        AppointmentDBUtil.closeDBConnection(conn);
 	        
@@ -131,7 +132,6 @@ public class Appointment {
 		+ " AND PatientID = "  + patient.getPatientID() 
 		+" AND AppointmentDateTime = '"+ slot + "'" ;	
 		
-		System.out.println(sqlUpdate);
 		stmt.executeUpdate(sqlUpdate);
         		
 		AppointmentDBUtil.closeDBConnection(conn);
