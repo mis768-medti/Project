@@ -26,7 +26,7 @@
     <TextField fx:id="userNametxt" layoutX="197.0" layoutY="97.0" prefHeight="27.0" prefWidth="200.0" />
     <TextField fx:id="passWordTxt" layoutX="197.0" layoutY="132.0" prefHeight="27.0" prefWidth="200.0" />
     <TextField fx:id="confirmPasswordTxt" layoutX="197.0" layoutY="172.0" prefHeight="27.0" prefWidth="200.0" />
-    <Button fx:id="saveButton" defaultButton="true" layoutX="211.0" layoutY="217.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="178.0" text="Save">
+    <Button fx:id="saveButton" defaultButton="true" layoutX="211.0" layoutY="217.0" mnemonicParsing="false" onAction="#saveButtonListener" prefHeight="27.0" prefWidth="178.0" text="Save">
       <font>
         <Font size="14.0" />
       </font>
