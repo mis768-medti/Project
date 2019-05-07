@@ -1,5 +1,6 @@
 package edu.unlv.mis768.project;
 
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -160,7 +161,6 @@ public class ProviderPortalController {
 	        	alert.setTitle("Error");
 	        	alert.setHeaderText("Application Error");
 	        	alert.setContentText(e.getMessage());
-	        	e.printStackTrace();
 	        	
 	        	alert.showAndWait();
 	    	}
@@ -219,18 +219,38 @@ public class ProviderPortalController {
     	stage.show();	
     }
     
-    public void exportButtonListener(ActionEvent e) throws Exception {
-    	PrintWriter outputFile = new PrintWriter("Schedule.csv");
-    	
-    	for(Appointment appointment: doctorAptTableView.getItems()) {
+    public void exportButtonListener() {
+    	PrintWriter outputFile;
+		try {
+			outputFile = new PrintWriter("Schedule.csv");
+		
+	    	for(Appointment appointment: doctorAptTableView.getItems()) {
     		    String outputString ="";
     			outputString += appointment.getPatient().getFirstName() + " " + appointment.getPatient().getLastName() + ",";
     			outputString += appointment.getSlot() +",";
     			outputString += appointment.getVisitType();
     			outputFile.println(outputString);
     		}
-    	outputFile.close();
-    	JOptionPane.showMessageDialog(null, "Succesfully Saved");
+	    	outputFile.close();
+	    	
+	    	Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Information");
+			alert.setHeaderText("Save Successful");
+
+			alert.showAndWait();
+	    	
+	    	
+
+		} catch (FileNotFoundException e) {
+	
+			Alert alert = new Alert(AlertType.ERROR);
+        	alert.setTitle("Error");
+        	alert.setHeaderText("Application Error");
+        	alert.setContentText(e.getMessage());
+        	
+        	alert.showAndWait();
+		}
+
     }
 
 }
