@@ -31,9 +31,7 @@ public class AdminPortalController {
     @FXML
     private Button LogoutBtn;
 
-    @FXML
-    private Button appMgmtBtn;
-    
+
     private Staff admin;
     
     public void initialize() {}
