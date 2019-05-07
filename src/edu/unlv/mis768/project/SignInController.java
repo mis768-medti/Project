@@ -25,7 +25,7 @@ public class SignInController {
     private TextField passWord;
 
     @FXML
-    private Label forgotUserNamePassWord;
+    private Button signUpButton;
 
     @FXML
     private TextField userName;
@@ -198,5 +198,29 @@ public class SignInController {
 	        	alert.showAndWait();
 			}
     	}
+    }
+    
+    // Event Listener For Sign Up
+    public void signUpListener(ActionEvent e) throws Exception {
+    	FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(getClass().getResource("SignUp.fxml"));
+		
+		// Specify the file location
+		// Determine window title
+    	// load the UI
+		Parent parent = loader.load();
+		
+		// set the scene
+		Scene scene = new Scene(parent);
+		
+		// get the current window
+		Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		// change the title
+		stage.setTitle("Patient Sign Up");
+		// set the scene for the stage
+		stage.setScene(scene);
+		// show the stage
+		stage.show();
+    	
     }
 }

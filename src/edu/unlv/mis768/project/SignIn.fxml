@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="399.0" prefWidth="342.000244140625" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="edu.unlv.mis768.project.SignInController">
+<AnchorPane prefHeight="399.0" prefWidth="342.000244140625" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unlv.mis768.project.SignInController">
   <!-- TODO Add Nodes -->
   <children>
     <Pane prefHeight="411.0" prefWidth="342.000244140625">
@@ -28,7 +28,7 @@
           </font>
         </Label>
         <Label font="$x1" layoutX="81.0" layoutY="192.0" text="Password" />
-        <Label id="forgotUserNamePassWord" fx:id="signOut" layoutX="147.0" layoutY="340.0" text="Sign Up" textFill="#9f9f9f" underline="true">
+        <Label id="forgotUserNamePassWord" layoutX="147.0" layoutY="340.0" textFill="#9f9f9f" underline="true">
           <font>
             <Font size="14.0" fx:id="x2" />
           </font>
@@ -36,8 +36,9 @@
         <TextField fx:id="userName" layoutX="65.0" layoutY="147.0" prefHeight="34.1796875" prefWidth="200.0" />
         <TextField fx:id="passWord" layoutX="60.0" layoutY="235.0" prefHeight="34.1796875" prefWidth="200.0" />
         <Button fx:id="logInBtn" defaultButton="true" font="$x2" layoutX="111.0" layoutY="291.0" onAction="#logInButtonListener" prefHeight="26.6015625" prefWidth="112.0" text="_Log in" textFill="#333100" />
-        <Label fx:id="signUpLbl" font="$x2" layoutX="95.0" layoutY="377.0" prefHeight="17.0" prefWidth="209.0" text="Sign up For an accoout" textFill="#9e9e9e" underline="true" wrapText="true" />
+        <Label fx:id="signUpLbl" font="$x2" layoutX="95.0" layoutY="377.0" prefHeight="17.0" prefWidth="209.0" textFill="#9e9e9e" underline="true" wrapText="true" />
         <Label layoutX="67.0" layoutY="88.0" text="-----------------------------------------" />
+            <Button fx:id="signUpButton" layoutX="84.0" layoutY="335.0" mnemonicParsing="false" onAction="#signUpListener" text="Patient Account Creation" />
       </children>
     </Pane>
   </children>
