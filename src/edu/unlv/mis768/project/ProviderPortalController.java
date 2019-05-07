@@ -1,5 +1,6 @@
 package edu.unlv.mis768.project;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +10,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+
+import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -75,6 +78,9 @@ public class ProviderPortalController {
 
     @FXML
     private Button rescheduleBtn;
+    
+    @FXML
+    private Button exportButton;
     
     private Doctor doctor;
     
@@ -211,6 +217,20 @@ public class ProviderPortalController {
     	stage.setScene(scene);
     	// show the stage
     	stage.show();	
+    }
+    
+    public void exportButtonListener(ActionEvent e) throws Exception {
+    	PrintWriter outputFile = new PrintWriter("Schedule.csv");
+    	
+    	for(Appointment appointment: doctorAptTableView.getItems()) {
+    		    String outputString ="";
+    			outputString += appointment.getPatient().getFirstName() + " " + appointment.getPatient().getLastName() + ",";
+    			outputString += appointment.getSlot() +",";
+    			outputString += appointment.getVisitType();
+    			outputFile.println(outputString);
+    		}
+    	outputFile.close();
+    	JOptionPane.showMessageDialog(null, "Succesfully Saved");
     }
 
 }
