@@ -38,8 +38,6 @@ public class ProviderPortalController {
     @FXML
     private TextArea aptCmtTxt;
 
-    @FXML
-    private TextField nameTxt;
 
     @FXML
     private DatePicker appDate;
@@ -47,8 +45,6 @@ public class ProviderPortalController {
     @FXML
     private Button logoutButton;
 
-    @FXML
-    private TextField timeTxt;
 
     @FXML
     private Button addBtn;
@@ -61,9 +57,6 @@ public class ProviderPortalController {
 
     @FXML
     private TableColumn<Appointment, Slot> timeColumn;
-
-    @FXML
-    private TextField appTypeTxt;
 
     @FXML
     private TableView<Appointment> doctorAptTableView;
@@ -126,6 +119,11 @@ public class ProviderPortalController {
         	alert.showAndWait();
 		}
     	
+    }
+    public void initData(Doctor doctor) {
+    	this.doctor = doctor;
+    	// Populate the tableView with Doctors's appointment information
+    	appDateListener();
     }
     
     // Event listener for Date Picker
@@ -251,6 +249,29 @@ public class ProviderPortalController {
         	alert.showAndWait();
 		}
 
+    }
+    public void addBtnListener(ActionEvent e) throws Exception {
+    	// FXML loader object to load the UI design
+    	FXMLLoader loader = new FXMLLoader();
+    	// specify the file location
+    	loader.setLocation(getClass().getResource("DoctorAddAppointment.fxml"));
+    	
+    	// load the UI and call the controller method
+    	Parent parent = loader.load();
+    	DoctorAddAppointmentController controller = loader.getController();
+    	controller.initData(this.doctor);
+    	
+    	// set the scene
+    	Scene scene = new Scene(parent);
+    	
+    	// get the current window
+    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    	// change the title
+    	stage.setTitle("Schedule Appointment");
+    	// set the scene for the stage
+    	stage.setScene(scene);
+    	// show the stage
+    	stage.show();
     }
 
 }

@@ -63,7 +63,7 @@ public class Patient extends User {
 
 	/**
 	 * Queries the patient insurance table and populates
-	 * the insurance ArrayList with the patient's 
+	 * the insurance ArrayList with the patient's 	
 	 * insurance information
 	 */
 	public void pullInsuranceInformation() {
