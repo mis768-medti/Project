@@ -232,52 +232,70 @@ public class ViewCalendarController {
     
     
     // Event listener for Return Home Button
-    public void returnHomeButtonListener(ActionEvent e) throws Exception {
-    	// FXML loader object to load the UI design
-    	FXMLLoader loader = new FXMLLoader();
-    	// specify the file location
-    	loader.setLocation(getClass().getResource("StaffPrtal.fxml"));
-    	
-    	// load the UI and call the controller method
-    	Parent parent = loader.load();
-    	AdminPortalController controller = loader.getController();
-    	controller.initData(this.admin);
-    	
-    	// set the scene
-    	Scene scene = new Scene(parent);
-    	
-    	// get the current window
-    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-    	// change the title
-    	stage.setTitle("Staff Portal");
-    	// set the scene for the stage
-    	stage.setScene(scene);
-    	// show the stage
-    	stage.show();
+    public void returnHomeButtonListener(ActionEvent e) {
+    	try {
+	    	// FXML loader object to load the UI design
+	    	FXMLLoader loader = new FXMLLoader();
+	    	// specify the file location
+	    	loader.setLocation(getClass().getResource("StaffPrtal.fxml"));
+	    	
+	    	// load the UI and call the controller method
+	    	Parent parent = loader.load();
+	    	AdminPortalController controller = loader.getController();
+	    	controller.initData(this.admin);
+	    	
+	    	// set the scene
+	    	Scene scene = new Scene(parent);
+	    	
+	    	// get the current window
+	    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+	    	// change the title
+	    	stage.setTitle("Staff Portal");
+	    	// set the scene for the stage
+	    	stage.setScene(scene);
+	    	// show the stage
+	    	stage.show();
+    	} catch (Exception ex) {
+			Alert alert = new Alert(AlertType.ERROR);
+        	alert.setTitle("Error");
+        	alert.setHeaderText("Application Error");
+        	alert.setContentText(ex.getMessage());
+        	
+        	alert.showAndWait();
+		}
     }
     
-    public void addAppointmentListener(ActionEvent e) throws Exception {
-    	Doctor doctor = providerCmb.getValue();
-    	FXMLLoader loader = new FXMLLoader();
-    	// specify the file location
-    	loader.setLocation(getClass().getResource("AdminAddAppointment.fxml"));
-    	
-    	// load the UI and call the controller method
-    	Parent parent = loader.load();
-    	AdminAddAppointmentController controller = loader.getController();
-    	controller.initData(doctor, this.admin);
-    	
-    	// set the scene
-    	Scene scene = new Scene(parent);
-    	
-    	// get the current window
-    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-    	// change the title
-    	stage.setTitle("Schedule Appointment");
-    	// set the scene for the stage
-    	stage.setScene(scene);
-    	// show the stage
-    	stage.show();
+    public void addAppointmentListener(ActionEvent e) {
+    	try {
+	    	Doctor doctor = providerCmb.getValue();
+	    	FXMLLoader loader = new FXMLLoader();
+	    	// specify the file location
+	    	loader.setLocation(getClass().getResource("AdminAddAppointment.fxml"));
+	    	
+	    	// load the UI and call the controller method
+	    	Parent parent = loader.load();
+	    	AdminAddAppointmentController controller = loader.getController();
+	    	controller.initData(doctor, this.admin);
+	    	
+	    	// set the scene
+	    	Scene scene = new Scene(parent);
+	    	
+	    	// get the current window
+	    	Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+	    	// change the title
+	    	stage.setTitle("Schedule Appointment");
+	    	// set the scene for the stage
+	    	stage.setScene(scene);
+	    	// show the stage
+	    	stage.show();
+    	} catch (Exception ex) {
+			Alert alert = new Alert(AlertType.ERROR);
+        	alert.setTitle("Error");
+        	alert.setHeaderText("Application Error");
+        	alert.setContentText(ex.getMessage());
+        	
+        	alert.showAndWait();
+		}
     }
 
 }

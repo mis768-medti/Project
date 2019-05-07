@@ -116,18 +116,23 @@ public class Appointment {
 		stmt = conn.createStatement();
 			
 		// insert appointment into Appointment table
-		String sqlUpdate ="";
+		String sqlUpdate = "UPDATE " + AppointmentDBConstants.APPOINTMENT_TABLE_NAME
+    			+ " Set Comments =";
 		if (!comments.isEmpty()) {
 			// Appointment has comments
-			sqlUpdate = "UPDATE " + AppointmentDBConstants.APPOINTMENT_TABLE_NAME
-        			+ "Set comments = '"+ getComments() + "' "
-					+ "WHERE "
-        			+ "physicianID = " + doctor.getId() 
-					+ " AND patientid= "  + patient.getPatientID() 
-					+" AND appointmentdatetime = '"+ getSlot() + "';" ;	
+			sqlUpdate += " '"+ getComments() + "' ";
 		}
-        
-        stmt.executeUpdate(sqlUpdate);
+		else {
+			sqlUpdate += " NULL ";
+		}
+		
+		sqlUpdate += "WHERE "
+		+ "PhysicianID = " + doctor.getId() 
+		+ " AND PatientID = "  + patient.getPatientID() 
+		+" AND AppointmentDateTime = '"+ slot + "'" ;	
+		
+		System.out.println(sqlUpdate);
+		stmt.executeUpdate(sqlUpdate);
         		
 		AppointmentDBUtil.closeDBConnection(conn);
 		} catch (SQLException ex) {

@@ -1,6 +1,7 @@
 package edu.unlv.mis768.project;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -217,6 +218,7 @@ public class ProviderPortalController {
     	stage.show();	
     }
     
+    // Event listener for Export Button
     public void exportButtonListener() {
     	PrintWriter outputFile;
 		try {
@@ -251,14 +253,18 @@ public class ProviderPortalController {
 		}
 
     }
-    public void addBtnListener(ActionEvent e) throws Exception {
+    
+    // Event Listener for Add Button
+    public void addBtnListener(ActionEvent e) {
+    	try {
     	// FXML loader object to load the UI design
     	FXMLLoader loader = new FXMLLoader();
     	// specify the file location
     	loader.setLocation(getClass().getResource("DoctorAddAppointment.fxml"));
     	
     	// load the UI and call the controller method
-    	Parent parent = loader.load();
+		Parent parent = loader.load();
+		
     	DoctorAddAppointmentController controller = loader.getController();
     	controller.initData(this.doctor);
     	
@@ -273,12 +279,24 @@ public class ProviderPortalController {
     	stage.setScene(scene);
     	// show the stage
     	stage.show();
+    	
+		} catch (Exception ex) {
+			Alert alert = new Alert(AlertType.ERROR);
+        	alert.setTitle("Error");
+        	alert.setHeaderText("Application Error");
+        	alert.setContentText(ex.getMessage());
+        	
+        	alert.showAndWait();
+		}
+
     }
+    
     public void commentTxtListener(){
     	int selectedRow = doctorAptTableView.getSelectionModel().getSelectedIndex();
     	Appointment commentToDisplay = doctorAptTableView.getItems().get(selectedRow);
     	aptCmtTxt.setText(commentToDisplay.getComments());
     }
+    
     public void addCommentBtnListener() {
     	// get the Appointment selected in the TableView
     	int selectedRow = doctorAptTableView.getSelectionModel().getSelectedIndex();
