@@ -38,7 +38,7 @@
         <Button fx:id="logInBtn" defaultButton="true" font="$x2" layoutX="111.0" layoutY="291.0" onAction="#logInButtonListener" prefHeight="26.6015625" prefWidth="112.0" text="_Log in" textFill="#333100" />
         <Label fx:id="signUpLbl" font="$x2" layoutX="95.0" layoutY="377.0" prefHeight="17.0" prefWidth="209.0" textFill="#9e9e9e" underline="true" wrapText="true" />
         <Label layoutX="67.0" layoutY="88.0" text="-----------------------------------------" />
-            <Button fx:id="signUpButton" layoutX="84.0" layoutY="335.0" mnemonicParsing="false" onAction="#signUpListener" text="Patient Account Creation" />
+            <Button fx:id="signUpButton" layoutX="100.0" layoutY="335.0" mnemonicParsing="false" onAction="#signUpListener" text="Account Creation" />
       </children>
     </Pane>
   </children>

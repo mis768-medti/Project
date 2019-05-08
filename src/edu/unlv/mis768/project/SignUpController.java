@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -32,6 +33,15 @@ public class SignUpController {
     private Button cancelButton;
 
     @FXML
+    private RadioButton patientRadioButton;
+
+    @FXML
+    private RadioButton staffRadioButton;
+
+    @FXML
+    private RadioButton doctorRadioButton;
+
+    @FXML
     private Button saveButton;
 
     @FXML
@@ -49,9 +59,15 @@ public class SignUpController {
     	String password = passWordTxt.getText();
     	String confirmPassword = confirmPasswordTxt.getText();
     	
+    	boolean isPatient = patientRadioButton.isSelected();
+    	boolean isDoctor = doctorRadioButton.isSelected();
+    	boolean isStaff = staffRadioButton.isSelected();
+    	boolean selectedUserType = (isPatient || isDoctor || isStaff);
+    	
     	// Check for empty values
     	if (patientIDText.isEmpty() || username.isEmpty()
-    			|| password.isEmpty() || confirmPassword.isEmpty()) {
+    			|| password.isEmpty() || confirmPassword.isEmpty()
+    			|| !selectedUserType) {
     		
     		Alert alert = new Alert(AlertType.WARNING);
     		alert.setTitle("Warning");
@@ -65,82 +81,303 @@ public class SignUpController {
     		// Check if patient exists
     		int patientID = Integer.parseInt(patientIDText);
     		
-    		// Create a connection to the database.
-	        Connection conn =
-	               AppointmentDBUtil.getDBConnection();
-	        
-	        try {
-	        	// Create a statement object
-				Statement stmt = conn.createStatement();
-				
-				// Query patient table
-		        String sqlSelect = "SELECT Username FROM " + AppointmentDBConstants.PATIENT_TABLE_NAME
-		        		+ " WHERE " + AppointmentDBConstants.PATIENT_PK_NAME + " = " + patientID;
-		        ResultSet result = stmt.executeQuery(sqlSelect);
+    		// Determine user type
+    		if (isPatient)
+    		{
+    			// User is a patient
+	    		// Create a connection to the database.
+		        Connection conn =
+		               AppointmentDBUtil.getDBConnection();
 		        
-		        if (result.last()) {
-		        	// Patient exists
-		        	String databaseUsername = result.getString("Username");
-		        	if (databaseUsername != null && databaseUsername.equalsIgnoreCase(username)) {
-		        		// Patient already has an account
-		        		Alert alert = new Alert(AlertType.ERROR);
+		        try {
+		        	// Create a statement object
+					Statement stmt = conn.createStatement();
+					
+					// Query patient table
+			        String sqlSelect = "SELECT Username FROM " + AppointmentDBConstants.PATIENT_TABLE_NAME
+			        		+ " WHERE " + AppointmentDBConstants.PATIENT_PK_NAME + " = " + patientID;
+			        ResultSet result = stmt.executeQuery(sqlSelect);
+			        
+			        if (result.last()) {
+			        	// Patient exists
+			        	String databaseUsername = result.getString("Username");
+			        	if (databaseUsername != null && databaseUsername.equalsIgnoreCase(username)) {
+			        		// Patient already has an account
+			        		// Update password
+			        		if (password.equals(confirmPassword)) {
+			        			
+			        			String sqlUpdate = "UPDATE " + AppointmentDBConstants.USER_TABLE_NAME
+			        					+ " SET Password = '" + password + "'"
+			        					+ " WHERE Username = '" + username + "'";
+			        			stmt.executeUpdate(sqlUpdate);
+			        			
+			        			Alert alert = new Alert(AlertType.INFORMATION);
+					        	alert.setTitle("Success");
+					        	alert.setHeaderText("Password changed!");
+	
+					        	alert.showAndWait();
+			        		}
+			        		else {
+			        			Alert alert = new Alert(AlertType.ERROR);
+					        	alert.setTitle("Error");
+					        	alert.setHeaderText("Passwords do not match");
+					        	alert.setContentText("Please re-enter passwords");
+		
+					        	alert.showAndWait();
+	
+			        		}
+			        					        	}
+			        	else {
+			        		// Patient does not already have an account
+			        		// Check if passwords match
+			        		if (password.equals(confirmPassword)) {
+			        			// Passwords match: add account
+			        			String sqlInsert = "INSERT INTO " + AppointmentDBConstants.USER_TABLE_NAME
+			        					+ " VALUES('" + username + "','" + password + "','patient')";
+			        			stmt.executeUpdate(sqlInsert);
+			        			
+			        			String sqlUpdate = "UPDATE " + AppointmentDBConstants.PATIENT_TABLE_NAME
+			        					+ " SET username = '" + username + "' WHERE PatientID = " 
+			        					+ patientID;
+			        			stmt.executeUpdate(sqlUpdate);
+			        			
+			        			Alert alert = new Alert(AlertType.INFORMATION);
+					        	alert.setTitle("Success");
+					        	alert.setHeaderText("Account Successfully Created");
+	
+					        	alert.showAndWait();
+			        		}
+			        		else {
+			        			// Passwords do not match
+			        			Alert alert = new Alert(AlertType.ERROR);
+					        	alert.setTitle("Error");
+					        	alert.setHeaderText("Passwords do not match");
+					        	alert.setContentText("Please re-enter passwords");
+	
+					        	alert.showAndWait();
+			        		}
+			        	}
+			        }
+			        else {
+			        	// Patient does not exist
+			        	AppointmentDBUtil.closeDBConnection(conn);
+			        	// No rows returned: Username does not exist in database
+			        	Alert alert = new Alert(AlertType.ERROR);
 			        	alert.setTitle("Error");
-			        	alert.setHeaderText("Account Already Exists");
-			        	alert.setContentText("Please log in to your account");
-
+			        	alert.setHeaderText("Patient ID does not exist");
+			        	alert.setContentText("Contact your doctor's office");
+	
 			        	alert.showAndWait();
-		        	}
-		        	else {
-		        		// Patient does not already have an account
-		        		// Check if passwords match
-		        		if (password.equals(confirmPassword)) {
-		        			// Passwords match: add account
-		        			String sqlInsert = "INSERT INTO " + AppointmentDBConstants.USER_TABLE_NAME
-		        					+ " VALUES('" + username + "','" + password + "','patient')";
-		        			stmt.executeUpdate(sqlInsert);
-		        			
-		        			String sqlUpdate = "UPDATE " + AppointmentDBConstants.PATIENT_TABLE_NAME
-		        					+ " SET username = '" + username + "' WHERE PatientID = " 
-		        					+ patientID;
-		        			stmt.executeUpdate(sqlUpdate);
-		        			
-		        			Alert alert = new Alert(AlertType.INFORMATION);
-				        	alert.setTitle("Success");
-				        	alert.setHeaderText("Account Successfully Created");
-
-				        	alert.showAndWait();
-		        		}
-		        		else {
-		        			// Passwords do not match
-		        			Alert alert = new Alert(AlertType.ERROR);
-				        	alert.setTitle("Error");
-				        	alert.setHeaderText("Passwords do not match");
-				        	alert.setContentText("Please re-enter passwords");
-
-				        	alert.showAndWait();
-		        		}
-		        	}
-		        }
-		        else {
-		        	// Patient does not exist
-		        	AppointmentDBUtil.closeDBConnection(conn);
-		        	// No rows returned: Username does not exist in database
-		        	Alert alert = new Alert(AlertType.ERROR);
+			        }
+		        } catch (SQLException ex) {
+					AppointmentDBUtil.closeDBConnection(conn);
+					Alert alert = new Alert(AlertType.ERROR);
 		        	alert.setTitle("Error");
-		        	alert.setHeaderText("Patient ID does not exist");
-		        	alert.setContentText("Contact your doctor's office");
-
+		        	alert.setHeaderText("Application Error");
+		        	alert.setContentText(ex.getMessage());
+		        	
 		        	alert.showAndWait();
-		        }
-	        } catch (SQLException ex) {
-				AppointmentDBUtil.closeDBConnection(conn);
-				Alert alert = new Alert(AlertType.ERROR);
-	        	alert.setTitle("Error");
-	        	alert.setHeaderText("Application Error");
-	        	alert.setContentText(ex.getMessage());
-	        	
-	        	alert.showAndWait();
-			}
+				}
+    		}
+    		
+    		else if (isDoctor)
+    		{
+    			// User is a doctor
+	    		// Create a connection to the database.
+		        Connection conn =
+		               AppointmentDBUtil.getDBConnection();
+		        
+		        try {
+		        	// Create a statement object
+					Statement stmt = conn.createStatement();
+					
+					// Query patient table
+			        String sqlSelect = "SELECT Username FROM " + AppointmentDBConstants.PROVIDER_TABLE_NAME
+			        		+ " WHERE " + AppointmentDBConstants.PROVIDER_PK_NAME + " = " + patientID;
+			        ResultSet result = stmt.executeQuery(sqlSelect);
+			        
+			        if (result.last()) {
+			        	// Doctor exists
+			        	String databaseUsername = result.getString("Username");
+			        	
+			        	if (databaseUsername != null && databaseUsername.equalsIgnoreCase(username)) {
+			        		// Doctor already has an account
+			        		// Update password
+			        		if (password.equals(confirmPassword)) {
+			        			
+			        			String sqlUpdate = "UPDATE " + AppointmentDBConstants.USER_TABLE_NAME
+			        					+ " SET Password = '" + password + "'"
+			        					+ " WHERE Username = '" + username + "'";
+			        			stmt.executeUpdate(sqlUpdate);
+			        			
+			        			Alert alert = new Alert(AlertType.INFORMATION);
+					        	alert.setTitle("Success");
+					        	alert.setHeaderText("Password changed!");
+	
+					        	alert.showAndWait();
+			        		}
+			        		else {
+			        			Alert alert = new Alert(AlertType.ERROR);
+					        	alert.setTitle("Error");
+					        	alert.setHeaderText("Passwords do not match");
+					        	alert.setContentText("Please re-enter passwords");
+		
+					        	alert.showAndWait();
+	
+			        		}
+			        	}
+			        	
+			        	
+			        	else {
+			        		// Doctor does not already have an account
+			        		// Check if passwords match
+			        		if (password.equals(confirmPassword)) {
+			        			// Passwords match: add account
+			        			String sqlInsert = "INSERT INTO " + AppointmentDBConstants.USER_TABLE_NAME
+			        					+ " VALUES('" + username + "','" + password + "','provider')";
+			        			stmt.executeUpdate(sqlInsert);
+			        			
+			        			String sqlUpdate = "UPDATE " + AppointmentDBConstants.PROVIDER_TABLE_NAME
+			        					+ " SET username = '" + username + "' WHERE ProviderID = " 
+			        					+ patientID;
+			        			stmt.executeUpdate(sqlUpdate);
+			        			
+			        			Alert alert = new Alert(AlertType.INFORMATION);
+					        	alert.setTitle("Success");
+					        	alert.setHeaderText("Account Successfully Created");
+	
+					        	alert.showAndWait();
+			        		}
+			        		else {
+			        			// Passwords do not match
+			        			Alert alert = new Alert(AlertType.ERROR);
+					        	alert.setTitle("Error");
+					        	alert.setHeaderText("Passwords do not match");
+					        	alert.setContentText("Please re-enter passwords");
+	
+					        	alert.showAndWait();
+			        		}
+			        	}
+			        }
+			        else {
+			        	// Provider does not exist
+			        	AppointmentDBUtil.closeDBConnection(conn);
+			        	// No rows returned: Username does not exist in database
+			        	Alert alert = new Alert(AlertType.ERROR);
+			        	alert.setTitle("Error");
+			        	alert.setHeaderText("Provider ID does not exist");
+			        	alert.setContentText("Contact system administrator");
+	
+			        	alert.showAndWait();
+			        }
+		        } catch (SQLException ex) {
+					AppointmentDBUtil.closeDBConnection(conn);
+					Alert alert = new Alert(AlertType.ERROR);
+		        	alert.setTitle("Error");
+		        	alert.setHeaderText("Application Error");
+		        	alert.setContentText(ex.getMessage());
+		        	
+		        	alert.showAndWait();
+				}
+    		}
+    		
+    		else if (isStaff)
+    		{
+    			// User is a staff
+	    		// Create a connection to the database.
+		        Connection conn =
+		               AppointmentDBUtil.getDBConnection();
+		        
+		        try {
+		        	// Create a statement object
+					Statement stmt = conn.createStatement();
+					
+					// Query patient table
+			        String sqlSelect = "SELECT Username FROM " + AppointmentDBConstants.ADMIN_TABLE_NAME
+			        		+ " WHERE " + AppointmentDBConstants.ADMIN_PK_NAME + " = " + patientID;
+			        ResultSet result = stmt.executeQuery(sqlSelect);
+			        
+			        if (result.last()) {
+			        	// Staff exists
+			        	String databaseUsername = result.getString("Username");
+			        	if (databaseUsername != null && databaseUsername.equalsIgnoreCase(username)) {
+			        		// Staff already has an account
+			        		// Update password
+			        		if (password.equals(confirmPassword)) {
+			        			
+			        			String sqlUpdate = "UPDATE " + AppointmentDBConstants.USER_TABLE_NAME
+			        					+ " SET Password = '" + password + "'"
+			        					+ " WHERE Username = '" + username + "'";
+			        			stmt.executeUpdate(sqlUpdate);
+			        			
+			        			Alert alert = new Alert(AlertType.INFORMATION);
+					        	alert.setTitle("Success");
+					        	alert.setHeaderText("Password changed!");
+	
+					        	alert.showAndWait();
+			        		}
+			        		else {
+			        			Alert alert = new Alert(AlertType.ERROR);
+					        	alert.setTitle("Error");
+					        	alert.setHeaderText("Passwords do not match");
+					        	alert.setContentText("Please re-enter passwords");
+		
+					        	alert.showAndWait();
+	
+			        		}
+			        	}
+			        	else {
+			        		// Doctor does not already have an account
+			        		// Check if passwords match
+			        		if (password.equals(confirmPassword)) {
+			        			// Passwords match: add account
+			        			String sqlInsert = "INSERT INTO " + AppointmentDBConstants.USER_TABLE_NAME
+			        					+ " VALUES('" + username + "','" + password + "','admin')";
+			        			stmt.executeUpdate(sqlInsert);
+			        			
+			        			String sqlUpdate = "UPDATE " + AppointmentDBConstants.ADMIN_TABLE_NAME
+			        					+ " SET username = '" + username + "' WHERE AdminID = " 
+			        					+ patientID;
+			        			stmt.executeUpdate(sqlUpdate);
+			        			
+			        			Alert alert = new Alert(AlertType.INFORMATION);
+					        	alert.setTitle("Success");
+					        	alert.setHeaderText("Account Successfully Created");
+	
+					        	alert.showAndWait();
+			        		}
+			        		else {
+			        			// Passwords do not match
+			        			Alert alert = new Alert(AlertType.ERROR);
+					        	alert.setTitle("Error");
+					        	alert.setHeaderText("Passwords do not match");
+					        	alert.setContentText("Please re-enter passwords");
+	
+					        	alert.showAndWait();
+			        		}
+			        	}
+			        }
+			        else {
+			        	// Staff does not exist
+			        	AppointmentDBUtil.closeDBConnection(conn);
+			        	// No rows returned: Username does not exist in database
+			        	Alert alert = new Alert(AlertType.ERROR);
+			        	alert.setTitle("Error");
+			        	alert.setHeaderText("Admin ID does not exist");
+			        	alert.setContentText("Contact a system administrator");
+	
+			        	alert.showAndWait();
+			        }
+		        } catch (SQLException ex) {
+					AppointmentDBUtil.closeDBConnection(conn);
+					Alert alert = new Alert(AlertType.ERROR);
+		        	alert.setTitle("Error");
+		        	alert.setHeaderText("Application Error");
+		        	alert.setContentText(ex.getMessage());
+		        	
+		        	alert.showAndWait();
+				}
+    		}
     	}
     }
     

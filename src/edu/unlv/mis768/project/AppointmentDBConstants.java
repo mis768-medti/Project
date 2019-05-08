@@ -9,7 +9,7 @@ public class AppointmentDBConstants {
     static public final String USER_NAME = "root";
     static public final String PASSWORD = "";
     static public final String ADMIN_TABLE_NAME  = "admin";
-    static public final String CUSTOMER_PK_NAME = "AdminID";
+    static public final String ADMIN_PK_NAME = "AdminID";
     static public final String APPOINTMENT_TABLE_NAME  = "appointment";
     static public final String PATIENT_TABLE_NAME = "patient";
     static public final String PATIENT_PK_NAME = "PatientID";
